@@ -1,0 +1,26 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Frontend.master.cs" Inherits="MasterPages_Frontend" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="../Styles/Styles.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="PageWrapper">
+            <div id="Header"><a href="~/" runat="server">Header Goes Here</a></div>
+            <div id="MenuWrapper">Menu Goes Here</div>
+            <div id="MainContent">
+                <asp:ContentPlaceHolder ID="cpMainContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+            <div id="Sidebar">Sidebar Goes Here</div>
+            <div id="Footer">Footer Goes Here</div>
+        </div>
+    </form>
+</body>
+</html>
