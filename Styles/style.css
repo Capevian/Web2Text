@@ -4,15 +4,16 @@
     Defines the main font used throughout the entire site 
   */
   font-family: Arial, Sans-Serif;
+    margin-bottom: 0px;
 }
 
 body
 {
-  /* 
+    /* 
     Clears white space around the body and gives it a dark gray color.
   */
-  margin: 0;
-  background-color: #cccccc;
+    margin: 0;
+    background-color: #FFFFFF;
 }
 
 a
@@ -53,25 +54,22 @@ h2
 
 #PageWrapper
 {
-  /*
+    /*
     Sets the total width for the entire page. Also sets the background-color
     which is used to fill the background of the Sidebar in case the MainContent block is taller than the Sidebar.
     Uses margin: auto to center the entire page in the middle of the browser's window.
   */
-  width: 844px;
-  background-color: #7773A1;
-  margin: auto;
+    width: 844px;
+    background-color: #FFFFFF;
+    margin: auto;
 }
 
-#Header
+#Header 
 {
-  /*
-    Gives the header the same width as the PageWrapper. The height creates some room for the logo
-    that is set with the background-image.
-  */
-  background-image: url(Images/Header.jpg);
-  width: 844px;
-  height: 86px;
+  background-image: url(Images/web2text.jpg);
+  width: 450px;
+  height: 100px;
+  margin: 50px auto 20px;
 }
 
 #Header a
@@ -80,8 +78,8 @@ h2
     The #Header a is a link nested in #Header. It provides a link back to the homepage.
     The size of the link is the same as the header, so the entire header is clickable.
   */
-  width: 844px; 
-  height: 86px; 
+  width: 450px; 
+  height: 100px; 
   display: block;  
 }
 
@@ -94,52 +92,57 @@ h2
   background-image: url(Images/MenuBackground.jpg);
   width: 827px;
   height: 36px;
-  padding-top: 7px;
-  padding-left: 17px;
+  padding-top: 5px;
+  padding-left: 15px;
+  margin-bottom: 10px;
 }
 
 #MenuWrapper a
 {
-  /*
+    /*
     Links in the Menu are white. This gets overriden by styles in chapter 7.
   */
-  color: #fff;
+    color: #0000FF;
+    font-family: Tahoma;
+    text-align: center;
 }
 
 .MainMenu
 {
-  /*
+    /*
     The Menu gets a white border on all four sides.
   */
-  border: 1px solid white;
-  width: 814px;
-  height: 19px;
-  background-color : #cccccc;
+    width: 400px;
+    height: 19px;
+    background-color: #FFFFFF;
+    margin: 0 auto;
 }
 
 .MainMenu ul li
 {
   /*
-    Gives the four menu items in the main menu a width of 200px each
+    Gives the five menu items in the main menu a width of 160px each
   */
-  width: 200px;
+  width: 100px;
 }
 
 #MainContent
 {
-  /*
+    /*
     Defines the main content area. The #MainContent element has a minimum height of 500 pixels, but can grow if necessary.
     The font-size is 80% of its parent element, which in this case comes down to 80% of the font
     the user has specified as the default font in the browser.
   */
-  font-size: 0.8em;
-  width: 659px;
-  border-left: 1px solid white;
-  border-right: 2px solid white;
-  float: left;
-  background-color: #e1e1e1;
-  min-height: 500px;
-  padding: 10px;
+    font-size: 0.8em;
+    width: 659px;
+    border-left: 1px solid white;
+    border-right: 2px solid white;
+    float: left;
+    background-color: #e1e1e1;
+    min-height: 500px;
+    padding: 10px;
+    background-image: url('Images/back.jpg');
+    background-repeat: repeat-x;
 }
 
 #Sidebar
@@ -161,7 +164,12 @@ h2
   padding-left: 20px;
   float: left;
 }
-
+.dplist
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: medium;
+    background-color: #00FFFF;
+}
 #Footer
 {
   /*
@@ -183,4 +191,98 @@ h2
 {
   font-style: italic;
   color: #3e3e3e;
+}
+
+.MyButton
+{
+  color: White;
+}
+
+ul.level1
+{
+  /* Defines the appearance of main menu items. */
+  font-size: 14px;
+  font-weight: bold;
+  height: 19px;
+  line-height: 19px;
+}
+
+ul.level1 .selected
+{
+  /* Defines the appearance of active menu items */
+  background-color: #BCD1FE;
+}
+
+a.level1
+{
+  /* Adds some white space to the left of the main menu item text */
+  margin-left: 5px;
+}
+
+a.level2
+{
+  /* Defines the appearance of the sub menu items */
+  background-color: #cccccc;
+  padding-left: 8px;
+}
+
+a.level1:hover, a.level2:hover
+{
+  /* Defines the hover style for the main and sub items */
+  background-color: #BCD1FE;
+}
+
+img
+{
+  border: 0;
+}
+
+.ErrorMessage
+{
+  color: red;
+}
+
+.PleaseWait
+{
+  height: 32px;
+  width: 500px;
+  background-image: url(Images/PleaseWait.gif);
+  background-repeat: no-repeat;
+  padding-left: 40px;
+  line-height: 32px;
+}
+
+.Attention
+{
+  border: 4px solid red;
+  padding: 10px 0;
+  width: 100px;
+  margin: auto;
+  display: block;
+  text-align: center;
+}
+
+.Watermark
+{
+  position: relative;
+  width: 0;
+  height: 1.25em;
+  vertical-align: top;
+}
+
+.Watermark label
+{
+  position: absolute;
+  left: 0;
+  top: 2px;
+  white-space: nowrap;
+  color: #999;
+  padding-left: 4px;
+  height: 1.25em;
+  vertical-align: middle;
+}
+
+.InputBox
+{
+  width: 300px;
 }
