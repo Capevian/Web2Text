@@ -14,17 +14,14 @@
         <div id="PageWrapper">
             <div id="Header"><a href="~/" runat="server"></a></div>
             <div id="MenuWrapper">
-                <asp:Menu ID="Menu1" runat="server" CssClass="MainMenu" 
-                    Orientation="Horizontal">
-                    <Items>
-                        <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Pesquisa" Value="Pesquisa">
-                        </asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="~/Edicao.aspx" Text="Edição" Value="Edição">
-                        </asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="~/Arquivo.aspx" Text="Arquivo" Value="Arquivo">
-                        </asp:MenuItem>
-                    </Items>
-                </asp:Menu>
+                <div class="MainMenu">
+                    <ul>
+                        <li><a href="Default.aspx">Pesquisa</a></li>
+                        <li><a href="Edicao.aspx">Edição</a></li>
+                        <li><a href="Arquivo.aspx">Arquivo</a></li>
+                    </ul>
+                </div>
+                <div style="clear: left;"></div>
             </div>
             <div id="MainContent">
                 <asp:ContentPlaceHolder ID="cpMainContent" runat="server">
