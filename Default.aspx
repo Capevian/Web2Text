@@ -4,5 +4,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cpMainContent" Runat="Server">
 <p>Ola fixe</p>
+    <asp:Label ID="Label1" runat="server" Text=""></asp:Label><asp:Label ID="Label2"
+        runat="server" Text=""></asp:Label>
+    <asp:Button ID="Button1"
+        runat="server" Text="Button" onclick="Button1_Click" />
 </asp:Content>
 
