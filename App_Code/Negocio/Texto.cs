@@ -24,4 +24,10 @@ public abstract class Texto
         this.username = user;
         this.link = link;
 	}
+
+    public string Titulo
+    {
+        get { return titulo; }
+        set { titulo = value; }
+    }
 }

@@ -7,11 +7,11 @@ using System.Data;
 /// <summary>
 /// Summary description for Arquivo
 /// </summary>
-public class ArquivoC
+public class ArquivoBLL
 {
     private ArquivoDAL arq;
 
-	public ArquivoC()
+	public ArquivoBLL()
 	{
         arq = new ArquivoDAL();	
 	}

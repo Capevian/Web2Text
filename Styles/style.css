@@ -244,6 +244,34 @@ img
   border: 0;
 }
 
+.Conteudo
+{
+    margin-top: 10px;
+}
+
+table thead tr th
+{
+    border-bottom: 1px solid black;
+    padding: 5px;
+    font-size: 11px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+table tbody tr td
+{
+    padding: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#dtPager
+{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
 .ErrorMessage
 {
   color: red;
