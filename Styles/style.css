@@ -161,8 +161,8 @@ h2
   */
   font-size: 0.8em;
   color: White;
-  background-image: url(Images/Sidebar.jpg);
-  background-repeat: no-repeat;
+  background-image: url(Images/sbar.jpg);
+  background-repeat: repeat-x;
   background-color: #7773A1;
   width: 142px;
   min-height: 500px;
@@ -246,7 +246,8 @@ img
 
 .Conteudo
 {
-    margin-top: 10px;
+    margin: 10px;
+    min-height: 430px;
 }
 
 table thead tr th
@@ -264,6 +265,7 @@ table tbody tr td
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
     font-weight: bold;
+    border-bottom: 1px solid gray;
 }
 
 #dtPager
@@ -320,4 +322,32 @@ table tbody tr td
 .InputBox
 {
   width: 300px;
+}
+
+
+textarea.CaixaEdicao
+{
+    margin-top: 20px;
+    height: 390px;
+    width: 98%;
+    border: none;
+    padding: 5px;
+    font-family: Tahoma, sans-serif;
+    background-color: #E1E1E1;
+}
+
+.Titulo
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+    font-weight: bold;
+    font-style: normal;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;    
+    margin-bottom: 5px;
+    border-bottom-color: #C0C0C0;
+    color: #3366FF;
+    margin-top: 30px;
+    display: block;
+    padding-bottom: 5px;
 }

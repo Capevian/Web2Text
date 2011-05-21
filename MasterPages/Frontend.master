@@ -23,11 +23,13 @@
                 </div>
                 <div style="clear: left;"></div>
             </div>
+            <div id="Sidebar">
+                <asp:ContentPlaceHolder ID="cpSideBar" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
             <div id="MainContent">
                 <asp:ContentPlaceHolder ID="cpMainContent" runat="server">
                 </asp:ContentPlaceHolder>
-            </div>
-            <div id="Sidebar">
             </div>
             <div id="Footer"></div>
         </div>

@@ -25,9 +25,20 @@ public abstract class Texto
         this.link = link;
 	}
 
+    public int IdTexto
+    {
+        get { return idTexto; }
+    }
+
     public string Titulo
     {
         get { return titulo; }
         set { titulo = value; }
+    }
+
+    public string TextContent
+    {
+        get { return texto; }
+        set { texto = value; }
     }
 }

@@ -28,7 +28,7 @@
       
         <ItemTemplate>
             <tr>
-                <td><a href="www.forcaavense.com"><%# Eval("Titulo") %></a></td>
+                <td><a href="Visualize.aspx?id=<%# Eval("IdTexto") %>"><%# Eval("Titulo") %></a></td>
                 <td><%# Eval("DataArq") %></td>
                 <td>Download</td>
                 <td>Remover</td>

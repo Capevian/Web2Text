@@ -39,4 +39,18 @@ public class ArquivoBLL
         
         return lista;
     }
+
+    public TextoArq getTexto(int idTexto)
+    {
+        DataRow row = arq.pesquisaID(idTexto);
+        
+        return(new TextoArq( (int) row[0],
+                             row[1].ToString(),
+                             row[2].ToString(),
+                             row[3].ToString(),
+                             Convert.ToDateTime(row[4]),
+                             row[5].ToString(),
+                             row[6].ToString()
+                            ));
+    }
 }
