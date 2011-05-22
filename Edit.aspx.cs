@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Visualize : System.Web.UI.Page
+public partial class Edit : System.Web.UI.Page
 {
-    private TextoArq txt = null;
+    private TextoEdit txt = null;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -15,42 +15,26 @@ public partial class Visualize : System.Web.UI.Page
         // qual o texto que deve apresentar
         string id = Request.QueryString["id"];
 
-        ArquivoBLL arquivo = new ArquivoBLL();
+        EdicaoBLL arquivo = new EdicaoBLL();
 
         // Descarrega da Base de Dados o texto com o id passado na QueryString
-        txt = arquivo.getTexto(Convert.ToInt32(id));
+        //txt = arquivo.getTexto(Convert.ToInt32(id));
 
         // Altera o titulo da pagina
         this.Title = "Web2Text : " + txt.Titulo;
 
         // Altera titulo do texto em vizualizacao
         LabelTitulo.Text = txt.Titulo;
-        
+
         // Altera conteudo da Area de texto
         TextBox1.Text = txt.TextContent;
         TextBox1.ReadOnly = true;
 
         // Detalhes do texto
         labelUser.Text = txt.User;
-        labelData.Text = txt.DataArq.ToString();
+        //labelData.Text = txt..ToString();
         linkWWW.NavigateUrl = txt.Link;
 
         dlButton.ToolTip = "Download";
-        
-
-        //TextBox1.Attributes.Add("onFocus", "setbg('"+TextBox1.ClientID+"','white');");
-        //TextBox1.Attributes.Add("onBlur", "setbg('" + TextBox1.ClientID + "','#E1E1E1');");
-    }
-    protected void Button1_Click(object sender, EventArgs e)
-    {
-    }
-    protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
-    {
-        Response.Clear();
-        Response.ContentType = "application/octet-stream";
-        Response.AppendHeader("content-disposition", "attachment; filename=ficheiro.txt");
-        Response.Flush();
-        Response.Write(TextBox1.Text);
-        Response.End();
     }
 }

@@ -41,4 +41,22 @@ public abstract class Texto
         get { return texto; }
         set { texto = value; }
     }
+
+    public string Intro
+    {
+        get { return intro; }
+        set { intro = value; }
+    }
+
+    public string User
+    {
+        get { return username; }
+        set { username = value; }
+    }
+
+    public string Link
+    {
+        get { return link; }
+        set { link = value; }
+    }
 }

@@ -25,17 +25,18 @@ public class ArquivoDAL
 
     public DataTable select(int ordenacao)
     {
-        string query = "SELECT " +
-                           "idTexto," +
-                           "Titulo," +
-                           "Texto," +
-                           "Intro," +
-                           "DataArq," +
-                           "username," +
-                           "Link " +
-                        "FROM " +
-                            "Arquivo " + 
-                        "ORDER BY Titulo;";
+        StringBuilder query = new StringBuilder();
+        query.Append("SELECT ");
+            query.Append("idTexto, ");
+            query.Append("Titulo, ");
+            query.Append("Texto, ");
+            query.Append("Intro, ");
+            query.Append("DataArq ,");
+            query.Append("username, ");
+            query.Append("Link ");
+        query.Append("FROM ");
+            query.Append("Arquivo ");
+            query.Append("ORDER BY Titulo;");
 
         // O bloco using garante a libertação dos recursos quando o código terminar
         // Semelhante ao try...finally
@@ -43,7 +44,7 @@ public class ArquivoDAL
         {
             // Utilizado para preencher o objeto DataSet
             // fazendo a query na BD
-            SqlDataAdapter dAdapter = new SqlDataAdapter(query, conn);
+            SqlDataAdapter dAdapter = new SqlDataAdapter(query.ToString(), conn);
             
             DataSet dataSet = new DataSet();
             
