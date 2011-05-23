@@ -12,8 +12,8 @@ using System.Configuration;
 /// </summary>
 public class EdicaoDAL
 {
-    private static string db = "web2textLocal";
-
+    //private static string db = "web2textLocal";
+    private static string db = "web2textRemote";
 	public EdicaoDAL()
 	{
 	}
