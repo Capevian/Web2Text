@@ -9,9 +9,9 @@ using net.live.search.api;
 /// </summary>
 public class PesquisaBing
 {
-    public List<String> search(String query, uint nLinks)
+    public List<Link> search(String query, uint nLinks)
     {
-        List<String> list = new List<String>();
+        List<Link> list = new List<Link>();
 
         BingService service = new BingService();
 
@@ -37,7 +37,7 @@ public class PesquisaBing
 
         foreach (WebResult result in response.Web.Results)
         {
-            list.Add(result.Url);
+            list.Add(new Link(result.Url,result.Description));
         }
         return list;
     }
