@@ -10,8 +10,12 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cpMainContent" Runat="Server">
+    
+    <%-- Conteudo principal: Lista de Textos --%>    
     <div class="Conteudo">
-    <asp:ListView ID="ListView1" runat="server" 
+    
+    <asp:ListView ID="ListView1" 
+        runat="server" 
         ItemPlaceholderID="myItemPlaceHolder"
         OnPagePropertiesChanging="listView1_PagePropertiesChanging"
         OnDataBound="listView1_DataBound">

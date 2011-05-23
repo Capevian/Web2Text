@@ -59,4 +59,9 @@ public abstract class Texto
         get { return link; }
         set { link = value; }
     }
+
+    public string limpaTexto(string s)
+    {
+        return null;
+    }
 }

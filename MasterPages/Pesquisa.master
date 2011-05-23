@@ -1,0 +1,34 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Pesquisa.master.cs" Inherits="MasterPages_Frontend" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link href="../Styles/style.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="PageWrapper">
+            <div id="Header"><a href="~/" runat="server"></a></div>
+            <div id="MenuWrapper">
+                <div class="MainMenu">
+                    <ul>
+                        <li><a href="Default.aspx">Pesquisa</a></li>
+                        <li><a href="Edicao.aspx">Edição</a></li>
+                        <li><a href="Arquivo.aspx">Arquivo</a></li>
+                    </ul>
+                </div>
+                <div style="clear: left;"></div>
+            </div>
+            <div id="MainContentPesquisa">
+                <asp:ContentPlaceHolder ID="cpMainContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+            <div id="Footer"></div>
+        </div>
+    </form>
+</body>
+</html>

@@ -21,7 +21,7 @@ public class EdicaoDAL
     public DataTable select(int ordenacao)
     {
         StringBuilder query = new StringBuilder();
-
+        
         query.Append("SELECT ");
             query.Append("idLink, ");
             query.Append("Titulo, ");
@@ -60,47 +60,48 @@ public class EdicaoDAL
 
     public DataRow pesquisaID(int idTexto)
     {
-        //DataRow dataRow = null;
+        DataRow dataRow = null;
 
-        //StringBuilder query = new StringBuilder();
+        StringBuilder query = new StringBuilder();
 
-        //query.Append("SELECT ");
-        //query.Append("idTexto, ");
-        //query.Append("Titulo, ");
-        //query.Append("Texto, ");
-        //query.Append("Intro, ");
-        //query.Append("DataArq, ");
-        //query.Append("username, ");
-        //query.Append("Link ");
-        //query.Append("FROM ");
-        //query.Append("Arquivo ");
-        //query.Append("WHERE ");
-        //query.Append("idTexto = @idVal ;");
+        query.Append("SELECT ");
+            query.Append("idLink, ");
+            query.Append("Titulo, ");
+            query.Append("Texto, ");
+            query.Append("Intro, ");
+            query.Append("username, ");
+            query.Append("Link, ");
+            query.Append("DataAcesso, ");
+            query.Append("DataModificacao ");
+        query.Append("FROM ");
+            query.Append("Edicao ");
+        query.Append("WHERE ");
+            query.Append("idLink = @idVal ;");
 
-        //SqlParameter param = new SqlParameter("@idVal", idTexto);
+        SqlParameter param = new SqlParameter("@idVal", idTexto);
 
-        //using (SqlConnection conn =
-        //    new SqlConnection(ConfigurationManager.ConnectionStrings[db].ConnectionString))
-        //{
+        using (SqlConnection conn =
+            new SqlConnection(ConfigurationManager.ConnectionStrings[db].ConnectionString))
+        {
 
-        //    SqlCommand cmd = new SqlCommand(query.ToString(), conn);
-        //    cmd.Parameters.Add(param);
+            SqlCommand cmd = new SqlCommand(query.ToString(), conn);
+            cmd.Parameters.Add(param);
 
-        //    SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
+            SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
 
-        //    DataSet dataSet = new DataSet();
+            DataSet dataSet = new DataSet();
 
-        //    dAdapter.Fill(dataSet, "Arquivo");
+            dAdapter.Fill(dataSet, "Edicao");
 
-        //    // Se existir um resultado 
-        //    if (dataSet.Tables["Arquivo"].Rows.Count == 1)
-        //    {
-        //        dataRow = dataSet.Tables["Arquivo"].Rows[0];
-        //    }
+            // Se existir um resultado 
+            if (dataSet.Tables["Edicao"].Rows.Count == 1)
+            {
+                dataRow = dataSet.Tables["Edicao"].Rows[0];
+            }
 
-        //    conn.Close();
-        //}
+            conn.Close();
+        }
 
-        //return dataRow;
+        return dataRow;
     }
 }
