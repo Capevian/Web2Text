@@ -1,6 +1,25 @@
 ﻿<%@ Page Title="" validateRequest="false" Language="C#" MasterPageFile="~/MasterPages/Frontend.master" AutoEventWireup="true" CodeFile="Edit.aspx.cs" Inherits="Edit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <script type="text/javascript">
+        function DoOnclick() {
+            document.getElementById('<%=HiddenField1.ClientID %>').value = window.showModalDialog("Popup.aspx", "", "dialogHeight: 150px; dialogWidth: 300px;"); ;
+        }
+
+        function ShowEditBox() {
+            document.getElementById('EditContainerDiv').style.display = "block";
+            document.getElementById('<%=LabelTitulo.ClientID %>').style.display = "none";
+            document.getElementById('<%=TextBox3.ClientID %>').value = document.getElementById('<%=LabelTitulo.ClientID %>').innerHTML;
+            return false;
+        }
+
+        function HideEditBox() {
+            document.getElementById('EditContainerDiv').style.display = "none";
+            document.getElementById('<%=LabelTitulo.ClientID %>').style.display = "inline";
+            document.getElementById('<%=HiddenField1.ClientID %>').value = document.getElementById('<%=TextBox3.ClientID %>').value;
+            return false;
+        }
+    </script>
 </asp:Content>
 
 <%-- CONTEUDO DA BARRA LATERAL --%>
@@ -47,9 +66,9 @@
                             runat="server" 
                             Width="15px" 
                             Height="15px"
-                            src="Styles/Images/dlb.png" 
                             CssClass="imgIcon"
                             onclick="dlButton_Click" 
+                            ImageUrl="~/Styles/Images/dlb.png" 
                             /> 
                 <asp:LinkButton ID="linkDownload" 
                                 runat="server" 
@@ -66,9 +85,9 @@
                             runat="server" 
                             Width="15px" 
                             Height="15px"
-                            src="Styles/Images/cll.png" 
                             CssClass="imgIcon" 
                             onclick="clButton_Click"
+                            ImageUrl="~/Styles/Images/cll.png" 
                             /> 
                 <asp:LinkButton ID="LinkLimparHTML" 
                                 runat="server" 
@@ -87,9 +106,9 @@
                             runat="server" 
                             Width="15px" 
                             Height="15px"
-                            src="Styles/Images/fd.gif"
                             CssClass="imgIcon" 
                             onclick="svButton_Click" 
+                            ImageUrl="~/Styles/Images/fd.gif" 
                             /> 
                 <asp:LinkButton ID="LinkGravar" 
                                 runat="server" 
@@ -107,9 +126,9 @@
                             runat="server" 
                             Width="15px" 
                             Height="15px"
-                            src="Styles/Images/arq.png" 
                             CssClass="imgIcon" 
                             onclick="ImageButton1_Click"
+                            ImageUrl="~/Styles/Images/arq.png" 
                             />
                 <asp:LinkButton ID="LinkArquivar" 
                                 runat="server" 
@@ -124,7 +143,18 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="cpMainContent" Runat="Server">
     <div class="Conteudo">
-        <asp:Label ID="LabelTitulo" runat="server" Text="Label" CssClass="Titulo"></asp:Label>
+        <div class="Titulo">
+        <asp:Label ID="LabelTitulo" style="display: inline;" runat="server" Text="Titulo"></asp:Label>
+            <asp:Label ID="Label6" runat="server" style="padding-left:10px; font-size: 10px;" Text="Clique no título para editar"></asp:Label>
+            <div id="EditContainerDiv" class="ContainerStyle">
+                <asp:TextBox ID="TextBox3" runat="server" Width="300px"></asp:TextBox> <br />
+                <asp:Button ID="Button1" runat="server" Text="Update"/>
+                <asp:Button ID="Button2" runat="server" Text="Close"/>
+            </div>
+            
+            <asp:HiddenField ID="HiddenField1" runat="server" />
+        </div>
+        
         <asp:TextBox ID="TextBox1" 
                     runat="server" 
                     TextMode="MultiLine" 
