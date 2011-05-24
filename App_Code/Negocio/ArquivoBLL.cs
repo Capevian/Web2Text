@@ -53,4 +53,16 @@ public class ArquivoBLL
                              row[6].ToString()
                             ));
     }
+    public List<PesquisaArq> efectuaPesquisa(string termos)
+    {
+        List<PesquisaArq> lista = new List<PesquisaArq>();
+        DataTable dt = arq.pesquisaPalavras(termos);
+        foreach (DataRow row in dt.Rows)
+        {
+            lista.Add(new PesquisaArq((int)row[0],
+                              row[1].ToString(),
+                              row[2].ToString()));
+        }
+        return lista;
+    }
 }

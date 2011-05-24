@@ -106,4 +106,39 @@ public class ArquivoDAL
 
         return dataRow;
     }
+    public DataTable pesquisaPalavras(string termos)
+    {
+        StringBuilder query = new StringBuilder();
+        query.Append("SELECT Tex.idTexto, Tex.Texto, KEY_TBL.RANK ");
+        query.Append("FROM web2text.dbo.Arquivo AS Tex ");
+        query.Append("INNER JOIN CONTAINSTABLE(web2text.dbo.Arquivo, *, ");
+        query.Append("'\"lights\"'");
+        query.Append(") AS KEY_TBL ");
+        query.Append("ON Tex.idTexto = KEY_TBL.[KEY]");
+        query.Append("WHERE KEY_TBL.RANK > 1");
+        query.Append("ORDER BY KEY_TBL.RANK DESC");
+
+
+        // O bloco using garante a libertação dos recursos quando o código terminar
+        // Semelhante ao try...finally
+        using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[db].ConnectionString))
+        {
+            // Utilizado para preencher o objeto DataSet
+            // fazendo a query na BD
+            SqlDataAdapter dAdapter = new SqlDataAdapter(query.ToString(), conn);
+
+            DataSet dataSet = new DataSet();
+
+            // preenche uma tabela do DataSet e da-lhe o nome arquivo
+            dAdapter.Fill(dataSet, "Arquivo");
+
+            // cria uma tabela que retira do DataSet
+            DataTable dt = dataSet.Tables["Arquivo"];
+
+            // fecha ligacao com a BD
+            conn.Close();
+
+            return dt;
+        }
+    }
 }
