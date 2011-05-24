@@ -144,9 +144,9 @@ h2
     the user has specified as the default font in the browser.
   */
     font-size: 0.8em;
-    width: 659px;
+    width: 660px;
     border-left: 1px solid white;
-    border-right: 2px solid white;
+    border-right: 1px solid white;
     float: left;
     background-color: #e1e1e1;
     min-height: 500px;
@@ -276,7 +276,7 @@ img
 .Conteudo
 {
     margin: 10px;
-    min-height: 430px;
+    min-height: 400px;
 }
 
 table thead tr th
@@ -357,7 +357,7 @@ table tbody tr td
 textarea.CaixaEdicao
 {
     margin-top: 20px;
-    height: 390px;
+    height: 383px;
     width: 98%;
     border: none;
     padding: 5px;

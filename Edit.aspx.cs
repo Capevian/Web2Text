@@ -7,38 +7,50 @@ using System.Web.UI.WebControls;
 
 public partial class Edit : System.Web.UI.Page
 {
-    private TextoEdit txt = null;
+    private TextoEdit txt;
+    private EdicaoBLL edi;
 
     protected void Page_Load(object sender, EventArgs e)
     {
         LabelTitulo.Attributes.Add("onclick", "ShowEditBox();");
-        Button1.Attributes.Add("onclick", "HideEditBox();");
-        Button2.Attributes.Add("onclick", "HideEditBox();");
+        ButtonUpdate.Attributes.Add("onclick", "SaveEditBox();");
+        ButtonClose.Attributes.Add("onclick", "HideEditBox();");
 
         LabelTitulo.Text = HiddenField1.Value;
         // verifica qual o id passado para saber
         // qual o texto que deve apresentar
         string id = Request.QueryString["id"];
 
-        EdicaoBLL arquivo = new EdicaoBLL();
+        edi = new EdicaoBLL();
 
         // Descarrega da Base de Dados o texto com o id passado na QueryString
-        txt = arquivo.getTexto(Convert.ToInt32(id));
+        txt = edi.getTexto(Convert.ToInt32(id));
 
         // Altera o titulo da pagina
         this.Title = "Web2Text : " + txt.Titulo;
 
-        // Altera titulo do texto em vizualizacao
-        if (!IsPostBack) { LabelTitulo.Text = txt.Titulo; }
+        
+        // Se nao foi feito um PostBack da pagina
+        // (guardar alteracoes por exemplo...)
+        if (!IsPostBack) 
+        {
+            // Altera titulo do texto em vizualizacao
+            LabelTitulo.Text = txt.Titulo;
+            HiddenField1.Value = txt.Titulo;
 
-        // Altera conteudo da Area de texto
-        TextBox1.Text = txt.TextContent;
+            // Altera conteudo da Area de texto
+            TextBox1.Text = txt.TextContent;
+            
+            // Detalhes do texto
+            labelUser.Text = txt.User;
+            labelDtMod.Text = txt.DtMod.ToString();
+            linkWWW.NavigateUrl = txt.Link;
+            labelDtAcess.Text = txt.DtAcesso.ToString();
+        }
 
-        // Detalhes do texto
-        labelUser.Text = txt.User;
-        labelDtMod.Text = txt.DtMod.ToString();
-        linkWWW.NavigateUrl = txt.Link;
-        labelDtAcess.Text = txt.DtAcesso.ToString();
+        
+
+        
 
         // Tooltips icons
         //dlButton.ToolTip = "Download";    
@@ -62,7 +74,8 @@ public partial class Edit : System.Web.UI.Page
 
     protected void guardarAlteracoes()
     {
-        /* !!!TO BE DONE!!! */
+        // Username a rever...
+        edi.saveTexto(txt.IdTexto,TextBox1.Text,LabelTitulo.Text);
     }
 
     protected void arquivarTexto()

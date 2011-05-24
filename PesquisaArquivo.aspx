@@ -1,17 +1,13 @@
-﻿<%@ Page Title="Web2Text : Arquivo" Language="C#" MasterPageFile="~/MasterPages/Frontend.master" AutoEventWireup="true" CodeFile="Arquivo.aspx.cs" Inherits="Arquivo" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/Pesquisa.master" AutoEventWireup="true" CodeFile="PesquisaArquivo.aspx.cs" Inherits="PesquisaArquivo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 
-<asp:Content ID="Content3" ContentPlaceHolderID="cpSideBar" runat="server">
-    <asp:TextBox ID="TextBox1" runat="server" Width="94px"></asp:TextBox>
-    <asp:Button ID="Button1" PostBackUrl="PesquisaArquivo.aspx" runat="server" Text="Pesquisar" 
-        onclick="Button1_Click" />
-</asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cpMainContent" Runat="Server">
-    <div class="Conteudo">
-    <asp:ListView ID="ListView1" runat="server" 
+
+    <asp:ListView ID="ListView1" 
+        runat="server" 
         ItemPlaceholderID="myItemPlaceHolder"
         OnPagePropertiesChanging="listView1_PagePropertiesChanging"
         OnDataBound="listView1_DataBound">
@@ -21,7 +17,7 @@
                 <thead>           
                     <tr>
                         <th>Título</th> 
-                        <th>Data Arquivação</th>
+                        <th>Data de Modificação</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -35,10 +31,9 @@
       
         <ItemTemplate>
             <tr>
-                <td><a href="Visualize.aspx?id=<%# Eval("IdTexto") %>"><%# Eval("Titulo") %></a></td>
-                <td><%# Eval("DataArq") %></td>
-                <td>Download</td>
-                <td>Remover</td>
+                <td><a href="<%# Eval("PesqArqIdT") %>"><%# Eval("PesqArqIdT")%></a>
+                    <a href="<%# Eval("PesqArqTex") %>"><%# Eval("PesqArqTex")%></a>
+                    <a href="<%# Eval("PesqArqRank") %>"><%# Eval("PesqArqRank")%></a></td>
             </tr>
         </ItemTemplate>
 
@@ -91,8 +86,7 @@
             </Fields>
         </asp:DataPager>
     </div>
-    </div>
-</asp:Content>
 
+</asp:Content>
 
 

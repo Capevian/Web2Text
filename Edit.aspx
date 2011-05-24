@@ -13,10 +13,15 @@
             return false;
         }
 
-        function HideEditBox() {
+        function SaveEditBox() {
             document.getElementById('EditContainerDiv').style.display = "none";
             document.getElementById('<%=LabelTitulo.ClientID %>').style.display = "inline";
             document.getElementById('<%=HiddenField1.ClientID %>').value = document.getElementById('<%=TextBox3.ClientID %>').value;
+            return false;
+        }
+        function HideEditBox() {
+            document.getElementById('EditContainerDiv').style.display = "none";
+            document.getElementById('<%=LabelTitulo.ClientID %>').style.display = "inline";
             return false;
         }
     </script>
@@ -62,7 +67,7 @@
             
             <%--DOWNLOAD DE FICHEIRO--%>
             <span class="space">
-            <asp:ImageButton ID="dlButton" 
+                <asp:ImageButton ID="dlButton" 
                             runat="server" 
                             Width="15px" 
                             Height="15px"
@@ -145,16 +150,17 @@
     <div class="Conteudo">
         <div class="Titulo">
         <asp:Label ID="LabelTitulo" style="display: inline;" runat="server" Text="Titulo"></asp:Label>
-            <asp:Label ID="Label6" runat="server" style="padding-left:10px; font-size: 10px;" Text="Clique no título para editar"></asp:Label>
+
             <div id="EditContainerDiv" class="ContainerStyle">
                 <asp:TextBox ID="TextBox3" runat="server" Width="300px"></asp:TextBox> <br />
-                <asp:Button ID="Button1" runat="server" Text="Update"/>
-                <asp:Button ID="Button2" runat="server" Text="Close"/>
+                <asp:Button ID="ButtonUpdate" runat="server" Text="Update"/>
+                <asp:Button ID="ButtonClose" runat="server" Text="Fechar"/>
             </div>
             
             <asp:HiddenField ID="HiddenField1" runat="server" />
         </div>
         
+        <asp:Label ID="Label6" runat="server" style="padding-left:10px; font-size: 10px;" Text="Clique no título para editar"></asp:Label>
         <asp:TextBox ID="TextBox1" 
                     runat="server" 
                     TextMode="MultiLine" 
