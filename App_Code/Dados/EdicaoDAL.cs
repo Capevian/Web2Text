@@ -114,23 +114,22 @@ public class EdicaoDAL
         query.Append("SET ");
             query.Append("Titulo = @tit, ");
             query.Append("Texto = @tex, ");
-            query.Append("DataModificacao = GETDATE()");
+            query.Append("DataModificacao = CURRENT_TIMESTAMP ");
         query.Append("WHERE ");
             query.Append("idLink = @idTex ;");
 
         using (SqlConnection conn =
             new SqlConnection(ConfigurationManager.ConnectionStrings[db].ConnectionString))
         {
+            conn.Open();
+
             SqlCommand cmd = new SqlCommand(query.ToString(), conn);
             
-            cmd.Parameters.Add(new SqlParameter("@idTex", SqlDbType.Int,idTexto));
-            cmd.Parameters["@idTex"].Value = idTexto;
+            cmd.Parameters.Add(new SqlParameter("@idTex", SqlDbType.Int)).Value = idTexto;
 
-            cmd.Parameters.Add(new SqlParameter("@tit", SqlDbType.NVarChar,50,titulo));
-            cmd.Parameters["@tit"].Value = titulo;
+            cmd.Parameters.Add(new SqlParameter("@tit", SqlDbType.NVarChar)).Value = titulo;
 
-            cmd.Parameters.Add(new SqlParameter("@tex", SqlDbType.NVarChar,-1,texto));
-            cmd.Parameters["@tex"].Value = texto;
+            cmd.Parameters.Add(new SqlParameter("@tex", SqlDbType.NVarChar)).Value = texto;
 
             cmd.ExecuteNonQuery();
 
