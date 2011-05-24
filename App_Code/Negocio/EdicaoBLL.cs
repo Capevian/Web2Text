@@ -54,4 +54,9 @@ public class EdicaoBLL
                              Convert.ToDateTime(row[7])  // Data Mod
                             ));
     }
+
+    public void saveTexto(int idTexto, string texto, string titulo)
+    {
+        edi.updateTexto(idTexto, texto, titulo);
+    }
 }

@@ -41,10 +41,8 @@ public partial class Visualize : System.Web.UI.Page
         //TextBox1.Attributes.Add("onFocus", "setbg('"+TextBox1.ClientID+"','white');");
         //TextBox1.Attributes.Add("onBlur", "setbg('" + TextBox1.ClientID + "','#E1E1E1');");
     }
-    protected void Button1_Click(object sender, EventArgs e)
-    {
-    }
-    protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+
+    protected void downloadFile()
     {
         Response.Clear();
         Response.ContentType = "application/octet-stream";
@@ -52,5 +50,27 @@ public partial class Visualize : System.Web.UI.Page
         Response.Flush();
         Response.Write(TextBox1.Text);
         Response.End();
+    }
+
+    protected void moveEdicao()
+    {
+        /* !!!! TO DO !!!!! */
+    }
+
+    protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+    {
+        downloadFile();
+    }
+    protected void LinkDownload_Click(object sender, EventArgs e)
+    {
+        downloadFile();
+    }
+    protected void LinkEdit_Click(object sender, EventArgs e)
+    {
+        moveEdicao();
+    }
+    protected void edButton_Click(object sender, ImageClickEventArgs e)
+    {
+        moveEdicao();
     }
 }
