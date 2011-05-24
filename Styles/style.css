@@ -436,3 +436,10 @@ textarea.CaixaEdicao
     padding: 1px;
     display: block;
 }
+
+.ContainerStyle
+{
+   float:left;
+   z-index:2;
+   display:none;
+}

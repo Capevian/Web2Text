@@ -11,6 +11,11 @@ public partial class Edit : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        LabelTitulo.Attributes.Add("onclick", "ShowEditBox();");
+        Button1.Attributes.Add("onclick", "HideEditBox();");
+        Button2.Attributes.Add("onclick", "HideEditBox();");
+
+        LabelTitulo.Text = HiddenField1.Value;
         // verifica qual o id passado para saber
         // qual o texto que deve apresentar
         string id = Request.QueryString["id"];
@@ -24,7 +29,7 @@ public partial class Edit : System.Web.UI.Page
         this.Title = "Web2Text : " + txt.Titulo;
 
         // Altera titulo do texto em vizualizacao
-        LabelTitulo.Text = txt.Titulo;
+        if (!IsPostBack) { LabelTitulo.Text = txt.Titulo; }
 
         // Altera conteudo da Area de texto
         TextBox1.Text = txt.TextContent;
@@ -36,7 +41,7 @@ public partial class Edit : System.Web.UI.Page
         labelDtAcess.Text = txt.DtAcesso.ToString();
 
         // Tooltips icons
-        //dlButton.ToolTip = "Download";
+        //dlButton.ToolTip = "Download";    
     }
 
     protected void downloadFile()
