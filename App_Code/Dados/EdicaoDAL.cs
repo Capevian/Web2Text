@@ -116,13 +116,11 @@ public class EdicaoDAL
             query.Append("Texto = @tex, ");
             query.Append("DataModificacao = CURRENT_TIMESTAMP ");
         query.Append("WHERE ");
-            query.Append("idLink = @idTex ;");
+            query.Append("idLink = @idTex; ");
 
         using (SqlConnection conn =
             new SqlConnection(ConfigurationManager.ConnectionStrings[db].ConnectionString))
-        {
-            conn.Open();
-
+        {          
             SqlCommand cmd = new SqlCommand(query.ToString(), conn);
             
             cmd.Parameters.Add(new SqlParameter("@idTex", SqlDbType.Int)).Value = idTexto;
@@ -130,6 +128,8 @@ public class EdicaoDAL
             cmd.Parameters.Add(new SqlParameter("@tit", SqlDbType.NVarChar)).Value = titulo;
 
             cmd.Parameters.Add(new SqlParameter("@tex", SqlDbType.NVarChar)).Value = texto;
+
+            conn.Open();
 
             cmd.ExecuteNonQuery();
 

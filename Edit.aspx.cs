@@ -29,21 +29,28 @@ public partial class Edit : System.Web.UI.Page
         // Altera o titulo da pagina
         this.Title = "Web2Text : " + txt.Titulo;
 
-        // Altera titulo do texto em vizualizacao
+        
+        // Se nao foi feito um PostBack da pagina
+        // (guardar alteracoes por exemplo...)
         if (!IsPostBack) 
-        { 
+        {
+            // Altera titulo do texto em vizualizacao
             LabelTitulo.Text = txt.Titulo;
             HiddenField1.Value = txt.Titulo;
+
+            // Altera conteudo da Area de texto
+            TextBox1.Text = txt.TextContent;
+            
+            // Detalhes do texto
+            labelUser.Text = txt.User;
+            labelDtMod.Text = txt.DtMod.ToString();
+            linkWWW.NavigateUrl = txt.Link;
+            labelDtAcess.Text = txt.DtAcesso.ToString();
         }
 
-        // Altera conteudo da Area de texto
-        TextBox1.Text = txt.TextContent;
+        
 
-        // Detalhes do texto
-        labelUser.Text = txt.User;
-        labelDtMod.Text = txt.DtMod.ToString();
-        linkWWW.NavigateUrl = txt.Link;
-        labelDtAcess.Text = txt.DtAcesso.ToString();
+        
 
         // Tooltips icons
         //dlButton.ToolTip = "Download";    
