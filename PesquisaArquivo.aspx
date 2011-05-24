@@ -31,10 +31,9 @@
       
         <ItemTemplate>
             <tr>
-                <td><a href="<%# Eval("LinkContent") %>"><%# Eval("LinkContent") %></a><br /><a href="<%# Eval("LinkDesc") %>"><%# Eval("LinkDesc") %></a></td>
-                <td></td>
-                <td>Download</td>
-                <td>Remover</td>
+                <td><a href="<%# Eval("PesqArqIdT") %>"><%# Eval("PesqArqIdT")%></a>
+                    <a href="<%# Eval("PesqArqTex") %>"><%# Eval("PesqArqTex")%></a>
+                    <a href="<%# Eval("PesqArqRank") %>"><%# Eval("PesqArqRank")%></a></td>
             </tr>
         </ItemTemplate>
 
