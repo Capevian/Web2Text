@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Text.RegularExpressions;
 
 /// <summary>
 /// Summary description for Texto
@@ -62,6 +63,21 @@ public abstract class Texto
 
     public string limpaTexto(string s)
     {
-        return null;
+        const string HTML_TAG = "<.*?>";
+        const string HTML_TAG_SCRIPT = "<script.*>[\\s\\S]?</script>";          //Caso em que script nao tem nada entre as tags
+        const string HTML_TAG_SCRIPT_2 = "<script.*>[\\s\\S]*?</script>";       //Caso em que realmente tem algo entre as tags
+        const string HTML_TAG_NOSCRIPT = "<noscript.*>[\\s\\S]?</noscript>";    //Caso em que noscript nao tem nada entre as tags
+        const string HTML_TAG_NOSCRIPT_2 = "<noscript.*>[\\s\\S]*?</noscript>"; //Caso em que realmente tem algo entre as tags
+
+       
+        /*Limpeza progressiva, dos especiais ate as tags isoladas*/
+        s = Regex.Replace(s, HTML_TAG_SCRIPT, "");
+        s = Regex.Replace(s, HTML_TAG_SCRIPT_2, "");
+        s = Regex.Replace(s, HTML_TAG_NOSCRIPT, "");
+        s = Regex.Replace(s, HTML_TAG_NOSCRIPT_2, "");
+        s = Regex.Replace(s, HTML_TAG, "");
+
+        return s;
+        
     }
 }
