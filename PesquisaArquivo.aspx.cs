@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Arquivo : System.Web.UI.Page
+public partial class PesquisaArquivo : System.Web.UI.Page
 {
     int CurrentPage = 0;
 
@@ -16,8 +16,6 @@ public partial class Arquivo : System.Web.UI.Page
             BindListView();
         }
     }
-
-
     /* Funcao executada quando se muda de pagina*/
     protected void listView1_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
     {
@@ -30,21 +28,21 @@ public partial class Arquivo : System.Web.UI.Page
      * neste caso preenche a dropDownlist*/
     protected void listView1_DataBound(object sender, EventArgs e)
     {
-            DropDownList ddl = DtPager.Controls[3].FindControl("DropDownList1") as DropDownList;
+        DropDownList ddl = DtPager.Controls[3].FindControl("DropDownList1") as DropDownList;
 
-            int PageCount = (DtPager.TotalRowCount / DtPager.PageSize);
+        int PageCount = (DtPager.TotalRowCount / DtPager.PageSize);
 
-            if (PageCount * DtPager.PageSize != DtPager.TotalRowCount)
-            {
-                PageCount = PageCount + 1;
-            }
+        if (PageCount * DtPager.PageSize != DtPager.TotalRowCount)
+        {
+            PageCount = PageCount + 1;
+        }
 
-            for (int i = 0; i < PageCount; i++)
-            {
-                ddl.Items.Add(new ListItem((i + 1).ToString(), i.ToString()));
-            }
+        for (int i = 0; i < PageCount; i++)
+        {
+            ddl.Items.Add(new ListItem((i + 1).ToString(), i.ToString()));
+        }
 
-            ddl.Items.FindByValue(CurrentPage.ToString()).Selected = true;
+        ddl.Items.FindByValue(CurrentPage.ToString()).Selected = true;
     }
 
     /* Funcao executada quando e' escolhida uma pagina na dropDownList*/
@@ -59,30 +57,18 @@ public partial class Arquivo : System.Web.UI.Page
         //BindListView();
     }
 
-    protected void DataPager1_PreRender(object sender, EventArgs e) {
-
-        ArquivoBLL arq = new ArquivoBLL();
-       
-        List<TextoArq> listaArq = arq.getListaArquivados(0);
-
-        ListView1.DataSource = listaArq;
-        ListView1.DataBind();
-
+    protected void DataPager1_PreRender(object sender, EventArgs e)
+    {
+        BindListView();
     }
 
     private void BindListView()
     {
         ArquivoBLL arq = new ArquivoBLL();
-       
-        List<TextoArq> listaArq = arq.getListaArquivados(0);
 
-        ListView1.DataSource = listaArq;
+        string termos = (string) (Session["value"]);
+        List<PesquisaArq> lista = arq.efectuaPesquisa(termos);
+        ListView1.DataSource = lista;
         ListView1.DataBind();
-       
-    }
-
-    protected void Button1_Click(object sender, EventArgs e)
-    {
-        Session["value"] = TextBox1.Text;
     }
 }
