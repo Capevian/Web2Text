@@ -104,4 +104,37 @@ public class EdicaoDAL
 
         return dataRow;
     }
+
+    public void updateTexto(int idTexto, string texto, string titulo)
+    {
+        StringBuilder query = new StringBuilder();
+
+        query.Append("UPDATE ");
+            query.Append("Edicao ");
+        query.Append("SET ");
+            query.Append("Titulo = @tit, ");
+            query.Append("Texto = @tex, ");
+            query.Append("DataModificacao = GETDATE()");
+        query.Append("WHERE ");
+            query.Append("idLink = @idTex ;");
+
+        using (SqlConnection conn =
+            new SqlConnection(ConfigurationManager.ConnectionStrings[db].ConnectionString))
+        {
+            SqlCommand cmd = new SqlCommand(query.ToString(), conn);
+            
+            cmd.Parameters.Add(new SqlParameter("@idTex", SqlDbType.Int,idTexto));
+            cmd.Parameters["@idTex"].Value = idTexto;
+
+            cmd.Parameters.Add(new SqlParameter("@tit", SqlDbType.NVarChar,50,titulo));
+            cmd.Parameters["@tit"].Value = titulo;
+
+            cmd.Parameters.Add(new SqlParameter("@tex", SqlDbType.NVarChar,-1,texto));
+            cmd.Parameters["@tex"].Value = texto;
+
+            cmd.ExecuteNonQuery();
+
+            conn.Close();
+        }
+    }
 }
