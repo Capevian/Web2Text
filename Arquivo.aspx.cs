@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 
 public partial class Arquivo : System.Web.UI.Page
 {
+    private ArquivoBLL arq = new ArquivoBLL();
+
     int CurrentPage = 0;
 
     protected void Page_Load(object sender, EventArgs e)
@@ -59,10 +61,9 @@ public partial class Arquivo : System.Web.UI.Page
         //BindListView();
     }
 
-    protected void DataPager1_PreRender(object sender, EventArgs e) {
+    protected void DataPager1_PreRender(object sender, EventArgs e) 
+    {
 
-        ArquivoBLL arq = new ArquivoBLL();
-       
         List<TextoArq> listaArq = arq.getListaArquivados(0);
 
         ListView1.DataSource = listaArq;
@@ -71,9 +72,7 @@ public partial class Arquivo : System.Web.UI.Page
     }
 
     private void BindListView()
-    {
-        ArquivoBLL arq = new ArquivoBLL();
-       
+    {       
         List<TextoArq> listaArq = arq.getListaArquivados(0);
 
         ListView1.DataSource = listaArq;
@@ -86,5 +85,10 @@ public partial class Arquivo : System.Web.UI.Page
         string termos = TextBox1.Text;
         Session["Termos"] = termos;
         Response.Redirect("PesquisaArquivo.aspx");
+    }
+
+    protected void clicklinkRemover(object sender, CommandEventArgs e)
+    {
+        arq.removeTexto(Convert.ToInt32(e.CommandArgument.ToString()));
     }
 }

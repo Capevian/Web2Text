@@ -14,7 +14,7 @@
     <asp:ListView ID="ListView1" runat="server" 
         ItemPlaceholderID="myItemPlaceHolder"
         OnPagePropertiesChanging="listView1_PagePropertiesChanging"
-        OnDataBound="listView1_DataBound">
+        OnDataBound="listView1_DataBound" >
       
         <LayoutTemplate>
             <table id="tabarquivo" width="100%">
@@ -38,7 +38,14 @@
                 <td><a href="Visualize.aspx?id=<%# Eval("IdTexto") %>"><%# Eval("Titulo") %></a></td>
                 <td><%# Eval("DataArq") %></td>
                 <td>Download</td>
-                <td>Remover</td>
+                <td>
+                    <asp:LinkButton ID="LinkButton1" 
+                        runat="server" 
+                        OnCommand="clicklinkRemover"
+                        CommandArgument='<%# Eval("IdTexto") %>' 
+                        Text="Remover">
+                    </asp:LinkButton>
+                </td>
             </tr>
         </ItemTemplate>
 
