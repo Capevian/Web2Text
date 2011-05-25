@@ -43,7 +43,8 @@
                         runat="server" 
                         OnCommand="clicklinkRemover"
                         CommandArgument='<%# Eval("IdTexto") %>' 
-                        Text="Remover">
+                        Text="Remover"
+                        OnClientClick="return confirm('Tem a certeza que deseja remover o texto?');">
                     </asp:LinkButton>
                 </td>
             </tr>
