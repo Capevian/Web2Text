@@ -65,13 +65,14 @@ public partial class PesquisaArquivo : System.Web.UI.Page
     private void BindListView()
     {
         ArquivoBLL arq = new ArquivoBLL();
+
         string termos;
 
-        if (Page.Session["Termos"] != null)
-            termos = (string)Page.Session["Termos"];
+        if (Session["Termos"] != null)
+            termos = (string)Session["Termos"];
         else termos = "Nada a apresentar";
 
-        List<PesquisaArq> lista = arq.efectuaPesquisa("lights");
+        List<PesquisaArq> lista = arq.efectuaPesquisa(termos);
         ListView1.DataSource = lista;
         ListView1.DataBind();
     }

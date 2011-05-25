@@ -5,7 +5,7 @@
 
 <asp:Content ID="Content3" ContentPlaceHolderID="cpSideBar" runat="server">
     <asp:TextBox ID="TextBox1" runat="server" Width="94px"></asp:TextBox>
-    <asp:Button ID="Button1" PostBackUrl="PesquisaArquivo.aspx" runat="server" Text="Pesquisar" 
+    <asp:Button ID="Button1" runat="server" Text="Pesquisar" 
         onclick="Button1_Click" />
 </asp:Content>
 
