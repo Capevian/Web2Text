@@ -59,4 +59,9 @@ public class EdicaoBLL
     {
         edi.updateTexto(idTexto, texto, titulo);
     }
+
+    public void archiveTexto(int idTexto, string texto, string titulo)
+    {
+        edi.archiveTexto(idTexto, texto, titulo);
+    }
 }

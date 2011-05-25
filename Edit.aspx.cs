@@ -47,11 +47,6 @@ public partial class Edit : System.Web.UI.Page
             linkWWW.NavigateUrl = txt.Link;
             labelDtAcess.Text = txt.DtAcesso.ToString();
         }
-
-        
-
-        
-
         // Tooltips icons
         //dlButton.ToolTip = "Download";    
     }
@@ -80,7 +75,8 @@ public partial class Edit : System.Web.UI.Page
 
     protected void arquivarTexto()
     {
-        /* !!!TO BE DONE!!! */
+        edi.archiveTexto(txt.IdTexto, TextBox1.Text, LabelTitulo.Text);
+        Response.Redirect("Arquivo.aspx");
     }
   
     protected void dlButton_Click(object sender, ImageClickEventArgs e)
