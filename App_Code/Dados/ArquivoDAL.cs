@@ -111,9 +111,9 @@ public class ArquivoDAL
         StringBuilder query = new StringBuilder();
         query.Append("SELECT Tex.idTexto, Tex.Texto, KEY_TBL.RANK ");
         query.Append("FROM web2text.dbo.Arquivo AS Tex ");
-        query.Append("INNER JOIN CONTAINSTABLE(web2text.dbo.Arquivo, *, ");
-        query.Append("'swimming'");
-        query.Append(") AS KEY_TBL ");
+        query.Append("INNER JOIN CONTAINSTABLE(web2text.dbo.Arquivo, *, '");
+        query.Append(termos);
+        query.Append("') AS KEY_TBL ");
         query.Append("ON Tex.idTexto = KEY_TBL.[KEY] ");
         query.Append("WHERE KEY_TBL.RANK > 1 ");
         query.Append("ORDER BY KEY_TBL.RANK DESC;");
