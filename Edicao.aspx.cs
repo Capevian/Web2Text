@@ -8,7 +8,8 @@ using System.Web.UI.WebControls;
 public partial class Edicao : System.Web.UI.Page
 {
     int CurrentPage = 0;
-
+    private EdicaoBLL edi;
+    
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -71,5 +72,17 @@ public partial class Edicao : System.Web.UI.Page
 
         ListView1.DataSource = listaEdit;
         ListView1.DataBind();
+    }
+
+    protected void linkDownloadClick(object sender, CommandEventArgs e)
+    {
+        TextoEdit txt;
+        txt = edi.getTexto( Convert.ToInt32(e.CommandArgument.ToString()));
+        Response.Clear();
+        Response.ContentType = "application/octet-stream";
+        Response.AppendHeader("content-disposition", "attachment; filename=ficheiro.txt");
+        Response.Flush();
+        Response.Write(txt.TextContent);
+        Response.End();
     }
 }

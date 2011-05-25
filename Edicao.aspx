@@ -41,7 +41,14 @@
             <tr>
                 <td><a href="Edit.aspx?id=<%# Eval("IdTexto") %>"><%# Eval("Titulo") %></a></td>
                 <td><%# Eval("DtMod") %></td>
-                <td>Download</td>
+                <td>
+                    <asp:LinkButton ID="LinkButton1" 
+                                    runat="server"
+                                    Text = "Download"
+                                    OnCommand="linkDownloadClick"
+                                    CommandArgument = '<% Eval(IdTexto) %>'>
+                    </asp:LinkButton>
+                </td>
                 <td>Remover</td>
             </tr>
         </ItemTemplate>
