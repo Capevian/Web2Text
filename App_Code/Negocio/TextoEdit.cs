@@ -6,7 +6,7 @@ using System.Web;
 /// <summary>
 /// Summary description for TextoEdit
 /// </summary>
-public class TextoEdit : Texto
+public class TextoEdit : Texto, IComparable<TextoEdit>
 {
     private DateTime dtAcesso;
     private DateTime dtMod;
@@ -36,4 +36,12 @@ public class TextoEdit : Texto
         get { return dtMod; }
         set { dtMod = value; }
     }
+
+    #region IComparable<TextoEdit> Members
+
+    public int CompareTo(TextoEdit other)
+    {
+        return other.Titulo.CompareTo(this.Titulo);
+    }
+    #endregion
 }

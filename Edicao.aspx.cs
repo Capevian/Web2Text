@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 public partial class Edicao : System.Web.UI.Page
 {
     int CurrentPage = 0;
+    private EdicaoBLL edi = new EdicaoBLL();
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -65,11 +66,48 @@ public partial class Edicao : System.Web.UI.Page
     
     private void BindListView()
     {
-        EdicaoBLL edi = new EdicaoBLL();
 
         List<TextoEdit> listaEdit = edi.getLista(0);
 
+
         ListView1.DataSource = listaEdit;
         ListView1.DataBind();
+    }
+
+    protected void clicklinkRemover(object sender, CommandEventArgs e)
+    {
+        edi.removeTexto(Convert.ToInt32(e.CommandArgument.ToString()));
+    }
+
+    protected string SortExpression
+    {
+        get
+        {
+            return ViewState["SortExpression"] as string;
+        }
+
+        set
+        {
+            ViewState["SortExpression"] = value;
+        }
+    }
+
+    protected SortDirection SortDirection
+    {
+        get
+        {
+            object o = ViewState["SortDirection"];
+
+            if (o == null)
+                return SortDirection.Ascending;
+
+            else
+                return (SortDirection)o;
+        }
+
+        set
+        {
+            ViewState["SortDirection"] = value;
+        }
     }
 }

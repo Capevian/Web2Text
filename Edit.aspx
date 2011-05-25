@@ -139,7 +139,8 @@
                                 runat="server" 
                                 CssClass="labelTitle labelDetail imgLabel" 
                                 Style="display:inline" 
-                                onclick="LinkArquivar_Click">
+                                onclick="LinkArquivar_Click"
+                                OnClientClick="return confirm('Tem a certeza que deseja arquivar o texto?');">
                                 Arquivar Texto
                 </asp:LinkButton>
             </span>

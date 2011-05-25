@@ -64,4 +64,9 @@ public class EdicaoBLL
     {
         edi.archiveTexto(idTexto, texto, titulo);
     }
+
+    public int removeTexto(int idTexto)
+    {
+        return (edi.remove(idTexto));
+    }
 }

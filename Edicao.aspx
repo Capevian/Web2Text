@@ -24,7 +24,12 @@
             <table id="tabarquivo" width="100%">
                 <thead>           
                     <tr>
-                        <th>Título</th> 
+                        <th>
+                            <asp:LinkButton ID="LinkButton2" 
+                                            Text="Título" 
+                                            CommandName="sort" 
+                                            CommandArgument="Titulo"
+                                            runat="server"></asp:LinkButton></th> 
                         <th>Data de Modificação</th>
                         <th></th>
                         <th></th>
@@ -42,7 +47,15 @@
                 <td><a href="Edit.aspx?id=<%# Eval("IdTexto") %>"><%# Eval("Titulo") %></a></td>
                 <td><%# Eval("DtMod") %></td>
                 <td>Download</td>
-                <td>Remover</td>
+                <td>
+                    <asp:LinkButton ID="LinkButton1" 
+                                runat="server" 
+                                OnCommand="clicklinkRemover"
+                                CommandArgument='<%# Eval("IdTexto") %>' 
+                                Text="Remover"
+                                OnClientClick="return confirm('Tem a certeza que deseja remover o texto?');">
+                    </asp:LinkButton>
+                </td>
             </tr>
         </ItemTemplate>
 
