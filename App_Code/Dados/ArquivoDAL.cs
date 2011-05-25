@@ -109,7 +109,7 @@ public class ArquivoDAL
     public DataTable pesquisaPalavras(string termos)
     {
         StringBuilder query = new StringBuilder();
-        query.Append("SELECT Tex.idTexto, Tex.Texto, KEY_TBL.RANK ");
+        query.Append("SELECT Tex.idTexto, Tex.Titulo, Tex.Texto, KEY_TBL.RANK ");
         query.Append("FROM web2text.dbo.Arquivo AS Tex ");
         query.Append("INNER JOIN CONTAINSTABLE(web2text.dbo.Arquivo, *, '");
         query.Append(termos);

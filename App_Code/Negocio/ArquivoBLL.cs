@@ -56,12 +56,18 @@ public class ArquivoBLL
     public List<PesquisaArq> efectuaPesquisa(string termos)
     {
         List<PesquisaArq> lista = new List<PesquisaArq>();
+
+        //retorna lista vazia se o termos pesquisado for null
+        if (termos == "") return lista;
+        
         DataTable dt = arq.pesquisaPalavras(termos);
         foreach (DataRow row in dt.Rows)
         {
-            lista.Add(new PesquisaArq((int)row[0],
-                              row[1].ToString(),
-                              row[2].ToString()));
+            lista.Add(new PesquisaArq(termos,
+                                (int)row[0],
+                                row[1].ToString(),
+                                row[2].ToString(),
+                                row[3].ToString()));
         }
         return lista;
     }
