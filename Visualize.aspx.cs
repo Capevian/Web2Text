@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 public partial class Visualize : System.Web.UI.Page
 {
     private TextoArq txt = null;
+    private ArquivoBLL arquivo;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -15,7 +16,7 @@ public partial class Visualize : System.Web.UI.Page
         // qual o texto que deve apresentar
         string id = Request.QueryString["id"];
 
-        ArquivoBLL arquivo = new ArquivoBLL();
+        arquivo = new ArquivoBLL();
 
         // Descarrega da Base de Dados o texto com o id passado na QueryString
         txt = arquivo.getTexto(Convert.ToInt32(id));
@@ -25,7 +26,7 @@ public partial class Visualize : System.Web.UI.Page
 
         // Altera titulo do texto em vizualizacao
         LabelTitulo.Text = txt.Titulo;
-        
+
         // Altera conteudo da Area de texto
         TextBox1.Text = txt.TextContent;
         TextBox1.ReadOnly = true;
@@ -36,11 +37,7 @@ public partial class Visualize : System.Web.UI.Page
         linkWWW.NavigateUrl = txt.Link;
 
         dlButton.ToolTip = "Download";
-        
-
-        //TextBox1.Attributes.Add("onFocus", "setbg('"+TextBox1.ClientID+"','white');");
-        //TextBox1.Attributes.Add("onBlur", "setbg('" + TextBox1.ClientID + "','#E1E1E1');");
-    }
+    }   
 
     protected void downloadFile()
     {
@@ -54,7 +51,8 @@ public partial class Visualize : System.Web.UI.Page
 
     protected void moveEdicao()
     {
-        /* !!!! TO DO !!!!! */
+        arquivo.moveToEdicao(Convert.ToInt32(Request.QueryString["id"]));
+        Response.Redirect("Edicao.aspx");
     }
 
     protected void ImageButton1_Click(object sender, ImageClickEventArgs e)

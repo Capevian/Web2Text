@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Text;
 using System.Configuration;
+using System.Diagnostics;
 
 /// <summary>
 /// Summary description for ArquivoDAL
@@ -25,18 +26,23 @@ public class ArquivoDAL
 
     public DataTable select(int ordenacao)
     {
-        StringBuilder query = new StringBuilder();
-        query.Append("SELECT ");
-            query.Append("idTexto, ");
-            query.Append("Titulo, ");
-            query.Append("Texto, ");
-            query.Append("Intro, ");
-            query.Append("DataArq ,");
-            query.Append("username, ");
-            query.Append("Link ");
-        query.Append("FROM ");
-            query.Append("Arquivo ");
-            query.Append("ORDER BY Titulo;");
+        StringBuilder q1 = new StringBuilder();
+        
+        q1.Append(" SELECT ");
+
+        q1.Append(" idTexto, ");
+        q1.Append(" Titulo, ");
+        q1.Append(" Texto, ");
+        q1.Append(" Intro, ");
+        q1.Append(" DataArq ,");
+        q1.Append(" username, ");
+        q1.Append(" Link ");
+
+        q1.Append(" FROM ");
+
+        q1.Append(" Arquivo ");
+
+        q1.Append(" ORDER BY Titulo; ");
 
         // O bloco using garante a libertação dos recursos quando o código terminar
         // Semelhante ao try...finally
@@ -44,7 +50,7 @@ public class ArquivoDAL
         {
             // Utilizado para preencher o objeto DataSet
             // fazendo a query na BD
-            SqlDataAdapter dAdapter = new SqlDataAdapter(query.ToString(), conn);
+            SqlDataAdapter dAdapter = new SqlDataAdapter(q1.ToString(), conn);
             
             DataSet dataSet = new DataSet();
             
@@ -65,20 +71,25 @@ public class ArquivoDAL
     {
         DataRow dataRow = null;
 
-        StringBuilder query = new StringBuilder();
+        StringBuilder q1 = new StringBuilder();
 
-        query.Append("SELECT ");
-            query.Append("idTexto, ");
-            query.Append("Titulo, ");
-            query.Append("Texto, ");
-            query.Append("Intro, ");
-            query.Append("DataArq, ");
-            query.Append("username, ");
-            query.Append("Link ");
-        query.Append("FROM ");
-            query.Append("Arquivo ");
-        query.Append("WHERE ");
-            query.Append("idTexto = @idVal ;");
+        q1.Append("SELECT ");
+        
+        q1.Append("idTexto, ");
+        q1.Append("Titulo, ");
+        q1.Append("Texto, ");
+        q1.Append("Intro, ");
+        q1.Append("DataArq, ");
+        q1.Append("username, ");
+        q1.Append("Link ");
+        
+        q1.Append("FROM ");
+        
+        q1.Append("Arquivo ");
+        
+        q1.Append("WHERE ");
+        
+        q1.Append("idTexto = @idVal ;");
 
         SqlParameter param = new SqlParameter("@idVal",idTexto);
 
@@ -86,7 +97,7 @@ public class ArquivoDAL
             new SqlConnection(ConfigurationManager.ConnectionStrings[db].ConnectionString))
         {
             
-            SqlCommand cmd = new SqlCommand(query.ToString(),conn);
+            SqlCommand cmd = new SqlCommand(q1.ToString(),conn);
             cmd.Parameters.Add(param);
 
             SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
@@ -139,5 +150,68 @@ public class ArquivoDAL
 
             return dt;
         }
+    }
+
+    public int moveToEdicao(int idTexto)
+    {
+        int i = -1;
+
+        SqlTransaction tn; 
+        
+        StringBuilder q1 = new StringBuilder();
+
+        q1.Append(" INSERT INTO ");
+        q1.Append(" Edicao ( DataAcesso, DataModificacao, Texto, Titulo, Link, Intro, username ) ");
+        q1.Append(" SELECT ");
+        q1.Append(" CURRENT_TIMESTAMP as Expr1, CURRENT_TIMESTAMP as Expr1, ");
+        q1.Append(" a.Texto, a.Titulo, a.Link, a.Intro, a.username ");
+        q1.Append(" FROM Arquivo AS a ");
+        q1.Append(" WHERE (a.idTexto = @idTexto) ");
+
+        StringBuilder q2 = new StringBuilder();
+
+        q2.Append(" DELETE ");
+        q2.Append(" FROM Arquivo ");
+        q2.Append(" WHERE (idTexto = @idTexto) ");
+
+        using (SqlConnection conn =
+            new SqlConnection(ConfigurationManager.ConnectionStrings[db].ConnectionString))
+        {
+
+            conn.Open();
+
+            tn = conn.BeginTransaction();
+
+            SqlCommand cmd1 = new SqlCommand(q1.ToString(), conn, tn);
+
+            cmd1.Parameters.Add("@idTexto", SqlDbType.Int).Value = idTexto;
+
+            SqlCommand cmd2 = new SqlCommand(q2.ToString(), conn, tn);
+
+            cmd2.Parameters.Add("@idTexto", SqlDbType.Int).Value = idTexto;
+
+            try
+            {
+                // Copia a entidade para a tabela Edicao
+                i = cmd1.ExecuteNonQuery();
+
+                // Remove do arquivo a entidade
+                i += cmd2.ExecuteNonQuery();
+
+                tn.Commit();
+            }
+            catch (SqlException ex)
+            {
+                Debug.Assert(false, ex.ToString());
+                tn.Rollback();
+            }
+
+            if (conn.State != ConnectionState.Closed)
+            {
+                conn.Close();
+            }
+        }
+
+        return i;
     }
 }
