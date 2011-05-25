@@ -46,16 +46,10 @@
             <tr>
                 <td><a href="Edit.aspx?id=<%# Eval("IdTexto") %>"><%# Eval("Titulo") %></a></td>
                 <td><%# Eval("DtMod") %></td>
-                <td> 
-                    <asp:LinkButton ID="LinkButton1" 
-                                    runat="server"
-                                    Text = "Download"
-                                    OnCommand="linkDownloadClick"
-                                    CommandArgument = '<%# Eval("IdTexto") %>'>
-                    </asp:LinkButton>
-                </td>
+<<<<<<< HEAD
+                <td>Download</td>
                 <td>
-                    <asp:LinkButton ID="LinkRemover" 
+                    <asp:LinkButton ID="LinkButton1" 
                                 runat="server" 
                                 OnCommand="clicklinkRemover"
                                 CommandArgument='<%# Eval("IdTexto") %>' 
@@ -63,7 +57,17 @@
                                 OnClientClick="return confirm('Tem a certeza que deseja remover o texto?');">
                     </asp:LinkButton>
                 </td>
-
+=======
+                <td>
+                    <asp:LinkButton ID="LinkButton1" 
+                                    runat="server"
+                                    Text = "Download"
+                                    OnCommand="linkDownloadClick"
+                                    CommandArgument = '<% Eval(IdTexto) %>'>
+                    </asp:LinkButton>
+                </td>
+                <td>Remover</td>
+>>>>>>> origin/master
             </tr>
         </ItemTemplate>
 
