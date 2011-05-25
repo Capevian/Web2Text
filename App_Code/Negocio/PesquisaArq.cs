@@ -12,8 +12,11 @@ public class PesquisaArq
     private string tex;
     private string rank;
 
-	public PesquisaArq(int idT, string tex, string rank) 
+	public PesquisaArq(int idTAux, string texAux, string rankAux) 
     {
+        idT = idTAux;
+        tex = texAux;
+        rank = rankAux;
 	}
     public int PesqArqIdT
     {

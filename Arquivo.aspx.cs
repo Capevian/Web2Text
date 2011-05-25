@@ -83,6 +83,7 @@ public partial class Arquivo : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        Session["value"] = TextBox1.Text;
+        string termos = TextBox1.Text;
+        Page.Session["Termos"] = termos;
     }
 }
