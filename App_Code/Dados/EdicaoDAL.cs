@@ -218,4 +218,34 @@ public class EdicaoDAL
             }
         }
     }
+
+    public int remove(int idTexto)
+    {
+        int i = -1;
+
+        StringBuilder q1 = new StringBuilder();
+
+        q1.Append(" DELETE ");
+        q1.Append(" FROM Edicao ");
+        q1.Append(" WHERE (idLink = @idTexto) ");
+
+        using (SqlConnection conn =
+            new SqlConnection(ConfigurationManager.ConnectionStrings[db].ConnectionString))
+        {
+            conn.Open();
+
+            SqlCommand cmd1 = new SqlCommand(q1.ToString(), conn);
+
+            cmd1.Parameters.Add("@idTexto", SqlDbType.Int).Value = idTexto;
+
+            i = cmd1.ExecuteNonQuery();
+
+            if (conn.State != ConnectionState.Closed)
+            {
+                conn.Close();
+            }
+        }
+
+        return i;
+    }
 }

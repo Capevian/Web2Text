@@ -77,4 +77,9 @@ public class ArquivoBLL
     {
         return(arq.moveToEdicao(idTexto));
     }
+
+    public int removeTexto(int idTexto)
+    {
+        return (arq.remove(idTexto));
+    }
 }
