@@ -6,6 +6,7 @@ using System.Data;
 using System.Text;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Diagnostics;
 
 /// <summary>
 /// Summary description for EdicaoDAL
@@ -107,33 +108,114 @@ public class EdicaoDAL
 
     public void updateTexto(int idTexto, string texto, string titulo)
     {
-        StringBuilder query = new StringBuilder();
+        StringBuilder q = new StringBuilder();
 
-        query.Append("UPDATE ");
-            query.Append("Edicao ");
-        query.Append("SET ");
-            query.Append("Titulo = @tit, ");
-            query.Append("Texto = @tex, ");
-            query.Append("DataModificacao = CURRENT_TIMESTAMP ");
-        query.Append("WHERE ");
-            query.Append("idLink = @idTex; ");
+        q.Append("UPDATE ");
+        q.Append("Edicao ");
+        q.Append("SET ");
+        q.Append("Titulo = @tit, ");
+        q.Append("Texto = @tex, ");
+        q.Append("DataModificacao = CURRENT_TIMESTAMP ");
+        q.Append("WHERE ");
+        q.Append("idLink = @idTex; ");
 
         using (SqlConnection conn =
             new SqlConnection(ConfigurationManager.ConnectionStrings[db].ConnectionString))
         {          
-            SqlCommand cmd = new SqlCommand(query.ToString(), conn);
-            
-            cmd.Parameters.Add(new SqlParameter("@idTex", SqlDbType.Int)).Value = idTexto;
-
+            SqlCommand cmd = new SqlCommand(q.ToString(), conn);
+                        
             cmd.Parameters.Add(new SqlParameter("@tit", SqlDbType.NVarChar)).Value = titulo;
 
             cmd.Parameters.Add(new SqlParameter("@tex", SqlDbType.NVarChar)).Value = texto;
+            
+            cmd.Parameters.Add(new SqlParameter("@idTex", SqlDbType.Int)).Value = idTexto;
 
             conn.Open();
 
             cmd.ExecuteNonQuery();
 
             conn.Close();
+        }
+    }
+
+    public void archiveTexto(int idTexto, string texto, string titulo)
+    {
+
+        SqlTransaction tn ;
+
+        StringBuilder q1 = new StringBuilder();
+
+        q1.Append(" UPDATE ");
+        q1.Append(" Edicao ");
+        q1.Append(" SET ");
+        q1.Append(" Titulo = @titulo, ");
+        q1.Append(" Texto = @texto ");
+        q1.Append(" WHERE ");
+        q1.Append(" idLink = @idTexto; ");
+        
+        StringBuilder q2 = new StringBuilder();
+
+        q2.Append(" INSERT INTO ");
+        q2.Append(" Arquivo ( Titulo, Texto, Intro, DataArq, username, Link ) ");
+        q2.Append(" SELECT ");
+        q2.Append(" e.Titulo, e.Texto, e.Intro, CURRENT_TIMESTAMP as Expr1, e.username, e.Link ");
+        q2.Append(" FROM Edicao AS e ");
+        q2.Append(" WHERE (e.idLink = @idTexto) ");
+
+        StringBuilder q3 = new StringBuilder();
+
+        q3.Append(" DELETE ");
+        q3.Append(" FROM Edicao ");
+        q3.Append(" WHERE ");
+        q3.Append(" (idLink = @idTexto) ");
+
+        using (SqlConnection conn =
+            new SqlConnection(ConfigurationManager.ConnectionStrings[db].ConnectionString))
+        {
+
+            conn.Open();
+
+            tn = conn.BeginTransaction();
+
+            SqlCommand cmd1 = new SqlCommand(q1.ToString(), conn, tn);
+
+            cmd1.Parameters.Add("@titulo", SqlDbType.NVarChar).Value = titulo;
+
+            cmd1.Parameters.Add("@texto", SqlDbType.NVarChar).Value = texto;
+
+            cmd1.Parameters.Add("@idTexto", SqlDbType.Int).Value = idTexto;
+
+            SqlCommand cmd2 = new SqlCommand(q2.ToString(), conn, tn);
+
+            cmd2.Parameters.Add("@idTexto", SqlDbType.Int).Value = idTexto;
+
+            SqlCommand cmd3 = new SqlCommand(q3.ToString(), conn, tn);
+
+            cmd3.Parameters.Add("@idTexto", SqlDbType.Int).Value = idTexto;
+
+            try
+            {
+                // Actualiza primeiro os dados da tabela edicao
+                cmd1.ExecuteNonQuery();
+
+                // Insere o novo texto no arquivo
+                cmd2.ExecuteNonQuery();
+
+                // Remove da tabela edicao
+                cmd3.ExecuteNonQuery();
+
+                tn.Commit();
+            }
+            catch (SqlException ex)
+            {
+                Debug.Assert(false, ex.ToString());
+                tn.Rollback();
+            }
+
+            if (conn.State != ConnectionState.Closed)
+            {
+                conn.Close();
+            }
         }
     }
 }

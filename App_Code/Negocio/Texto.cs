@@ -63,16 +63,15 @@ public abstract class Texto
 
     public string limpaTexto(string s)
     {
-        const string HTML_TAG = "<.*?>";
-        const string HTML_TAG_SCRIPT = "<script.*>[\\s\\S]?</script>";          //Caso em que script nao tem nada entre as tags
-        const string HTML_TAG_SCRIPT_2 = "<script.*>[\\s\\S]*?</script>";       //Caso em que realmente tem algo entre as tags
-        const string HTML_TAG_NOSCRIPT = "<noscript.*>[\\s\\S]?</noscript>";    //Caso em que noscript nao tem nada entre as tags
-        const string HTML_TAG_NOSCRIPT_2 = "<noscript.*>[\\s\\S]*?</noscript>"; //Caso em que realmente tem algo entre as tags
+        const string HTML_TAG = "<[\\s\\S]*?>"; //Tudo o que esta dentro de tags html
+        const string HTML_TAG_SCRIPT = "<[Ss][Cc][Rr][Ii][Pp][Tt].*?>[\\s\\S]*?</[Ss][Cc][Rr][Ii][Pp][Tt]>";                  //Tudo entre tags script
+        const string HTML_TAG_NOSCRIPT = "<[Nn][Oo][Ss][Cc][Rr][Ii][Pp][Tt]>[\\s\\S]?</[Nn][Oo][Ss][Cc][Rr][Ii][Pp][Tt]>";    //Semelhante ao de baixo mas para casos especiais
+        const string HTML_TAG_NOSCRIPT_2 = "<[Nn][Oo][Ss][Cc][Rr][Ii][Pp][Tt]>[\\s\\S]*?</[Nn][Oo][Ss][Cc][Rr][Ii][Pp][Tt]>"; //Tudo entre tags noscript
 
        
         /*Limpeza progressiva, dos especiais ate as tags isoladas*/
+      
         s = Regex.Replace(s, HTML_TAG_SCRIPT, "");
-        s = Regex.Replace(s, HTML_TAG_SCRIPT_2, "");
         s = Regex.Replace(s, HTML_TAG_NOSCRIPT, "");
         s = Regex.Replace(s, HTML_TAG_NOSCRIPT_2, "");
         s = Regex.Replace(s, HTML_TAG, "");

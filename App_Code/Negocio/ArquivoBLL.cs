@@ -53,6 +53,7 @@ public class ArquivoBLL
                              row[6].ToString()
                             ));
     }
+
     public List<PesquisaArq> efectuaPesquisa(string termos)
     {
         List<PesquisaArq> lista = new List<PesquisaArq>();
@@ -70,5 +71,10 @@ public class ArquivoBLL
                                 row[3].ToString()));
         }
         return lista;
+    }
+
+    public int moveToEdicao(int idTexto)
+    {
+        return(arq.moveToEdicao(idTexto));
     }
 }
