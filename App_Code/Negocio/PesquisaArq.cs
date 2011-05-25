@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Text;
+using System.Text.RegularExpressions;
 
 /// <summary>
 /// Summary description for PesquisaArq
@@ -57,6 +58,7 @@ public class PesquisaArq
         int nPalavras = 20;
         
         string textoAux;
+        string[] p;
         int i=0;
         string[] palavrasFinais = new String[nPalavras];
 
@@ -64,10 +66,14 @@ public class PesquisaArq
         textoAux = tex.Replace(Environment.NewLine, " ");
 
         // Obtém um array de palavras
+        //string[] palavras = Regex.Split(textoAux, "\r\n ");
         string[] palavras = textoAux.Split(' ');
 
         // Obtém o tamanho do array palavras
         int tamanhoArray = palavras.Length;
+
+        //Faz o acerto para os textos que tenham menos de 20 palavras
+        if (tamanhoArray < 20){nPalavras = tamanhoArray;}
 
         // Encontra a primeira ocurencia da palavra e fica com a posicao em i
         foreach(string palavra in palavras)
@@ -90,7 +96,7 @@ public class PesquisaArq
             {
                 for (int j = 0; j < nPalavras; j++)
                 {
-                    palavrasFinais[j] = String.Copy(palavras[tamanhoArray + j - 20]);
+                    palavrasFinais[j] = String.Copy(palavras[tamanhoArray + j - nPalavras]);
                 }
             }
         }
@@ -106,10 +112,18 @@ public class PesquisaArq
         StringBuilder textoFinal = new StringBuilder();
         for(int x=0; x<nPalavras; x++)
         {
-            textoFinal.Append(palavrasFinais[x]);
+            if (String.Compare(palavrasFinais[x], termos, true) == 0)
+            {
+                textoFinal.Append("<i><font color=\"#FF8C00\">");
+                textoFinal.Append(palavrasFinais[x]);
+                textoFinal.Append("</font></i>");
+            }
+            else
+            {
+                textoFinal.Append(palavrasFinais[x]);
+            }
             textoFinal.Append(" ");
         }
-
         return textoFinal.ToString();
     }
 }

@@ -16,8 +16,7 @@
             <table id="tabarquivo" width="100%">
                 <thead>           
                     <tr>
-                        <th>Texto</th> 
-                        <th>Rank</th>
+                        <th>Resultados</th> 
                     </tr>
                 </thead>
                 <tbody>
@@ -31,7 +30,6 @@
             <tr>
                 <td><a href="Visualize.aspx?id=<%# Eval("PesqArqidT") %>"><%# Eval("PesqArqTitulo")%></a><br />
                     <%# Eval("PesqArqZonaPalavra")%></a><td>
-                <td><%# Eval("PesqArqRank")%></a><td>
             </tr>
 
         </ItemTemplate>
