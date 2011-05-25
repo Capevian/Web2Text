@@ -82,8 +82,7 @@ public partial class Arquivo : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        string termos = TextBox1.Text;
-        Session["Termos"] = termos;
+        Session["Termos"] = TextBox1.Text;
         Response.Redirect("PesquisaArquivo.aspx");
     }
 

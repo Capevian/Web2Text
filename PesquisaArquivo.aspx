@@ -16,10 +16,8 @@
             <table id="tabarquivo" width="100%">
                 <thead>           
                     <tr>
-                        <th>Título</th> 
-                        <th>Data de Modificação</th>
-                        <th></th>
-                        <th></th>
+                        <th>Texto</th> 
+                        <th>Rank</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,10 +29,11 @@
       
         <ItemTemplate>
             <tr>
-                <td><a href="<%# Eval("PesqArqIdT") %>"><%# Eval("PesqArqIdT")%></a>
-                    <a href="<%# Eval("PesqArqTex") %>"><%# Eval("PesqArqTex")%></a>
-                    <a href="<%# Eval("PesqArqRank") %>"><%# Eval("PesqArqRank")%></a></td>
+                <td><a href="Visualize.aspx?id=<%# Eval("PesqArqidT") %>"><%# Eval("PesqArqTitulo")%></a><br />
+                    <%# Eval("PesqArqZonaPalavra")%></a><td>
+                <td><%# Eval("PesqArqRank")%></a><td>
             </tr>
+
         </ItemTemplate>
 
     </asp:ListView>

@@ -28,21 +28,24 @@ public partial class PesquisaArquivo : System.Web.UI.Page
      * neste caso preenche a dropDownlist*/
     protected void listView1_DataBound(object sender, EventArgs e)
     {
-        DropDownList ddl = DtPager.Controls[3].FindControl("DropDownList1") as DropDownList;
-
-        int PageCount = (DtPager.TotalRowCount / DtPager.PageSize);
-
-        if (PageCount * DtPager.PageSize != DtPager.TotalRowCount)
+        if (DtPager.TotalRowCount != 0)
         {
-            PageCount = PageCount + 1;
-        }
+            DropDownList ddl = DtPager.Controls[3].FindControl("DropDownList1") as DropDownList;
 
-        for (int i = 0; i < PageCount; i++)
-        {
-            ddl.Items.Add(new ListItem((i + 1).ToString(), i.ToString()));
-        }
+            int PageCount = (DtPager.TotalRowCount / DtPager.PageSize);
 
-        ddl.Items.FindByValue(CurrentPage.ToString()).Selected = true;
+            if (PageCount * DtPager.PageSize != DtPager.TotalRowCount)
+            {
+                PageCount = PageCount + 1;
+            }
+
+            for (int i = 0; i < PageCount; i++)
+            {
+                ddl.Items.Add(new ListItem((i + 1).ToString(), i.ToString()));
+            }
+
+            ddl.Items.FindByValue(CurrentPage.ToString()).Selected = true;
+        }
     }
 
     /* Funcao executada quando e' escolhida uma pagina na dropDownList*/
@@ -65,12 +68,11 @@ public partial class PesquisaArquivo : System.Web.UI.Page
     private void BindListView()
     {
         ArquivoBLL arq = new ArquivoBLL();
-
         string termos;
 
         if (Session["Termos"] != null)
             termos = (string)Session["Termos"];
-        else termos = "Nada a apresentar";
+        else termos = null;
 
         List<PesquisaArq> lista = arq.efectuaPesquisa(termos);
         ListView1.DataSource = lista;
