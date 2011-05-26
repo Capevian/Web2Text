@@ -80,6 +80,9 @@ public partial class PesquisaArquivo : System.Web.UI.Page
 
         List<PesquisaArq> lista = arq.efectuaPesquisa(termos, option);
         
+        // Este caso trara a situacao em a pesquisa não tem resultados
+        // Desta forma, vai ser criado um objecto PesquisaArq com uma mensagem
+        // no parametro zonaPalavra
         if (lista.Count == 0)
         {
             lista.Add(new PesquisaArq(termos, 0, "", "", ""));
