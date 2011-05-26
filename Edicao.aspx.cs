@@ -14,7 +14,10 @@ public partial class Edicao : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            BindListView("");
+            Session["SortTit"] = true;
+            Session["SortDate"] = true;
+            Session["SortingBy"] = "Titulo";
+            BindListView("Ascending");
         }
     }
 
@@ -23,7 +26,8 @@ public partial class Edicao : System.Web.UI.Page
     {
         this.DtPager.SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
         //custom function to bind your listview
-        BindListView("");
+        callBindListView(Session["SortingBy"].ToString());
+        //BindListView("");
     }
 
     /* Funcao executada quando a listView e' carregada de elementos
@@ -61,14 +65,34 @@ public partial class Edicao : System.Web.UI.Page
 
     protected void DataPager1_PreRender(object sender, EventArgs e)
     {
-        BindListView("");
+        //BindListView("");
+        //callBindListView();
     }
     
     private void BindListView(string sortDirection)
     {
         List<TextoEdit> listaEdit = edi.getLista(0);
 
-        listaEdit.Sort();
+        if (sortDirection.Equals("TitAsc"))
+        {
+            TextoSortByTituloAsc sorter = new TextoSortByTituloAsc();
+            listaEdit.Sort(sorter);
+        }
+        if (sortDirection.Equals("TitDesc"))
+        {
+            TextoSortByTituloDesc sorter = new TextoSortByTituloDesc();
+            listaEdit.Sort(sorter);
+        }
+        if (sortDirection.Equals("DateAsc"))
+        {
+            TextoSortByDataAsc sorter = new TextoSortByDataAsc();
+            listaEdit.Sort(sorter);
+        }
+        if (sortDirection.Equals("DateDesc"))
+        {
+            TextoSortByDataDesc sorter = new TextoSortByDataDesc();
+            listaEdit.Sort(sorter);
+        }
 
         ListView1.DataSource = listaEdit;
         ListView1.DataBind();
@@ -79,42 +103,11 @@ public partial class Edicao : System.Web.UI.Page
         edi.removeTexto(Convert.ToInt32(e.CommandArgument.ToString()));
     }
 
-    protected string SortExpression
-    {
-        get
-        {
-            return ViewState["SortExpression"] as string;
-        }
-
-        set
-        {
-            ViewState["SortExpression"] = value;
-        }
-    }
-
-    protected SortDirection SortDirection
-    {
-        get
-        {
-            object o = ViewState["SortDirection"];
-
-            if (o == null)
-                return SortDirection.Ascending;
-
-            else
-                return (SortDirection)o;
-        }
-
-        set
-        {
-            ViewState["SortDirection"] = value;
-        }
-    }
-
     protected void linkDownloadClick(object sender, CommandEventArgs e)
     {
         TextoEdit txt;
         txt = edi.getTexto( Convert.ToInt32(e.CommandArgument.ToString()));
+
         Response.Clear();
         Response.ContentType = "application/octet-stream";
         Response.AppendHeader("content-disposition", "attachment; filename=ficheiro.txt");
@@ -125,6 +118,47 @@ public partial class Edicao : System.Web.UI.Page
 
     protected void sortTituloClick(object sender, EventArgs e)
     {
-        BindListView("");
+        Session["SortingBy"] = "Titulo";
+        callBindListView("Titulo");
+    }
+
+    protected void sortDataClick(object sender, EventArgs e)
+    {
+        Session["SortingBy"] = "Date";
+        callBindListView("Date");
+    }
+
+    protected void callBindListView(string by)
+    {
+        if (by.Equals("Titulo"))
+        {
+            bool sort = !(bool)Session["SortTit"];
+
+            Session["SortTit"] = sort;
+
+            if (sort)
+            {
+                BindListView("TitAsc");
+            }
+            else
+            {
+                BindListView("TitDesc");
+            }
+        }
+        else
+        {
+            bool sort = !(bool)Session["SortDate"];
+
+            Session["SortDate"] = sort;
+
+            if (sort)
+            {
+                BindListView("DateAsc");
+            }
+            else
+            {
+                BindListView("DateDesc");
+            }
+        }
     }
 }

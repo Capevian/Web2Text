@@ -27,9 +27,15 @@
                         <th>
                             <asp:LinkButton ID="LinkButton2" 
                                             Text="Título" 
-                                            onclick="sortTituloClick"
-                                            runat="server"></asp:LinkButton></th> 
-                        <th>Data de Modificação</th>
+                                            OnClick="sortTituloClick"
+                                            runat="server"></asp:LinkButton>
+                        </th> 
+                        <th>
+                            <asp:LinkButton ID="LinkButton3" 
+                                            Text="Data de Modificação" 
+                                            OnClick="sortDataClick"
+                                            runat="server"></asp:LinkButton>
+                        </th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -74,7 +80,7 @@
     --%>
     <div id="dtPager">
     <asp:DataPager ID="DtPager" runat="server" 
-            PageSize="5" PagedControlID="ListView1" 
+            PageSize="2" PagedControlID="ListView1" 
             OnPreRender="DataPager1_PreRender">
             
             <Fields>
