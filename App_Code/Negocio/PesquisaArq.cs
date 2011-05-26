@@ -67,7 +67,6 @@ public class PesquisaArq
         int nPalavras = 20;
         
         string textoAux;
-        string[] p;
         string[] palavrasFinais = new String[nPalavras];
 
         // Remove os \n substituindo-os por espaços
