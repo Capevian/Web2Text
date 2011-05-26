@@ -37,7 +37,15 @@
             <tr>
                 <td><a href="Visualize.aspx?id=<%# Eval("IdTexto") %>"><%# Eval("Titulo") %></a></td>
                 <td><%# Eval("DataArq") %></td>
-                <td>Download</td>
+                <td>
+                    <asp:LinkButton ID="LinkButton2" 
+                                    runat="server"
+                                    Text = "Download"
+                                    OnCommand="linkDownloadClick"
+                                    CommandArgument = '<%# Eval("IdTexto") %>'
+                                    >
+                    </asp:LinkButton>
+                </td>
                 <td>
                     <asp:LinkButton ID="LinkButton1" 
                         runat="server" 

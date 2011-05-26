@@ -90,4 +90,16 @@ public partial class Arquivo : System.Web.UI.Page
     {
         arq.removeTexto(Convert.ToInt32(e.CommandArgument.ToString()));
     }
+
+    protected void linkDownloadClick(object sender, CommandEventArgs e)
+    {
+        TextoArq txt;
+        txt = arq.getTexto(Convert.ToInt32(e.CommandArgument.ToString()));
+        Response.Clear();
+        Response.ContentType = "application/octet-stream";
+        Response.AppendHeader("content-disposition", "attachment; filename=ficheiro.txt");
+        Response.Flush();
+        Response.Write(txt.TextContent);
+        Response.End();
+    }
 }
