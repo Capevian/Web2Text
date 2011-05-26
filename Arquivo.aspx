@@ -25,7 +25,12 @@
             <table id="tabarquivo" width="100%">
                 <thead>           
                     <tr>
-                        <th>Título</th> 
+                        <th>
+                            <asp:LinkButton ID="LinkButton3" 
+                                            runat="server"
+                                            Text="Título">
+                            </asp:LinkButton> 
+                        </th>
                         <th>Data Arquivação</th>
                         <th></th>
                         <th></th>

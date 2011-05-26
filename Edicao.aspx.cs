@@ -14,10 +14,8 @@ public partial class Edicao : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            Session["SortTit"] = true;
-            Session["SortDate"] = true;
-            Session["SortingBy"] = "Titulo";
-            BindListView("Ascending");
+            Session["SortingBy"] = "TitAsc";
+            BindListView("TitAsc");
         }
     }
 
@@ -26,8 +24,8 @@ public partial class Edicao : System.Web.UI.Page
     {
         this.DtPager.SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
         //custom function to bind your listview
-        callBindListView(Session["SortingBy"].ToString());
-        //BindListView("");
+        //callBindListView(Session["SortingBy"].ToString());
+        BindListView(Session["SortingBy"].ToString());
     }
 
     /* Funcao executada quando a listView e' carregada de elementos
@@ -118,47 +116,45 @@ public partial class Edicao : System.Web.UI.Page
 
     protected void sortTituloClick(object sender, EventArgs e)
     {
-        Session["SortingBy"] = "Titulo";
-        callBindListView("Titulo");
+        string orderby = Session["SortingBy"].ToString();
+
+        switch (orderby)
+        {
+            case "TitAsc": 
+                Session["SortingBy"] = "TitDesc";
+                orderby = "TitDesc";
+                break;
+            case "TitDesc": 
+                Session["SortingBy"] = "TitAsc";
+                orderby = "TitAsc";
+                break;
+            default:
+                Session["SortingBy"] = "TitAsc";
+                orderby = "TitAsc";
+                break;
+        }
+        BindListView(orderby);
     }
 
     protected void sortDataClick(object sender, EventArgs e)
     {
-        Session["SortingBy"] = "Date";
-        callBindListView("Date");
-    }
+        string orderby = Session["SortingBy"].ToString();
 
-    protected void callBindListView(string by)
-    {
-        if (by.Equals("Titulo"))
+        switch (orderby)
         {
-            bool sort = !(bool)Session["SortTit"];
-
-            Session["SortTit"] = sort;
-
-            if (sort)
-            {
-                BindListView("TitAsc");
-            }
-            else
-            {
-                BindListView("TitDesc");
-            }
+            case "DateAsc":
+                Session["SortingBy"] = "DateDesc";
+                orderby = "DateDesc";
+                break;
+            case "DateDesc":
+                Session["SortingBy"] = "DateAsc";
+                orderby = "DateAsc";
+                break;
+            default:
+                Session["SortingBy"] = "DateAsc";
+                orderby = "DateAsc";
+                break;
         }
-        else
-        {
-            bool sort = !(bool)Session["SortDate"];
-
-            Session["SortDate"] = sort;
-
-            if (sort)
-            {
-                BindListView("DateAsc");
-            }
-            else
-            {
-                BindListView("DateDesc");
-            }
-        }
+        BindListView(orderby);
     }
 }

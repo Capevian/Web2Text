@@ -9,6 +9,10 @@
     </script>
 </asp:Content>
 
+<asp:Content ID="Content3" ContentPlaceHolderID="cpSideBar" runat="server">
+
+</asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="cpMainContent" Runat="Server">
     
     <%-- Conteudo principal: Lista de Textos --%>    
