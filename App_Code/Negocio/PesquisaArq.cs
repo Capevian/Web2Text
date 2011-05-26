@@ -24,7 +24,14 @@ public class PesquisaArq
         titulo = tituloAux;
         tex = texAux;
         rank = rankAux;
-        zonaPalavra = encontraPalavra();
+        if ((String.Compare(tituloAux, "") == 0) && (String.Compare(texAux, "") == 0))
+        {
+            zonaPalavra = "<center>A sua pesquisa não obteve qualquer resultado.</center>";
+        }
+        else
+        {
+            zonaPalavra = encontraPalavra();
+        }
 	}
     public int PesqArqIdT
     {
