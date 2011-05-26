@@ -14,7 +14,7 @@ public partial class Edicao : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            BindListView();
+            BindListView("");
         }
     }
 
@@ -23,7 +23,7 @@ public partial class Edicao : System.Web.UI.Page
     {
         this.DtPager.SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
         //custom function to bind your listview
-        BindListView();
+        BindListView("");
     }
 
     /* Funcao executada quando a listView e' carregada de elementos
@@ -61,20 +61,20 @@ public partial class Edicao : System.Web.UI.Page
 
     protected void DataPager1_PreRender(object sender, EventArgs e)
     {
-        BindListView();
+        BindListView("");
     }
     
-    private void BindListView()
+    private void BindListView(string sortDirection)
     {
-
         List<TextoEdit> listaEdit = edi.getLista(0);
 
+        listaEdit.Sort();
 
         ListView1.DataSource = listaEdit;
         ListView1.DataBind();
     }
 
- protected void clicklinkRemover(object sender, CommandEventArgs e)
+    protected void clicklinkRemover(object sender, CommandEventArgs e)
     {
         edi.removeTexto(Convert.ToInt32(e.CommandArgument.ToString()));
     }
@@ -111,7 +111,7 @@ public partial class Edicao : System.Web.UI.Page
         }
     }
 
-protected void linkDownloadClick(object sender, CommandEventArgs e)
+    protected void linkDownloadClick(object sender, CommandEventArgs e)
     {
         TextoEdit txt;
         txt = edi.getTexto( Convert.ToInt32(e.CommandArgument.ToString()));
@@ -121,6 +121,10 @@ protected void linkDownloadClick(object sender, CommandEventArgs e)
         Response.Flush();
         Response.Write(txt.TextContent);
         Response.End();
+    }
 
+    protected void sortTituloClick(object sender, EventArgs e)
+    {
+        BindListView("");
     }
 }

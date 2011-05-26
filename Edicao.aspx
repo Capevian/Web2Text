@@ -27,8 +27,7 @@
                         <th>
                             <asp:LinkButton ID="LinkButton2" 
                                             Text="Título" 
-                                            CommandName="sort" 
-                                            CommandArgument="Titulo"
+                                            onclick="sortTituloClick"
                                             runat="server"></asp:LinkButton></th> 
                         <th>Data de Modificação</th>
                         <th></th>
