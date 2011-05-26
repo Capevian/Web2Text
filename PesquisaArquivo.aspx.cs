@@ -79,6 +79,12 @@ public partial class PesquisaArquivo : System.Web.UI.Page
             option = (int)Session["OpcaoPesquisa"];
 
         List<PesquisaArq> lista = arq.efectuaPesquisa(termos, option);
+        
+        if (lista.Count == 0)
+        {
+            lista.Add(new PesquisaArq(termos, 0, "", "", ""));
+        }
+        
         ListView1.DataSource = lista;
         ListView1.DataBind();
     }
