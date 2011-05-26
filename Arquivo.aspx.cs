@@ -83,6 +83,16 @@ public partial class Arquivo : System.Web.UI.Page
     protected void Button1_Click(object sender, EventArgs e)
     {
         Session["Termos"] = TextBox1.Text;
+        string selected = RadioButtonList1.SelectedItem.Value;
+        
+        if(String.Compare(selected,"0") == 0)
+        {
+            Session["OpcaoPesquisa"] = 0;
+        }
+        else
+        {
+            Session["OpcaoPesquisa"] = 1;
+        }
         Response.Redirect("PesquisaArquivo.aspx");
     }
 

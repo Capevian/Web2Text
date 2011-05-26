@@ -7,6 +7,11 @@
     <asp:TextBox ID="TextBox1" runat="server" Width="94px"></asp:TextBox>
     <asp:Button ID="Button1" runat="server" Text="Pesquisar" 
         onclick="Button1_Click" />
+    <asp:RadioButtonList ID="RadioButtonList1" runat="server" AutoPostBack="True" 
+        Height="14px">
+        <asp:ListItem Selected="True" Value="0">Pesquisa todos os termos</asp:ListItem>
+        <asp:ListItem Value="1">Algum dos termos</asp:ListItem>
+        </asp:RadioButtonList>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cpMainContent" Runat="Server">

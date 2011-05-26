@@ -117,17 +117,64 @@ public class ArquivoDAL
 
         return dataRow;
     }
-    public DataTable pesquisaPalavras(string termos)
+    public DataTable pesquisaPalavras(string termos, int option)
     {
         StringBuilder query = new StringBuilder();
-        query.Append("SELECT Tex.idTexto, Tex.Titulo, Tex.Texto, KEY_TBL.RANK ");
-        query.Append("FROM web2text.dbo.Arquivo AS Tex ");
-        query.Append("INNER JOIN CONTAINSTABLE(web2text.dbo.Arquivo, *, '");
-        query.Append(termos);
-        query.Append("') AS KEY_TBL ");
-        query.Append("ON Tex.idTexto = KEY_TBL.[KEY] ");
-        query.Append("WHERE KEY_TBL.RANK > 1 ");
-        query.Append("ORDER BY KEY_TBL.RANK DESC;");
+
+        if (termos.IndexOf(" ") == -1)
+        {
+            query.Append("SELECT Tex.idTexto, Tex.Titulo, Tex.Texto, KEY_TBL.RANK ");
+            query.Append("FROM web2text.dbo.Arquivo AS Tex ");
+            query.Append("INNER JOIN CONTAINSTABLE(web2text.dbo.Arquivo, *, '");
+            query.Append(termos);
+            query.Append("') AS KEY_TBL ");
+            query.Append("ON Tex.idTexto = KEY_TBL.[KEY] ");
+            query.Append("WHERE KEY_TBL.RANK > 1 ");
+            query.Append("ORDER BY KEY_TBL.RANK DESC;");
+        }
+        else
+        {
+            // Opcao 0 - Pesquisar todos os termos implicitamente. Tipicamente AND
+            if (option == 0)
+            {
+                string[] todosTermos = termos.Split(' ');
+                int nTermos = todosTermos.Length;
+
+                query.Append("SELECT Tex.idTexto, Tex.Titulo, Tex.Texto, KEY_TBL.RANK ");
+                query.Append("FROM web2text.dbo.Arquivo AS Tex ");
+                query.Append("INNER JOIN CONTAINSTABLE(web2text.dbo.Arquivo, *, '");
+                query.Append(todosTermos[0]);
+                for (int i = 1; i < nTermos; i++)
+                {
+                    query.Append(" AND ");
+                    query.Append(todosTermos[i]);
+                }
+                query.Append("') AS KEY_TBL ");
+                query.Append("ON Tex.idTexto = KEY_TBL.[KEY] ");
+                query.Append("WHERE KEY_TBL.RANK > 1 ");
+                query.Append("ORDER BY KEY_TBL.RANK DESC;");
+            }
+            // Opcao 1 - Pesquisar termos isoladamente. Tipicamente OU
+            if (option == 1)
+            {
+                string[] todosTermos = termos.Split(' ');
+                int nTermos = todosTermos.Length;
+
+                query.Append("SELECT Tex.idTexto, Tex.Titulo, Tex.Texto, KEY_TBL.RANK ");
+                query.Append("FROM web2text.dbo.Arquivo AS Tex ");
+                query.Append("INNER JOIN CONTAINSTABLE(web2text.dbo.Arquivo, *, '");
+                query.Append(todosTermos[0]);
+                for (int i = 1; i < nTermos; i++)
+                {
+                    query.Append(" OR ");
+                    query.Append(todosTermos[i]);
+                }
+                query.Append("') AS KEY_TBL ");
+                query.Append("ON Tex.idTexto = KEY_TBL.[KEY] ");
+                query.Append("WHERE KEY_TBL.RANK > 1 ");
+                query.Append("ORDER BY KEY_TBL.RANK DESC;");
+            }
+        }
 
         // O bloco using garante a libertação dos recursos quando o código terminar
         // Semelhante ao try...finally
