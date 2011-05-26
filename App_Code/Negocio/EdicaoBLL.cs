@@ -16,11 +16,11 @@ public class EdicaoBLL
         edi = new EdicaoDAL();
 	}
 
-    public List<TextoEdit> getLista(int ordenacao)
+    public List<TextoEdit> getLista(string ordenacao)
     {
         List<TextoEdit> lista = new List<TextoEdit>();
 
-        DataTable dt = edi.select(ordenacao);
+        DataTable dt = edi.select(0);
 
         foreach (DataRow row in dt.Rows)
         {
@@ -37,6 +37,28 @@ public class EdicaoBLL
                              );
             lista.Add(text);
         }
+
+        if (ordenacao.Equals("TitAsc"))
+        {
+            TextoSortByTituloAsc sorter = new TextoSortByTituloAsc();
+            lista.Sort(sorter);
+        }
+        if (ordenacao.Equals("TitDesc"))
+        {
+            TextoSortByTituloDesc sorter = new TextoSortByTituloDesc();
+            lista.Sort(sorter);
+        }
+        if (ordenacao.Equals("DateAsc"))
+        {
+            TextoSortByDataAsc sorter = new TextoSortByDataAsc();
+            lista.Sort(sorter);
+        }
+        if (ordenacao.Equals("DateDesc"))
+        {
+            TextoSortByDataDesc sorter = new TextoSortByDataDesc();
+            lista.Sort(sorter);
+        }
+
         return lista;
     }
 

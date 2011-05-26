@@ -43,5 +43,6 @@ public class TextoEdit : Texto, IComparable<TextoEdit>
     {
         return other.Titulo.CompareTo(this.Titulo);
     }
+   
     #endregion
 }

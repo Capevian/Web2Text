@@ -9,6 +9,10 @@
     </script>
 </asp:Content>
 
+<asp:Content ID="Content3" ContentPlaceHolderID="cpSideBar" runat="server">
+
+</asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="cpMainContent" Runat="Server">
     
     <%-- Conteudo principal: Lista de Textos --%>    
@@ -25,11 +29,17 @@
                 <thead>           
                     <tr>
                         <th>
-                            <asp:LinkButton ID="LinkButton2" 
+                            <asp:LinkButton ID="LinkOrderTitulo" 
                                             Text="Título" 
-                                            onclick="sortTituloClick"
-                                            runat="server"></asp:LinkButton></th> 
-                        <th>Data de Modificação</th>
+                                            OnClick="sortTituloClick"
+                                            runat="server"></asp:LinkButton>
+                        </th> 
+                        <th>
+                            <asp:LinkButton ID="LinkOrderData" 
+                                            Text="Data de Modificação" 
+                                            OnClick="sortDataClick"
+                                            runat="server"></asp:LinkButton>
+                        </th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -74,8 +84,7 @@
     --%>
     <div id="dtPager">
     <asp:DataPager ID="DtPager" runat="server" 
-            PageSize="5" PagedControlID="ListView1" 
-            OnPreRender="DataPager1_PreRender">
+            PageSize="2" PagedControlID="ListView1">
             
             <Fields>
                 <%--Link para pagina anterior--%>

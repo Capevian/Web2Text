@@ -14,20 +14,89 @@ public partial class Edicao : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            BindListView("");
+            Session["SortingBy"] = "TitAsc";
+            BindListView("TitAsc");
         }
     }
 
-    /* Funcao executada quando se muda de pagina*/
+    #region Funcao executada quando se clica no titulo para reordenar
+
+    protected void sortTituloClick(object sender, EventArgs e)
+    {
+        string orderby = Session["SortingBy"].ToString();
+
+        switch (orderby)
+        {
+            case "TitAsc":
+                Session["SortingBy"] = "TitDesc";
+                orderby = "TitDesc";
+                break;
+            case "TitDesc":
+                Session["SortingBy"] = "TitAsc";
+                orderby = "TitAsc";
+                break;
+            default:
+                Session["SortingBy"] = "TitAsc";
+                orderby = "TitAsc";
+                break;
+        }
+        BindListView(orderby);
+    }
+
+    #endregion
+
+    #region Funcao executada quando se clica na data para reordenar
+
+    protected void sortDataClick(object sender, EventArgs e)
+    {
+        string orderby = Session["SortingBy"].ToString();
+
+        switch (orderby)
+        {
+            case "DateAsc":
+                Session["SortingBy"] = "DateDesc";
+                orderby = "DateDesc";
+                break;
+            case "DateDesc":
+                Session["SortingBy"] = "DateAsc";
+                orderby = "DateAsc";
+                break;
+            default:
+                Session["SortingBy"] = "DateAsc";
+                orderby = "DateAsc";
+                break;
+        }
+        BindListView(orderby);
+    }
+
+    #endregion
+
+    #region Funcao que preenche a listView
+
+    private void BindListView(string sortDirection)
+    {
+        List<TextoEdit> listaEdit = edi.getLista(sortDirection);
+
+        ListView1.DataSource = listaEdit;
+        ListView1.DataBind();
+    }
+
+    #endregion
+
+    #region Funcao executada quando se muda de pagina
+    
     protected void listView1_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
     {
         this.DtPager.SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
-        //custom function to bind your listview
-        BindListView("");
+
+        BindListView(Session["SortingBy"].ToString());
     }
 
-    /* Funcao executada quando a listView e' carregada de elementos
-     * neste caso preenche a dropDownlist*/
+    #endregion
+
+    #region Funcao executada quando a listView e' carregada de elementos
+     
+    /* neste caso preenche a dropDownlist com paginas*/
     protected void listView1_DataBound(object sender, EventArgs e)
     {
         DropDownList ddl = DtPager.Controls[3].FindControl("DropDownList1") as DropDownList;
@@ -47,74 +116,27 @@ public partial class Edicao : System.Web.UI.Page
         ddl.Items.FindByValue(CurrentPage.ToString()).Selected = true;
     }
 
-    /* Funcao executada quando e' escolhida uma pagina na dropDownList*/
+    #endregion
+
+    #region Funcao executada quando e' escolhida uma pagina na dropDownList
+    
     protected void ddlPage_SelectedIndexChanged(object sender, EventArgs e)
     {
-
         DropDownList ddl = sender as DropDownList;
         CurrentPage = int.Parse(ddl.SelectedValue);
         int PageSize = DtPager.PageSize;
         DtPager.SetPageProperties(CurrentPage * PageSize, PageSize, true);
-
-        //BindListView();
     }
 
-    protected void DataPager1_PreRender(object sender, EventArgs e)
-    {
-        BindListView("");
-    }
-    
-    private void BindListView(string sortDirection)
-    {
-        List<TextoEdit> listaEdit = edi.getLista(0);
+    #endregion
 
-        listaEdit.Sort();
-
-        ListView1.DataSource = listaEdit;
-        ListView1.DataBind();
-    }
-
-    protected void clicklinkRemover(object sender, CommandEventArgs e)
-    {
-        edi.removeTexto(Convert.ToInt32(e.CommandArgument.ToString()));
-    }
-
-    protected string SortExpression
-    {
-        get
-        {
-            return ViewState["SortExpression"] as string;
-        }
-
-        set
-        {
-            ViewState["SortExpression"] = value;
-        }
-    }
-
-    protected SortDirection SortDirection
-    {
-        get
-        {
-            object o = ViewState["SortDirection"];
-
-            if (o == null)
-                return SortDirection.Ascending;
-
-            else
-                return (SortDirection)o;
-        }
-
-        set
-        {
-            ViewState["SortDirection"] = value;
-        }
-    }
+    #region Funcao executada quando se clica em Download
 
     protected void linkDownloadClick(object sender, CommandEventArgs e)
     {
         TextoEdit txt;
-        txt = edi.getTexto( Convert.ToInt32(e.CommandArgument.ToString()));
+        txt = edi.getTexto(Convert.ToInt32(e.CommandArgument.ToString()));
+
         Response.Clear();
         Response.ContentType = "application/octet-stream";
         Response.AppendHeader("content-disposition", "attachment; filename=ficheiro.txt");
@@ -123,8 +145,14 @@ public partial class Edicao : System.Web.UI.Page
         Response.End();
     }
 
-    protected void sortTituloClick(object sender, EventArgs e)
+    #endregion
+
+    #region Funcao executada quando se clica em Remover texto
+
+    protected void clicklinkRemover(object sender, CommandEventArgs e)
     {
-        BindListView("");
+        edi.removeTexto(Convert.ToInt32(e.CommandArgument.ToString()));
     }
+
+    #endregion
 }

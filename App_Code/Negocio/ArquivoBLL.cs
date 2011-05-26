@@ -16,11 +16,11 @@ public class ArquivoBLL
         arq = new ArquivoDAL();	
 	}
 
-    public List<TextoArq> getListaArquivados(int ordenacao)
+    public List<TextoArq> getListaArquivados(string ordenacao)
     {   
         List<TextoArq> lista = new List<TextoArq>();
 
-        DataTable dt = arq.select(ordenacao);
+        DataTable dt = arq.select(0);
 
         foreach (DataRow row in dt.Rows)
         {
@@ -35,6 +35,27 @@ public class ArquivoBLL
                              row[6].ToString()
                              );
             lista.Add(text);
+        }
+
+        if (ordenacao.Equals("TitAsc"))
+        {
+            TextoSortByTituloAsc sorter = new TextoSortByTituloAsc();
+            lista.Sort(sorter);
+        }
+        if (ordenacao.Equals("TitDesc"))
+        {
+            TextoSortByTituloDesc sorter = new TextoSortByTituloDesc();
+            lista.Sort(sorter);
+        }
+        if (ordenacao.Equals("DateAsc"))
+        {
+            TextoSortByDataArqAsc sorter = new TextoSortByDataArqAsc();
+            lista.Sort(sorter);
+        }
+        if (ordenacao.Equals("DateDesc"))
+        {
+            TextoSortByDataArqDesc sorter = new TextoSortByDataArqDesc();
+            lista.Sort(sorter);
         }
         
         return lista;
