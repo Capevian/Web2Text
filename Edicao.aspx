@@ -29,13 +29,13 @@
                 <thead>           
                     <tr>
                         <th>
-                            <asp:LinkButton ID="LinkButton2" 
+                            <asp:LinkButton ID="LinkOrderTitulo" 
                                             Text="Título" 
                                             OnClick="sortTituloClick"
                                             runat="server"></asp:LinkButton>
                         </th> 
                         <th>
-                            <asp:LinkButton ID="LinkButton3" 
+                            <asp:LinkButton ID="LinkOrderData" 
                                             Text="Data de Modificação" 
                                             OnClick="sortDataClick"
                                             runat="server"></asp:LinkButton>
@@ -84,8 +84,7 @@
     --%>
     <div id="dtPager">
     <asp:DataPager ID="DtPager" runat="server" 
-            PageSize="2" PagedControlID="ListView1" 
-            OnPreRender="DataPager1_PreRender">
+            PageSize="2" PagedControlID="ListView1">
             
             <Fields>
                 <%--Link para pagina anterior--%>

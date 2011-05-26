@@ -4,14 +4,30 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="cpSideBar" runat="server">
-    <asp:TextBox ID="TextBox1" runat="server" Width="94px"></asp:TextBox>
-    <asp:Button ID="Button1" runat="server" Text="Pesquisar" 
-        onclick="Button1_Click" />
-    <asp:RadioButtonList ID="RadioButtonList1" runat="server" AutoPostBack="True" 
-        Height="14px">
-        <asp:ListItem Selected="True" Value="0">Pesquisa todos os termos</asp:ListItem>
-        <asp:ListItem Value="1">Algum dos termos</asp:ListItem>
+    
+    <div class="sideCont">
+        
+        <asp:Label ID="Label1" 
+                   runat="server" 
+                   Text="Pesquisa"
+                   CssClass="Titulo side">
+        </asp:Label>
+
+        <asp:TextBox ID="TextBox1" 
+                     runat="server"
+                     CssClass="boxPesquisa">
+        </asp:TextBox>
+
+        <asp:Button ID="ButtonPesquisar" runat="server" Text="Pesquisar" 
+            onclick="ButtonPesquisarClick" />
+
+        <asp:RadioButtonList ID="RadioButtonList1" runat="server" AutoPostBack="True" 
+            Height="14px">
+            <asp:ListItem Selected="True" Value="0">Pesquisa todos os termos</asp:ListItem>
+            <asp:ListItem Value="1">Algum dos termos</asp:ListItem>
         </asp:RadioButtonList>
+
+    </div>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cpMainContent" Runat="Server">
@@ -26,12 +42,19 @@
                 <thead>           
                     <tr>
                         <th>
-                            <asp:LinkButton ID="LinkButton3" 
+                            <asp:LinkButton ID="LinkOrderTitulo" 
                                             runat="server"
+                                            OnClick="sortTituloClick"
                                             Text="Título">
                             </asp:LinkButton> 
                         </th>
-                        <th>Data Arquivação</th>
+                        <th>
+                            <asp:LinkButton ID="LinkOrderData"
+                                            runat="server"
+                                            OnClick="sortDataClick"
+                                            Text="Data Arquivação">
+                            </asp:LinkButton>
+                        </th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -76,8 +99,7 @@
     --%>
     <div id="dtPager">
     <asp:DataPager ID="DtPager" runat="server" 
-            PageSize="5" PagedControlID="ListView1" 
-            OnPreRender="DataPager1_PreRender">
+            PageSize="5" PagedControlID="ListView1" >
             
             <Fields>
                 <%--Link para pagina anterior--%>

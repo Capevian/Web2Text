@@ -6,11 +6,11 @@ using System.Web;
 /// <summary>
 /// Summary description for TextoEditSortByTituloDesc
 /// </summary>
-public class TextoSortByTituloAsc : IComparer<TextoEdit>
+public class TextoSortByTituloAsc : IComparer<Texto>
 {
     #region IComparer<TextoEdit> Members
 
-    public int Compare(TextoEdit x, TextoEdit y)
+    public int Compare(Texto x, Texto y)
     {
         return(string.Compare(x.Titulo, y.Titulo));
     }

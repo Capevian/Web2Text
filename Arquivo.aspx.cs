@@ -7,29 +7,95 @@ using System.Web.UI.WebControls;
 
 public partial class Arquivo : System.Web.UI.Page
 {
-    private ArquivoBLL arq = new ArquivoBLL();
-
     int CurrentPage = 0;
+    private ArquivoBLL arq = new ArquivoBLL();
 
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
-            BindListView();
+            Session["SortingBy"] = "TitAsc";
+            BindListView("TitAsc");
         }
     }
 
+    #region Funcao executada quando se clica no titulo para reordenar
 
-    /* Funcao executada quando se muda de pagina*/
+    protected void sortTituloClick(object sender, EventArgs e)
+    {
+        string orderby = Session["SortingBy"].ToString();
+
+        switch (orderby)
+        {
+            case "TitAsc":
+                Session["SortingBy"] = "TitDesc";
+                orderby = "TitDesc";
+                break;
+            case "TitDesc":
+                Session["SortingBy"] = "TitAsc";
+                orderby = "TitAsc";
+                break;
+            default:
+                Session["SortingBy"] = "TitAsc";
+                orderby = "TitAsc";
+                break;
+        }
+        BindListView(orderby);
+    }
+
+    #endregion
+
+    #region Funcao executada quando se clica na data para reordenar
+
+    protected void sortDataClick(object sender, EventArgs e)
+    {
+        string orderby = Session["SortingBy"].ToString();
+
+        switch (orderby)
+        {
+            case "DateAsc":
+                Session["SortingBy"] = "DateDesc";
+                orderby = "DateDesc";
+                break;
+            case "DateDesc":
+                Session["SortingBy"] = "DateAsc";
+                orderby = "DateAsc";
+                break;
+            default:
+                Session["SortingBy"] = "DateAsc";
+                orderby = "DateAsc";
+                break;
+        }
+        BindListView(orderby);
+    }
+
+    #endregion
+
+    #region Funcao que preenche a listView
+
+    private void BindListView(string sortDirection)
+    {
+        List<TextoArq> listaEdit = arq.getListaArquivados(sortDirection);
+
+        ListView1.DataSource = listaEdit;
+        ListView1.DataBind();
+    }
+
+    #endregion
+
+    #region Funcao executada quando se muda de pagina
+
     protected void listView1_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
     {
         this.DtPager.SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
-        //custom function to bind your listview
-        BindListView();
+
+        BindListView(Session["SortingBy"].ToString());
     }
 
-    /* Funcao executada quando a listView e' carregada de elementos
-     * neste caso preenche a dropDownlist*/
+    #endregion
+
+    #region Funcao executada quando a listView e' carregada de elementos
+     /* neste caso preenche a dropDownlist*/
     protected void listView1_DataBound(object sender, EventArgs e)
     {
             DropDownList ddl = DtPager.Controls[3].FindControl("DropDownList1") as DropDownList;
@@ -48,8 +114,10 @@ public partial class Arquivo : System.Web.UI.Page
 
             ddl.Items.FindByValue(CurrentPage.ToString()).Selected = true;
     }
+    #endregion
 
-    /* Funcao executada quando e' escolhida uma pagina na dropDownList*/
+    #region Funcao executada quando e' escolhida uma pagina na dropDownList
+
     protected void ddlPage_SelectedIndexChanged(object sender, EventArgs e)
     {
 
@@ -57,30 +125,12 @@ public partial class Arquivo : System.Web.UI.Page
         CurrentPage = int.Parse(ddl.SelectedValue);
         int PageSize = DtPager.PageSize;
         DtPager.SetPageProperties(CurrentPage * PageSize, PageSize, true);
-
-        //BindListView();
     }
+    #endregion
 
-    protected void DataPager1_PreRender(object sender, EventArgs e) 
-    {
+    #region Funcao executada quando se clica no botao de pesquisa
 
-        List<TextoArq> listaArq = arq.getListaArquivados(0);
-
-        ListView1.DataSource = listaArq;
-        ListView1.DataBind();
-
-    }
-
-    private void BindListView()
-    {       
-        List<TextoArq> listaArq = arq.getListaArquivados(0);
-
-        ListView1.DataSource = listaArq;
-        ListView1.DataBind();
-       
-    }
-
-    protected void Button1_Click(object sender, EventArgs e)
+    protected void ButtonPesquisarClick(object sender, EventArgs e)
     {
         Session["Termos"] = TextBox1.Text;
         string selected = RadioButtonList1.SelectedItem.Value;
@@ -96,15 +146,24 @@ public partial class Arquivo : System.Web.UI.Page
         Response.Redirect("PesquisaArquivo.aspx");
     }
 
+    #endregion
+
+    #region Funcao executada quando se clica em Remover texto
+
     protected void clicklinkRemover(object sender, CommandEventArgs e)
     {
         arq.removeTexto(Convert.ToInt32(e.CommandArgument.ToString()));
     }
 
+    #endregion
+
+    #region Funcao executada quando se clica em Download
+
     protected void linkDownloadClick(object sender, CommandEventArgs e)
     {
         TextoArq txt;
         txt = arq.getTexto(Convert.ToInt32(e.CommandArgument.ToString()));
+
         Response.Clear();
         Response.ContentType = "application/octet-stream";
         Response.AppendHeader("content-disposition", "attachment; filename=ficheiro.txt");
@@ -112,4 +171,5 @@ public partial class Arquivo : System.Web.UI.Page
         Response.Write(txt.TextContent);
         Response.End();
     }
+    #endregion
 }
