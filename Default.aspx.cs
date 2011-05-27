@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using System.Net;
+
 
 public partial class _Default : System.Web.UI.Page
 {
@@ -13,6 +15,7 @@ public partial class _Default : System.Web.UI.Page
     
     protected void Page_Load(object sender, EventArgs e)
     {
+        
         if (!IsPostBack)
         {
             BindListView();
@@ -69,9 +72,37 @@ public partial class _Default : System.Web.UI.Page
     {
         PesquisaBing bing = new PesquisaBing();
         string termos = TextBox1.Text;
+        
         if (termos != "")
         {
-            List<Link> links = bing.search(termos, 10);
+            List<Link> links = bing.search(termos, 1);
+            List<Link> resultado = new List<Link>();
+
+            Label1.Text = links[0].LinkContent;
+            Uri uri = new Uri(links[0].LinkContent);
+
+            IEnumerable<WebPage> pages = WebPage.GetAllPagesUnder(uri);
+
+            List<WebPage> listPages = new List<WebPage>(pages);
+
+            foreach (WebPage p in listPages)
+            {
+                WebClient client = new WebClient();
+                Label1.Text = p.Url.ToString();
+                //String htmlCode = client.DownloadString(p.Url);
+                String htmlCode = "bananas";
+
+                if (htmlCode.IndexOf(termos) == -1)
+                {
+                    //Label1.Text += p.Url.ToString() + " Cool <br />";
+                }
+                else
+                {
+                    Link temp = new Link(p.Url.ToString(), "Teste");
+                    resultado.Add(temp);
+                }   
+            }
+
             ListView1.DataSource = links;
             ListView1.DataBind();
         }

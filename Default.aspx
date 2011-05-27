@@ -7,6 +7,8 @@
     
     <asp:Button ID="Button1" runat="server" Text="Pesquisar" 
         onclick="Button1_Click" />
+    
+    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
 
     <asp:ListView ID="ListView1" 
         runat="server" 
