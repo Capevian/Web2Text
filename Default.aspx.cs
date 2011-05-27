@@ -12,15 +12,10 @@ using System.Net;
 public partial class _Default : System.Web.UI.Page
 {
     int CurrentPage = 0;
+    private List<Link> listaLinks;
     
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Spider s = new Spider(); 
-        
-        //s.run();
-
-        //Label1.Text = s.Paginas[0].Url;
-        
         if (!IsPostBack)
         {
             BindListView();
@@ -39,7 +34,7 @@ public partial class _Default : System.Web.UI.Page
      * neste caso preenche a dropDownlist*/
     protected void listView1_DataBound(object sender, EventArgs e)
     {
-        DropDownList ddl = DtPager.Controls[3].FindControl("DropDownList1") as DropDownList;
+        /*DropDownList ddl = DtPager.Controls[3].FindControl("DropDownList1") as DropDownList;
 
         int PageCount = (DtPager.TotalRowCount / DtPager.PageSize);
 
@@ -53,7 +48,7 @@ public partial class _Default : System.Web.UI.Page
             ddl.Items.Add(new ListItem((i + 1).ToString(), i.ToString()));
         }
 
-        ddl.Items.FindByValue(CurrentPage.ToString()).Selected = true;
+        ddl.Items.FindByValue(CurrentPage.ToString()).Selected = true;*/
     }
 
     /* Funcao executada quando e' escolhida uma pagina na dropDownList*/
@@ -78,11 +73,24 @@ public partial class _Default : System.Web.UI.Page
         PesquisaBing bing = new PesquisaBing();
         string termos = TextBox1.Text;
 
+        if (termos != "")
+        {
+            List<Link> tempLinks = bing.search(termos, 20);
+
+            ListView1.DataSource = tempLinks;
+            ListView1.DataBind();
+        }
+        
+        /*
+        PesquisaBing bing = new PesquisaBing();
+        string termos = TextBox1.Text;
+        List<Link> tempLinks = bing.search(termos, 20);
+        
         Spider spider = new Spider();
 
         if (termos != "")
         {
-            List<Link> tempLinks = bing.search(termos, 4);
+            List<Link> tempLinks = bing.search(termos, 5);
             List<Uri> links = new List<Uri>();
 
             foreach (Link link in tempLinks)
@@ -93,11 +101,12 @@ public partial class _Default : System.Web.UI.Page
             spider.run(termos, links);
 
             List<Link> list = spider.Paginas;
+        */
+            //ListView1.DataSource = list;
+        //    ListView1.DataSource = tempLinks;
+        //    ListView1.DataBind();
 
-            ListView1.DataSource = list;
-            ListView1.DataBind();
-
-        }
+        //}
 
         //PesquisaBing bing = new PesquisaBing();
         //string termos = TextBox1.Text;
@@ -142,8 +151,32 @@ public partial class _Default : System.Web.UI.Page
     //    }
     }
 
+    protected void firstRun()
+    {
+        PesquisaBing bing = new PesquisaBing();
+        string termos = TextBox1.Text;
+       
+        Spider spider = new Spider();
+
+        if (termos != "")
+        {
+            List<Link> tempLinks = bing.search(termos, 20);
+            List<Uri> links = new List<Uri>();
+
+            foreach (Link link in tempLinks)
+            {
+                links.Add(new Uri(link.LinkContent));
+            }
+
+            spider.run(termos, links);
+
+            listaLinks = spider.Paginas;
+        }
+    }
+
     protected void Button1_Click(object sender, EventArgs e)
     {
+        //firstRun();
         BindListView();
     }
 }

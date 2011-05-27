@@ -23,6 +23,10 @@
                 </div>
                 <div style="clear: left;"></div>
             </div>
+            <div id="searchBox">
+                <asp:ContentPlaceHolder ID="searhBoxContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
             <div id="MainContentPesquisa">
                 <asp:ContentPlaceHolder ID="cpMainContent" runat="server">
                 </asp:ContentPlaceHolder>

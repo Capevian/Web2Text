@@ -297,6 +297,41 @@ table tbody tr td
     border-bottom: 1px solid gray;
 }
 
+table#tabPesquisa thead tr th
+{
+    border-bottom: 1px solid #C0C0C0;
+    color: #333333;
+    font: 11px "lucida grande" ,tahoma,verdana,arial,sans-serif;
+    font-weight: bold;
+    font-variant: small-caps;
+    text-align: left;
+    padding-top: 15px;
+}
+
+.tbpTitle a
+{
+    font: 15px "lucida grande" ,tahoma,verdana,arial,sans-serif;
+    font-weight: bold;
+    color: #3366FF;
+    text-decoration: underline;
+}
+
+.tbpDesc
+{
+    color: black;
+    font: 11px "lucida grande" ,tahoma,verdana,arial,sans-serif;
+    text-align: left;
+    padding-top: 5px;
+    padding-right: 290px;
+}
+
+.link
+{
+    display: block;
+    color: Green;
+    padding-top: 3px;
+}
+
 #dtPager
 {
     margin-top: 10px;
@@ -449,4 +484,19 @@ textarea.CaixaEdicao
     width: 125px;
     border: 1px solid #3366FF;
 	border-left: 4px solid #3366FF;
+}
+
+.boxPesquisa2
+{
+    width: 650px;
+    height: 25px;
+    border: 1px solid #3366FF;
+	border-left: 4px solid #3366FF;
+	font: 15px "lucida grande" ,tahoma,verdana,arial,sans-serif;
+	padding-left: 5px;
+}
+
+#searchBox
+{
+    text-align: center;
 }

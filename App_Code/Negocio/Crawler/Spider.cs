@@ -52,10 +52,12 @@ public class Spider
 				//new DumperStep(),
                 new Web2TextStep(termo, paginas))
 				{
+                    AdhereToRobotRules = true,
+                    
 					// Custom step to visualize crawl
 					MaximumThreadCount = 1,
-					MaximumCrawlDepth = 2,
-                    MaximumCrawlCount = 10,
+					MaximumCrawlDepth = 5,
+                    MaximumCrawlCount = 20,
 					ExcludeFilter = ExtensionsToSkip,
 				})
 			{
@@ -79,13 +81,7 @@ public class Spider
 
         public void Process(Crawler crawler, PropertyBag propertyBag)
         {
-            //AspectF.Define.
-            //    NotNull(crawler, "crawler").
-            //    NotNull(propertyBag, "propertyBag");
-            //paginas = new List<PaginaWeb>();
-
             string text = propertyBag.Text;
-            //Console.Out.WriteLine(ConsoleColor.Red, text);
 
             if (text.IsNullOrEmpty())
             {

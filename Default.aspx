@@ -2,14 +2,21 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="cpMainContent" Runat="Server">
-    <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-    
-    <asp:Button ID="Button1" runat="server" Text="Pesquisar" 
-        onclick="Button1_Click" />
-    
-    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
 
+<asp:Content ID="Content3" ContentPlaceHolderID="searhBoxContent" runat="server">
+        
+        <asp:TextBox ID="TextBox1" 
+                     CssClass="boxPesquisa2"
+                     runat="server">
+        </asp:TextBox>
+
+        <asp:Button ID="Button1" runat="server" Text="Pesquisar" 
+            onclick="Button1_Click" />
+
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="cpMainContent" Runat="Server">
+    
     <asp:ListView ID="ListView1" 
         runat="server" 
         ItemPlaceholderID="myItemPlaceHolder"
@@ -17,13 +24,11 @@
         OnDataBound="listView1_DataBound">
       
         <LayoutTemplate>
-            <table id="tabarquivo" width="100%">
+            <table id="tabPesquisa" width="100%">
                 <thead>           
                     <tr>
-                        <th>Título</th> 
-                        <th>Data de Modificação</th>
-                        <th></th>
-                        <th></th>
+                        <th>Resultados</th> 
+                        <th style="text-align:center;">Selecção</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,11 +40,17 @@
       
         <ItemTemplate>
             <tr>
-                <td><a href="<%# Eval("LinkContent") %>"><%# Eval("LinkContent") %></a><br /><a href="<%# Eval("LinkDesc") %>"><%# Eval("LinkDesc") %></a></td>
-                <td></td>
-                <td>Download</td>
-                <td>Remover</td>
-            </tr>
+                <td style="margin-bottom: 8px; border: none">
+                    <div class="tbpTitle">
+                        <a href="<%# Eval("LinkContent") %>"><%# Eval("Titulo") %></a>
+                    </div>
+                    <div class="tbpDesc">
+                        <%# Eval("LinkDesc") %>
+                        <span class="link"><%# Eval("LinkContent") %></span>
+                    </div>
+                </td>
+                <td style="border-bottom: none;">Seleccionar</td>
+            </tr>            
         </ItemTemplate>
 
     </asp:ListView>

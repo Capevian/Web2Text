@@ -37,7 +37,7 @@ public class PesquisaBing
 
         foreach (WebResult result in response.Web.Results)
         {
-            list.Add(new Link(result.Url,result.Description));
+            list.Add(new Link(result.Title, result.Url,result.Description));
         }
         return list;
     }

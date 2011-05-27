@@ -8,6 +8,7 @@ using System.Web;
 /// </summary>
 public class Link
 {
+    private string titulo;
     private string link;
     private string desc;
     
@@ -16,6 +17,20 @@ public class Link
         link = s;
         desc = d;
 	}
+
+    public Link(string t, string l, string d)
+    {
+        this.titulo = t;
+        this.link = l;
+        this.desc = d;
+    }
+
+    public string Titulo
+    {
+        get { return titulo; }
+        set { titulo = value; }
+    }
+
     public string LinkContent
     {
         get { return link; }
