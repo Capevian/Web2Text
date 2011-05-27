@@ -15,6 +15,11 @@ public partial class _Default : System.Web.UI.Page
     
     protected void Page_Load(object sender, EventArgs e)
     {
+        //Spider s = new Spider(); 
+        
+        //s.run();
+
+        //Label1.Text = s.Paginas[0].Url;
         
         if (!IsPostBack)
         {
@@ -72,40 +77,69 @@ public partial class _Default : System.Web.UI.Page
     {
         PesquisaBing bing = new PesquisaBing();
         string termos = TextBox1.Text;
-        
+
+        Spider spider = new Spider();
+
         if (termos != "")
         {
-            List<Link> links = bing.search(termos, 1);
-            List<Link> resultado = new List<Link>();
+            List<Link> tempLinks = bing.search(termos, 4);
+            List<Uri> links = new List<Uri>();
 
-            Label1.Text = links[0].LinkContent;
-            Uri uri = new Uri(links[0].LinkContent);
-
-            IEnumerable<WebPage> pages = WebPage.GetAllPagesUnder(uri);
-
-            List<WebPage> listPages = new List<WebPage>(pages);
-
-            foreach (WebPage p in listPages)
+            foreach (Link link in tempLinks)
             {
-                WebClient client = new WebClient();
-                Label1.Text = p.Url.ToString();
-                //String htmlCode = client.DownloadString(p.Url);
-                String htmlCode = "bananas";
-
-                if (htmlCode.IndexOf(termos) == -1)
-                {
-                    //Label1.Text += p.Url.ToString() + " Cool <br />";
-                }
-                else
-                {
-                    Link temp = new Link(p.Url.ToString(), "Teste");
-                    resultado.Add(temp);
-                }   
+                links.Add(new Uri(link.LinkContent));
             }
 
-            ListView1.DataSource = links;
+            spider.run(termos, links);
+
+            List<Link> list = spider.Paginas;
+
+            ListView1.DataSource = list;
             ListView1.DataBind();
+
         }
+
+        //PesquisaBing bing = new PesquisaBing();
+        //string termos = TextBox1.Text;
+        //List<Link> links = bing.search(termos, 1);
+
+        //Spider sp = new Spider();
+
+//        Spider.Run();
+        
+        //if (termos != "")
+        //{
+        //    List<Link> links = bing.search(termos, 1);
+        //    List<Link> resultado = new List<Link>();
+
+        //    Label1.Text = links[0].LinkContent;
+        //    Uri uri = new Uri(links[0].LinkContent);
+
+        //    IEnumerable<WebPage> pages = WebPage.GetAllPagesUnder(uri);
+
+        //    List<WebPage> listPages = new List<WebPage>(pages);
+
+        //    foreach (WebPage p in listPages)
+        //    {
+        //        WebClient client = new WebClient();
+        //        Label1.Text = p.Url.ToString();
+        //        //String htmlCode = client.DownloadString(p.Url);
+        //        String htmlCode = "bananas";
+
+        //        if (htmlCode.IndexOf(termos) == -1)
+        //        {
+        //            //Label1.Text += p.Url.ToString() + " Cool <br />";
+        //        }
+        //        else
+        //        {
+        //            Link temp = new Link(p.Url.ToString(), "Teste");
+        //            resultado.Add(temp);
+        //        }   
+        //    }
+
+        //    ListView1.DataSource = links;
+        //    ListView1.DataBind();
+    //    }
     }
 
     protected void Button1_Click(object sender, EventArgs e)
