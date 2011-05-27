@@ -24,7 +24,16 @@ public class PesquisaArq
         titulo = tituloAux;
         tex = texAux;
         rank = rankAux;
-        zonaPalavra = encontraPalavra();
+
+        // Este IF cria um objecto com a mensagem de que não há resultados na pesquisa.
+        if ((String.Compare(tituloAux, "") == 0) && (String.Compare(texAux, "") == 0))
+        {
+            zonaPalavra = "<center>A sua pesquisa não obteve qualquer resultado.</center>";
+        }
+        else
+        {
+            zonaPalavra = encontraPalavra();
+        }
 	}
     public int PesqArqIdT
     {
@@ -58,8 +67,6 @@ public class PesquisaArq
         int nPalavras = 20;
         
         string textoAux;
-        string[] p;
-        int i=0;
         string[] palavrasFinais = new String[nPalavras];
 
         // Remove os \n substituindo-os por espaços
@@ -69,18 +76,17 @@ public class PesquisaArq
         //string[] palavras = Regex.Split(textoAux, "\r\n ");
         string[] palavras = textoAux.Split(' ');
 
+        // Obtém um array com todos os termos da pesquisa
+        string[] listaTermos = termos.Split(' ');
+
         // Obtém o tamanho do array palavras
         int tamanhoArray = palavras.Length;
 
         //Faz o acerto para os textos que tenham menos de 20 palavras
         if (tamanhoArray < 20){nPalavras = tamanhoArray;}
 
-        // Encontra a primeira ocurencia da palavra e fica com a posicao em i
-        foreach(string palavra in palavras)
-        {
-            if(string.Compare(palavra,termos,true)==0) break;
-            i++;
-        }
+        // Encontra a primeira ocurencia de uma das palavras e guarda-a em i
+        int i = getPosicao(listaTermos,palavras);
 
         // Preenche string[20] com as 20 palavras mais próximas.
         if ((i < nPalavras/2) || (i+nPalavras/2 > tamanhoArray))
@@ -110,9 +116,17 @@ public class PesquisaArq
 
         // Forma a string final com as 20 palavras para ser returnada
         StringBuilder textoFinal = new StringBuilder();
-        for(int x=0; x<nPalavras; x++)
+        bool encontrou = false;
+        for (int x = 0; x < nPalavras; x++)
         {
-            if (String.Compare(palavrasFinais[x], termos, true) == 0)
+            foreach (string t in listaTermos)
+            {
+                if (String.Compare(palavrasFinais[x], t, true) == 0)
+                {
+                    encontrou = true;
+                }
+            }
+            if (encontrou)
             {
                 textoFinal.Append("<i><font color=\"#FF8C00\">");
                 textoFinal.Append(palavrasFinais[x]);
@@ -123,7 +137,25 @@ public class PesquisaArq
                 textoFinal.Append(palavrasFinais[x]);
             }
             textoFinal.Append(" ");
+            encontrou = false;
         }
         return textoFinal.ToString();
+    }
+
+    // Função que retorna a primeira ocurrencia de uma das palavras pesquisadas
+    private int getPosicao(string[] termos, string[] texto)
+    {
+        int i = 0;
+
+        foreach (string palavra in texto)
+        {
+            foreach (string t in termos)
+            {
+                if (String.Compare(palavra, t, true) == 0)
+                    return i;
+            }
+            i++;
+        }
+        return i;
     }
 }
