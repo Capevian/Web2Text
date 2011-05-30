@@ -105,7 +105,9 @@ public partial class _Default : System.Web.UI.Page
 
     private void BindListView()
     {
-        PesquisaWeb search = new PesquisaWeb();
+        string usr = System.Web.HttpContext.Current.User.Identity.Name;
+        
+        PesquisaWeb search = new PesquisaWeb(usr);
         bool flagTodosTermos = CheckBoxTodosTermos.Checked;
         bool ignorarHist = CheckBoxRejeitadas.Checked;
 
@@ -113,9 +115,9 @@ public partial class _Default : System.Web.UI.Page
 
         if (termos != "")
         {
-             List<Link> resultado = 
+            List<Link> resultado = 
                  search.efectuaPesquisa(termos, flagTodosTermos, ignorarHist);
-
+            
             if (resultado.Count() > 0)
             {
                 ListView1.DataSource = resultado;

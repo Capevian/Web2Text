@@ -9,14 +9,22 @@ using net.live.search.api;
 /// </summary>
 public class PesquisaWeb
 {
-    private uint nLinksRes = 100;
-    private uint nLinksSeed = 10;
-    private int profundidade = 2;
-    private int modoPesquisa = 1;
+    private uint nLinksRes = 40;
+    private uint nLinksSeed;
+    private int profundidade;
+    private int modoPesquisa;
     private HistoricoBLL histBLL; 
 
-	public PesquisaWeb()
+	public PesquisaWeb(string username)
 	{
+        LoginDAL log = new LoginDAL();
+
+        int[] defs = log.getDefinicoes(username);
+
+        this.nLinksSeed = Convert.ToUInt32(defs[0]);
+        this.profundidade = defs[1];
+        this.modoPesquisa = defs[2];
+
         histBLL = new HistoricoBLL();
 	}
 
@@ -27,22 +35,22 @@ public class PesquisaWeb
         switch (modoPesquisa)
         {
             case 0:
-                temp = procuraBing(termos, nLinksRes, flagTodosTermos);
+                temp = this.procuraBing(termos, nLinksRes, flagTodosTermos);
                 break;
             case 1:
-                temp = procuraCrawler(termos, flagTodosTermos);
+                temp = this.procuraCrawler(termos, flagTodosTermos);
                 break;
             default:
                 break;
         }
 
-
+        return temp;
+        /*
         List<Link> resultado = new List<Link>();
         List<Link> historico = histBLL.getHistorico();
 
-        // resultado = temp.Intersect(historico);
-
-        return resultado;
+        resultado = temp.Intersect(historico);
+        return resultado;*/
     }
 
     public List<Link> procuraCrawler(string query, bool flagTodosTermos)
@@ -65,7 +73,7 @@ public class PesquisaWeb
 
     #region funcao de pesquisa no Bing
 
-    public List<Link> procuraBing(String query, uint nLinks, bool flagTodosTermos)
+    public List<Link> procuraBing(string query, uint nLinks, bool flagTodosTermos)
     {
         List<Link> list = new List<Link>();
 
