@@ -13,19 +13,21 @@ public class PesquisaWeb
     private uint nLinksSeed;
     private int profundidade;
     private int modoPesquisa;
-    private HistoricoBLL histBLL; 
+    private HistoricoBLL histBLL;
+    private LoginDAL log;
+    private Spider spider;
 
 	public PesquisaWeb(string username)
 	{
-        LoginDAL log = new LoginDAL();
+        log = new LoginDAL();
+        histBLL = new HistoricoBLL();
+        spider = new Spider();
 
         int[] defs = log.getDefinicoes(username);
 
         this.nLinksSeed = Convert.ToUInt32(defs[0]);
         this.profundidade = defs[1];
         this.modoPesquisa = defs[2];
-
-        histBLL = new HistoricoBLL();
 	}
 
     public List<Link> efectuaPesquisa(string termos, bool flagTodosTermos, bool ignorarHist)
@@ -53,9 +55,10 @@ public class PesquisaWeb
         return resultado;*/
     }
 
-    public List<Link> procuraCrawler(string query, bool flagTodosTermos)
-    {        
-        Spider spider = new Spider();
+    #region funcao de pesquisa usando o crawler
+
+    private List<Link> procuraCrawler(string query, bool flagTodosTermos)
+    {               
 
         List<Link> tempLinks = this.procuraBing(query, nLinksSeed, flagTodosTermos);
 
@@ -66,14 +69,16 @@ public class PesquisaWeb
             links.Add(new Uri(link.LinkContent));
         }
 
-        spider.run(query, links, flagTodosTermos);
+        spider.pesquisa(query, links, flagTodosTermos);
 
         return spider.Paginas;
     }
 
+    #endregion 
+
     #region funcao de pesquisa no Bing
 
-    public List<Link> procuraBing(string query, uint nLinks, bool flagTodosTermos)
+    private List<Link> procuraBing(string query, uint nLinks, bool flagTodosTermos)
     {
         List<Link> list = new List<Link>();
 

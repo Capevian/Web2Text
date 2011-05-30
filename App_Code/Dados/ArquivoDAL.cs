@@ -24,7 +24,7 @@ public class ArquivoDAL
 	{
 	}
 
-    public DataTable select(int ordenacao)
+    public DataTable select()
     {
         StringBuilder q1 = new StringBuilder();
         
@@ -41,8 +41,6 @@ public class ArquivoDAL
         q1.Append(" FROM ");
 
         q1.Append(" Arquivo ");
-
-        q1.Append(" ORDER BY Titulo; ");
 
         // O bloco using garante a libertação dos recursos quando o código terminar
         // Semelhante ao try...finally
@@ -65,6 +63,36 @@ public class ArquivoDAL
             
             return dt;
         }
+    }
+
+    public int remove(int idTexto)
+    {
+        int i = -1;
+
+        StringBuilder q1 = new StringBuilder();
+
+        q1.Append(" DELETE ");
+        q1.Append(" FROM Arquivo ");
+        q1.Append(" WHERE (idTexto = @idTexto) ");
+
+        using (SqlConnection conn =
+            new SqlConnection(ConfigurationManager.ConnectionStrings[db].ConnectionString))
+        {
+            conn.Open();
+
+            SqlCommand cmd1 = new SqlCommand(q1.ToString(), conn);
+
+            cmd1.Parameters.Add("@idTexto", SqlDbType.Int).Value = idTexto;
+
+            i = cmd1.ExecuteNonQuery();
+
+            if (conn.State != ConnectionState.Closed)
+            {
+                conn.Close();
+            }
+        }
+
+        return i;
     }
 
     public DataRow pesquisaID(int idTexto)
@@ -117,6 +145,7 @@ public class ArquivoDAL
 
         return dataRow;
     }
+
     public DataTable pesquisaPalavras(string termos, int option)
     {
         StringBuilder query = new StringBuilder();
@@ -262,33 +291,4 @@ public class ArquivoDAL
         return i;
     }
 
-    public int remove(int idTexto)
-    {
-        int i = -1;
-
-        StringBuilder q1 = new StringBuilder();
-
-        q1.Append(" DELETE ");
-        q1.Append(" FROM Arquivo ");
-        q1.Append(" WHERE (idTexto = @idTexto) ");
-
-        using (SqlConnection conn =
-            new SqlConnection(ConfigurationManager.ConnectionStrings[db].ConnectionString))
-        {
-            conn.Open();
-
-            SqlCommand cmd1 = new SqlCommand(q1.ToString(), conn);
-
-            cmd1.Parameters.Add("@idTexto", SqlDbType.Int).Value = idTexto;
-
-            i = cmd1.ExecuteNonQuery();
-
-            if (conn.State != ConnectionState.Closed)
-            {
-                conn.Close();
-            }
-        }
-
-        return i;
-    }
 }

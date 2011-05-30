@@ -13,10 +13,12 @@ public partial class _Default : System.Web.UI.Page
 {
     int CurrentPage = 0;
     private List<Link> listaLinks;
-    private string username = "kAIOSHIN";
+    private string username;
     
     protected void Page_Load(object sender, EventArgs e)
     {
+        username = System.Web.HttpContext.Current.User.Identity.Name;
+
         if (!IsPostBack)
         {
             CheckBoxRejeitadas.Checked = true;
@@ -104,10 +106,8 @@ public partial class _Default : System.Web.UI.Page
     #region Funcao que preenche a listView (BindListView)
 
     private void BindListView()
-    {
-        string usr = System.Web.HttpContext.Current.User.Identity.Name;
-        
-        PesquisaWeb search = new PesquisaWeb(usr);
+    { 
+        PesquisaWeb search = new PesquisaWeb(username);
         bool flagTodosTermos = CheckBoxTodosTermos.Checked;
         bool ignorarHist = CheckBoxRejeitadas.Checked;
 

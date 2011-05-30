@@ -19,22 +19,23 @@ public class EdicaoDAL
 	{
 	}
 
-    public DataTable select(int ordenacao)
+    public DataTable select()
     {
         StringBuilder query = new StringBuilder();
         
         query.Append("SELECT ");
-            query.Append("idLink, ");
-            query.Append("Titulo, ");
-            query.Append("Texto, ");
-            query.Append("Intro, ");
-            query.Append("username, ");
-            query.Append("Link, ");
-            query.Append("DataAcesso,");
-            query.Append("DataModificacao ");
+        query.Append("idLink, ");
+        query.Append("Titulo, ");
+        query.Append("Texto, ");
+        query.Append("Intro, ");
+        query.Append("username, ");
+        query.Append("Link, ");
+        query.Append("DataAcesso,");
+        query.Append("DataModificacao ");
+
         query.Append("FROM ");
-            query.Append("Edicao ");
-        query.Append("ORDER BY Titulo;");
+
+        query.Append("Edicao ");
 
         // O bloco using garante a libertação dos recursos quando o código terminar
         // Semelhante ao try...finally
@@ -95,6 +96,70 @@ public class EdicaoDAL
         return i; 
     }
 
+    public int updateTexto(int idTexto, string texto, string titulo)
+    {
+        int i = 0;
+        StringBuilder q = new StringBuilder();
+
+        q.Append("UPDATE ");
+        q.Append("Edicao ");
+        q.Append("SET ");
+        q.Append("Titulo = @tit, ");
+        q.Append("Texto = @tex, ");
+        q.Append("DataModificacao = CURRENT_TIMESTAMP ");
+        q.Append("WHERE ");
+        q.Append("idLink = @idTex; ");
+
+        using (SqlConnection conn =
+            new SqlConnection(ConfigurationManager.ConnectionStrings[db].ConnectionString))
+        {
+            SqlCommand cmd = new SqlCommand(q.ToString(), conn);
+
+            cmd.Parameters.Add(new SqlParameter("@tit", SqlDbType.NVarChar)).Value = titulo;
+
+            cmd.Parameters.Add(new SqlParameter("@tex", SqlDbType.NVarChar)).Value = texto;
+
+            cmd.Parameters.Add(new SqlParameter("@idTex", SqlDbType.Int)).Value = idTexto;
+
+            conn.Open();
+
+            i = cmd.ExecuteNonQuery();
+
+            conn.Close();
+        }
+        return i;
+    }
+
+    public int remove(int idTexto)
+    {
+        int i = -1;
+
+        StringBuilder q1 = new StringBuilder();
+
+        q1.Append(" DELETE ");
+        q1.Append(" FROM Edicao ");
+        q1.Append(" WHERE (idLink = @idTexto) ");
+
+        using (SqlConnection conn =
+            new SqlConnection(ConfigurationManager.ConnectionStrings[db].ConnectionString))
+        {
+            conn.Open();
+
+            SqlCommand cmd1 = new SqlCommand(q1.ToString(), conn);
+
+            cmd1.Parameters.Add("@idTexto", SqlDbType.Int).Value = idTexto;
+
+            i = cmd1.ExecuteNonQuery();
+
+            if (conn.State != ConnectionState.Closed)
+            {
+                conn.Close();
+            }
+        }
+
+        return i;
+    }
+
     public DataRow pesquisaID(int idTexto)
     {
         DataRow dataRow = null;
@@ -142,40 +207,9 @@ public class EdicaoDAL
         return dataRow;
     }
 
-    public void updateTexto(int idTexto, string texto, string titulo)
+    public int archiveTexto(int idTexto, string texto, string titulo)
     {
-        StringBuilder q = new StringBuilder();
-
-        q.Append("UPDATE ");
-        q.Append("Edicao ");
-        q.Append("SET ");
-        q.Append("Titulo = @tit, ");
-        q.Append("Texto = @tex, ");
-        q.Append("DataModificacao = CURRENT_TIMESTAMP ");
-        q.Append("WHERE ");
-        q.Append("idLink = @idTex; ");
-
-        using (SqlConnection conn =
-            new SqlConnection(ConfigurationManager.ConnectionStrings[db].ConnectionString))
-        {          
-            SqlCommand cmd = new SqlCommand(q.ToString(), conn);
-                        
-            cmd.Parameters.Add(new SqlParameter("@tit", SqlDbType.NVarChar)).Value = titulo;
-
-            cmd.Parameters.Add(new SqlParameter("@tex", SqlDbType.NVarChar)).Value = texto;
-            
-            cmd.Parameters.Add(new SqlParameter("@idTex", SqlDbType.Int)).Value = idTexto;
-
-            conn.Open();
-
-            cmd.ExecuteNonQuery();
-
-            conn.Close();
-        }
-    }
-
-    public void archiveTexto(int idTexto, string texto, string titulo)
-    {
+        int i = 0;
 
         SqlTransaction tn ;
 
@@ -246,6 +280,7 @@ public class EdicaoDAL
             {
                 Debug.Assert(false, ex.ToString());
                 tn.Rollback();
+                return 0;
             }
 
             if (conn.State != ConnectionState.Closed)
@@ -253,35 +288,7 @@ public class EdicaoDAL
                 conn.Close();
             }
         }
-    }
-
-    public int remove(int idTexto)
-    {
-        int i = -1;
-
-        StringBuilder q1 = new StringBuilder();
-
-        q1.Append(" DELETE ");
-        q1.Append(" FROM Edicao ");
-        q1.Append(" WHERE (idLink = @idTexto) ");
-
-        using (SqlConnection conn =
-            new SqlConnection(ConfigurationManager.ConnectionStrings[db].ConnectionString))
-        {
-            conn.Open();
-
-            SqlCommand cmd1 = new SqlCommand(q1.ToString(), conn);
-
-            cmd1.Parameters.Add("@idTexto", SqlDbType.Int).Value = idTexto;
-
-            i = cmd1.ExecuteNonQuery();
-
-            if (conn.State != ConnectionState.Closed)
-            {
-                conn.Close();
-            }
-        }
-
         return i;
     }
+ 
 }

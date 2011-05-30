@@ -46,7 +46,7 @@ public class EdicaoBLL
     {
         List<TextoEdit> lista = new List<TextoEdit>();
 
-        DataTable dt = edi.select(0);
+        DataTable dt = edi.select();
 
         foreach (DataRow row in dt.Rows)
         {
@@ -103,14 +103,14 @@ public class EdicaoBLL
                             ));
     }
 
-    public void saveTexto(int idTexto, string texto, string titulo)
+    public int saveTexto(int idTexto, string texto, string titulo)
     {
-        edi.updateTexto(idTexto, texto, titulo);
+        return(edi.updateTexto(idTexto, texto, titulo));
     }
 
-    public void archiveTexto(int idTexto, string texto, string titulo)
+    public int archiveTexto(int idTexto, string texto, string titulo)
     {
-        edi.archiveTexto(idTexto, texto, titulo);
+        return(edi.archiveTexto(idTexto, texto, titulo));
     }
 
     public int removeTexto(int idTexto)

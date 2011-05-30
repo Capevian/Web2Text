@@ -20,7 +20,7 @@ public class ArquivoBLL
     {   
         List<TextoArq> lista = new List<TextoArq>();
 
-        DataTable dt = arq.select(0);
+        DataTable dt = arq.select();
 
         foreach (DataRow row in dt.Rows)
         {
@@ -75,14 +75,14 @@ public class ArquivoBLL
                             ));
     }
 
-    public List<PesquisaArq> efectuaPesquisa(string termos, int option)
+    public List<PesquisaArq> efectuaPesquisa(string termos, int opcao)
     {
         List<PesquisaArq> lista = new List<PesquisaArq>();
 
         //retorna lista vazia se o termos pesquisado for null
         if (termos == "") return lista;
         
-        DataTable dt = arq.pesquisaPalavras(termos, option);
+        DataTable dt = arq.pesquisaPalavras(termos, opcao);
         foreach (DataRow row in dt.Rows)
         {
             lista.Add(new PesquisaArq(termos,

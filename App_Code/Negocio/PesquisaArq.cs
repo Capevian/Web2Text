@@ -11,18 +11,18 @@ using System.Text.RegularExpressions;
 public class PesquisaArq
 {
     private string termos;
-    private int idT;
+    private int idTexto;
     private string titulo;
-    private string tex;
+    private string texto;
     private string zonaPalavra;
     private string rank;
 
 	public PesquisaArq(string termosAux, int idTAux, string tituloAux, string texAux, string rankAux) 
     {
         termos = termosAux;
-        idT = idTAux;
+        idTexto = idTAux;
         titulo = tituloAux;
-        tex = texAux;
+        texto = texAux;
         rank = rankAux;
 
         // Este IF cria um objecto com a mensagem de que não há resultados na pesquisa.
@@ -37,8 +37,8 @@ public class PesquisaArq
 	}
     public int PesqArqIdT
     {
-        get { return idT; }
-        set { idT = value; }
+        get { return idTexto; }
+        set { idTexto = value; }
     }
     public string PesqArqTitulo
     {
@@ -47,8 +47,8 @@ public class PesquisaArq
     }
     public string PesqArqTex
     {
-        get { return tex; }
-        set { tex = value; }
+        get { return texto; }
+        set { texto = value; }
     }
     public string PesqArqRank
     {
@@ -70,7 +70,7 @@ public class PesquisaArq
         string[] palavrasFinais = new String[nPalavras];
 
         // Remove os \n substituindo-os por espaços
-        textoAux = tex.Replace(Environment.NewLine, " ");
+        textoAux = texto.Replace(Environment.NewLine, " ");
 
         // Obtém um array de palavras
         //string[] palavras = Regex.Split(textoAux, "\r\n ");

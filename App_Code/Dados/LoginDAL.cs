@@ -130,7 +130,8 @@ public class LoginDAL
     {
         return 0;
     }
-    public string CalculaMD5(string input)
+    
+    private string CalculaMD5(string input)
     {
         MD5 md5 = System.Security.Cryptography.MD5.Create();
         byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);

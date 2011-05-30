@@ -31,8 +31,7 @@ public class Spider
 		
 	}
 
-   // public static void Run()
-    public void run(string termo, List<Uri> seeds, bool flagTodosTermos)
+    public void pesquisa(string termo, List<Uri> seeds, bool flagTodosTermos)
     {
         NCrawlerModule.Setup();
             // Setup crawler to crawl http://ncrawler.codeplex.com
