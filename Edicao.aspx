@@ -25,7 +25,7 @@
         OnDataBound="listView1_DataBound">
       
         <LayoutTemplate>
-            <table id="tabarquivo" width="100%">
+            <table id="tabArquivo" width="100%">
                 <thead>           
                     <tr>
                         <th>
@@ -84,7 +84,7 @@
     --%>
     <div id="dtPager">
     <asp:DataPager ID="DtPager" runat="server" 
-            PageSize="2" PagedControlID="ListView1">
+            PageSize="15" PagedControlID="ListView1">
             
             <Fields>
                 <%--Link para pagina anterior--%>

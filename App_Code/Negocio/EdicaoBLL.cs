@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data;
+using System.Net;
+using System.Text;
 
 /// <summary>
 /// Summary description for EdicaoBLL
@@ -15,6 +17,30 @@ public class EdicaoBLL
 	{
         edi = new EdicaoDAL();
 	}
+
+    public int adicionaLinks(List<Link> linksToEdit, string username)
+    {
+        string texto;
+        int addedLinks = 0;
+        
+        WebClient webCli = new WebClient();
+
+        foreach (Link l in linksToEdit)
+        {
+            //Byte[] PageHTMLBytes;
+
+            //PageHTMLBytes = webCli.DownloadData(l.LinkContent);
+            
+            //UTF8Encoding oUTF8 = new UTF8Encoding();
+            //texto = oUTF8.GetString(PageHTMLBytes);
+
+            texto = webCli.DownloadString(l.LinkContent);
+
+            addedLinks += edi.insert(texto, l.Titulo, l.LinkContent, l.LinkDesc, username);
+        }
+
+        return addedLinks;
+    }
 
     public List<TextoEdit> getLista(string ordenacao)
     {

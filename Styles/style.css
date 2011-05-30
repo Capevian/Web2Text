@@ -69,7 +69,7 @@ h2
   background-image: url(Images/web2text.jpg);
   width: 450px;
   height: 100px;
-  margin: 40px auto 20px;
+  margin: 20px auto 20px;
 }
 
 #Header a
@@ -164,8 +164,8 @@ h2
   */
     font-size: 0.8em;
     width: 820px;
-    border-left: 1px solid white;
-    border-right: 1px solid white;
+    /*border-left: 1px solid white;
+    border-right: 1px solid white;*/
     float: left;
     background-color: #e1e1e1;
     min-height: 500px;
@@ -212,7 +212,7 @@ h2
     The footer is positioned below all other content (yet still within PageWrapper).
     clear: both is used to clear the impact of the float properties used for #MainContent and #Sidebar.
   */
-  width: 844px;
+  width: 840px;
   clear: both;
   height: 37px;
   background-color : #BCD1FE;
@@ -294,6 +294,10 @@ table tbody tr td
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
     font-weight: bold;
+}
+
+table#tabArquivo tbody tr td
+{
     border-bottom: 1px solid gray;
 }
 
@@ -322,7 +326,7 @@ table#tabPesquisa thead tr th
     font: 11px "lucida grande" ,tahoma,verdana,arial,sans-serif;
     text-align: left;
     padding-top: 5px;
-    padding-right: 290px;
+    padding-right: 10px;
 }
 
 .link
@@ -334,6 +338,8 @@ table#tabPesquisa thead tr th
 
 #dtPager
 {
+    font: 13px "lucida grande" ,tahoma,verdana,arial,sans-serif;
+    font-weight: bold;
     margin-top: 10px;
     margin-left: 10px;
 }
@@ -488,7 +494,11 @@ textarea.CaixaEdicao
 
 .boxPesquisa2
 {
-    width: 650px;
+    display: block;
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+    width: 730px;
     height: 25px;
     border: 1px solid #3366FF;
 	border-left: 4px solid #3366FF;
@@ -499,4 +509,17 @@ textarea.CaixaEdicao
 #searchBox
 {
     text-align: center;
+}
+
+.botao
+{
+    height: 25px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: 'Lucida Grande',Tahoma,Verdana,Arial,sans-serif;
+    font-weight: bold;
+    padding: 1px 2px 2px;
+    color: #FFFFFF;
+    border: 1px solid #29447E;
+    background-color: #3366FF;/*#5B74A8;*/
 }

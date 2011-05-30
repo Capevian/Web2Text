@@ -13,7 +13,7 @@
         OnDataBound="listView1_DataBound">
       
         <LayoutTemplate>
-            <table id="tabarquivo" width="100%">
+            <table id="tabPesquisa" width="100%">
                 <thead>           
                     <tr>
                         <th>Resultados</th> 
@@ -28,8 +28,15 @@
       
         <ItemTemplate>
             <tr>
-                <td><a href="Visualize.aspx?id=<%# Eval("PesqArqidT") %>"><%# Eval("PesqArqTitulo")%></a><br />
-                    <%# Eval("PesqArqZonaPalavra")%></a><td>
+                <td>
+                    <div class="tbpTitle">
+                        <a href="Visualize.aspx?id=<%# Eval("PesqArqidT") %>"><%# Eval("PesqArqTitulo")%></a>
+                    
+                    </div>
+                    <div class="tbpDesc" style="margin-bottom:20px; font-size:12px;">
+                        <%# Eval("PesqArqZonaPalavra")%>
+                    </div>
+                <td>
             </tr>
 
         </ItemTemplate>

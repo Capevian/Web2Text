@@ -59,6 +59,42 @@ public class EdicaoDAL
         }
     }
 
+    public int insert(string texto, string titulo, string link, string intro, string username)
+    {
+        int i = 0;
+
+        StringBuilder q = new StringBuilder();
+
+        q.Append(" INSERT INTO ");
+        q.Append(" Edicao ");
+        q.Append(" (DataAcesso, DataModificacao, Texto, Titulo, Link, Intro, username ) ");
+        q.Append(" VALUES ");
+        q.Append(" (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, @texto, @titulo, @link, @intro, @username ) ");
+
+        using (SqlConnection conn =
+            new SqlConnection(ConfigurationManager.ConnectionStrings[db].ConnectionString))
+        {          
+            SqlCommand cmd = new SqlCommand(q.ToString(), conn);
+
+            cmd.Parameters.Add(new SqlParameter("@texto", SqlDbType.NVarChar)).Value = texto;
+            
+            cmd.Parameters.Add(new SqlParameter("@titulo", SqlDbType.NVarChar)).Value = titulo;
+
+            cmd.Parameters.Add(new SqlParameter("@link", SqlDbType.NVarChar)).Value = link;
+            
+            cmd.Parameters.Add(new SqlParameter("@intro", SqlDbType.NVarChar)).Value = intro;
+
+            cmd.Parameters.Add(new SqlParameter("@username", SqlDbType.NVarChar)).Value = username;
+
+            conn.Open();
+
+            i = cmd.ExecuteNonQuery();
+
+            conn.Close();
+        }
+        return i; 
+    }
+
     public DataRow pesquisaID(int idTexto)
     {
         DataRow dataRow = null;

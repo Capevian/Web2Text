@@ -4,15 +4,41 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="searhBoxContent" runat="server">
-        
+        <div style="width:820px; margin-left: auto; margin-right: auto;">
         <asp:TextBox ID="TextBox1" 
                      CssClass="boxPesquisa2"
                      runat="server">
         </asp:TextBox>
 
-        <asp:Button ID="Button1" runat="server" Text="Pesquisar" 
-            onclick="Button1_Click" />
-
+        <asp:Button ID="ButtonPesquisar" runat="server" Text="Pesquisar" 
+            onclick="ButtonPesquisar_Click" CssClass="botao"
+            Style="height: 29px;
+                   display: block;
+                   float: left;
+                   font-size: 14px;
+                   margin-left:2px;"/>
+        </div>
+        <br />
+        <div style="font-family: 'Lucida Grande',Tahoma,Verdana,Arial,sans-serif;
+                    font-weight: bold;
+                    font-size:10px;
+                    text-align: left;
+                    margin-left: 10px;
+                    margin-top: 15px;">
+            <asp:CheckBox ID="CheckBoxRejeitadas" runat="server"
+                          Text="Ignorar Páginas Rejeitadas"
+                          />
+            <asp:CheckBox ID="CheckBoxTodosTermos" runat="server"
+                          Text="Todos os termos"/>
+            <asp:Button ID="Button2" runat="server" Text="Limpar Histórico" 
+                        onclick="ButtonLimparHistorico_Click" 
+                        Style="font-size: 10px;
+                               margin-left:2px;"/>
+            <asp:HyperLink ID="LinkCrawlerConfig" runat="server"
+                           Text="Crawler Config."
+                           Style="float:right; display: block; margin: 5px 12px 0px 2px;" 
+                           NavigateUrl="~/Crawler.aspx"></asp:HyperLink>
+        </div>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cpMainContent" Runat="Server">
@@ -21,35 +47,64 @@
         runat="server" 
         ItemPlaceholderID="myItemPlaceHolder"
         OnPagePropertiesChanging="listView1_PagePropertiesChanging"
-        OnDataBound="listView1_DataBound">
+        >
       
         <LayoutTemplate>
             <table id="tabPesquisa" width="100%">
                 <thead>           
                     <tr>
                         <th>Resultados</th> 
-                        <th style="text-align:center;">Selecção</th>
+                        <th width="80px"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <asp:PlaceHolder ID="myItemPlaceHolder" runat="server">
                     </asp:PlaceHolder>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td style="text-align: center;">
+                            <asp:Button ID="ButtonEditItems" runat="server" 
+                            Text="Seleccionar" 
+                            onclick="ButtonEditItems_Click" 
+                            Width="85px" 
+                            CssClass="botao" />
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
         </LayoutTemplate>
       
         <ItemTemplate>
             <tr>
-                <td style="margin-bottom: 8px; border: none">
+                <td onmouseover="this.style.backgroundColor='#B8B8B8'" 
+                    onmouseout="this.style.backgroundColor='#E1E1E1'"
+                    style="margin-bottom: 8px; border: none"
+                    width="500px">
+
                     <div class="tbpTitle">
-                        <a href="<%# Eval("LinkContent") %>"><%# Eval("Titulo") %></a>
+                        <asp:HyperLink ID="linkSite" runat="server" 
+                                       Target="_blank" 
+                                       NavigateUrl='<%# Eval("LinkContent") %>' 
+                                       Text='<%# Eval("Titulo") %>'>
+                        </asp:HyperLink>
+                        <%--<a href="<%# Eval("LinkContent") %>" target="_blank"><%# Eval("Titulo") %></a>--%>
                     </div>
+
                     <div class="tbpDesc">
-                        <%# Eval("LinkDesc") %>
-                        <span class="link"><%# Eval("LinkContent") %></span>
+                        <asp:Label ID="linkIntro" runat="server" 
+                                     Text='<%# Eval("LinkDesc") %>'>
+                        </asp:Label>
+                        <asp:Label ID="linkLiteral" runat="server" 
+                                     CssClass="link" 
+                                     Text='<%# Eval("LinkContent") %>'>
+                        </asp:Label>
                     </div>
                 </td>
-                <td style="border-bottom: none;">Seleccionar</td>
+                <td style="border-bottom: none; text-align: center;">
+                    <asp:CheckBox ID="chkSelect" runat="server"/>
+                </td>
             </tr>            
         </ItemTemplate>
 
@@ -60,9 +115,10 @@
       -- PagedControlID: id do componente que e' paginado
     --%>
     <div id="dtPager">
+        
     <asp:DataPager ID="DtPager" runat="server" 
             PageSize="5" PagedControlID="ListView1" 
-            OnPreRender="DataPager1_PreRender">
+            >
             
             <Fields>
                 <%--Link para pagina anterior--%>
@@ -91,17 +147,17 @@
                     ShowLastPageButton="false" />
                 
                 <%--Lista de numeros para escolher pagina--%>
-                <asp:TemplatePagerField>
+                <%--<asp:TemplatePagerField>
                     <PagerTemplate>
                         <asp:DropDownList ID="DropDownList1" runat="server" 
                             OnSelectedIndexChanged="ddlPage_SelectedIndexChanged" AutoPostBack="true">
                         </asp:DropDownList>
                     </PagerTemplate>
-                </asp:TemplatePagerField>
+                </asp:TemplatePagerField> --%>
 
             </Fields>
         </asp:DataPager>
     </div>
-
+    <asp:Label ID="LabelResultados" runat="server" Text=""></asp:Label>
 </asp:Content>
 

@@ -64,7 +64,7 @@ public class PesquisaArq
     {
         //Numero que define quantas palavras devem estar no preview
         //Deve ter sempre um numero par
-        int nPalavras = 20;
+        int nPalavras = 50;
         
         string textoAux;
         string[] palavrasFinais = new String[nPalavras];
@@ -114,7 +114,7 @@ public class PesquisaArq
             }
         }
 
-        // Forma a string final com as 20 palavras para ser returnada
+        // Forma a string final com as 20 palavras para ser retornada
         StringBuilder textoFinal = new StringBuilder();
         bool encontrou = false;
         for (int x = 0; x < nPalavras; x++)

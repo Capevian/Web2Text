@@ -71,7 +71,7 @@ public partial class Arquivo : System.Web.UI.Page
 
     #endregion
 
-    #region Funcao que preenche a listView
+    #region Funcao que preenche a listView (BindListView)
 
     private void BindListView(string sortDirection)
     {

@@ -32,7 +32,7 @@ public class Spider
 	}
 
    // public static void Run()
-    public void run(string termo, List<Uri> seeds)
+    public void run(string termo, List<Uri> seeds, bool flagTodosTermos)
     {
         NCrawlerModule.Setup();
             // Setup crawler to crawl http://ncrawler.codeplex.com
@@ -59,6 +59,11 @@ public class Spider
 					MaximumCrawlDepth = 5,
                     MaximumCrawlCount = 20,
 					ExcludeFilter = ExtensionsToSkip,
+                    
+                    //ExcludeFilter = new IFilter[]
+                    //{
+                    //    new LambdaFilter((uri, crawlStep) => !uri.ToString().Contains(""));
+                    //}
 				})
 			{
 				// Begin crawl
@@ -90,7 +95,7 @@ public class Spider
 
             if (text.IndexOf(ContentToBeFound) != -1)
             {
-                paginas.Add(new Link(propertyBag.Step.Uri.ToString(), propertyBag.Text.Remove(30)));
+                paginas.Add(new Link(propertyBag.Step.Uri.ToString(),propertyBag.Step.Uri.ToString(), propertyBag.Text.Remove(100)));
             }
         }
 

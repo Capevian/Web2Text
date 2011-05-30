@@ -31,7 +31,8 @@
                 <asp:ContentPlaceHolder ID="cpMainContent" runat="server">
                 </asp:ContentPlaceHolder>
             </div>
-            <div id="Footer"></div>
+            <div id="Footer">
+            &copy; Capevian Team - Universidade do Minho 2011</div>
         </div>
     </form>
 </body>

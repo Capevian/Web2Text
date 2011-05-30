@@ -10,19 +10,27 @@ public class Link
 {
     private string titulo;
     private string link;
-    private string desc;
+    private string intro;
+
+    public Link(string link)
+    {
+        this.titulo = "";
+        this.link = link;
+        this.intro = "";
+    }
     
-    public Link(string s, string d)
+    public Link(string link, string intro)
 	{
-        link = s;
-        desc = d;
+        this.titulo = "";
+        this.link = link;
+        this.intro = intro;
 	}
 
-    public Link(string t, string l, string d)
+    public Link(string titulo, string link, string intro)
     {
-        this.titulo = t;
-        this.link = l;
-        this.desc = d;
+        this.titulo = titulo;
+        this.link = link;
+        this.intro = intro;
     }
 
     public string Titulo
@@ -38,7 +46,7 @@ public class Link
     }
     public string LinkDesc
     {
-        get { return desc; }
-        set { desc = value; }
+        get { return intro; }
+        set { intro = value; }
     }
 }
