@@ -103,14 +103,14 @@ public class EdicaoBLL
                             ));
     }
 
-    public int saveTexto(int idTexto, string texto, string titulo)
+    public int saveTexto(int idTexto, string texto, string titulo, string username)
     {
-        return(edi.updateTexto(idTexto, texto, titulo));
+        return(edi.updateTexto(idTexto, texto, titulo,username));
     }
 
-    public int archiveTexto(int idTexto, string texto, string titulo)
+    public int archiveTexto(int idTexto, string texto, string titulo, string username)
     {
-        return(edi.archiveTexto(idTexto, texto, titulo));
+        return(edi.archiveTexto(idTexto, texto, titulo,username));
     }
 
     public int removeTexto(int idTexto)

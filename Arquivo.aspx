@@ -18,11 +18,12 @@
                      CssClass="boxPesquisa">
         </asp:TextBox>
 
-        <asp:Button ID="ButtonPesquisar" runat="server" Text="Pesquisar" 
-            onclick="ButtonPesquisarClick" />
+        <div style="width: 95px; margin: 0 auto;"><asp:Button ID="ButtonPesquisar" runat="server" Text="Pesquisar" 
+            onclick="ButtonPesquisarClick" /></div>
 
         <asp:RadioButtonList ID="RadioButtonList1" runat="server" AutoPostBack="True" 
-            Height="14px">
+            Height="14px"
+            Style="font-size: 10px;">
             <asp:ListItem Selected="True" Value="0">Pesquisa todos os termos</asp:ListItem>
             <asp:ListItem Value="1">Algum dos termos</asp:ListItem>
         </asp:RadioButtonList>
@@ -69,8 +70,8 @@
         <ItemTemplate>
             <tr>
                 <td><a href="Visualize.aspx?id=<%# Eval("IdTexto") %>"><%# Eval("Titulo") %></a></td>
-                <td><%# Eval("DataArq") %></td>
-                <td>
+                <td align="center"><%# Eval("DataArq") %></td>
+                <td align="center">
                     <asp:LinkButton ID="LinkButton2" 
                                     runat="server"
                                     Text = "Download"
@@ -79,7 +80,7 @@
                                     >
                     </asp:LinkButton>
                 </td>
-                <td>
+                <td align="center">
                     <asp:LinkButton ID="LinkButton1" 
                         runat="server" 
                         OnCommand="clicklinkRemover"

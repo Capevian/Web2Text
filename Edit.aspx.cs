@@ -8,20 +8,20 @@ using System.Web.UI.WebControls;
 public partial class Edit : System.Web.UI.Page
 {
     private TextoEdit txt;
-    private EdicaoBLL edi;
+    private EdicaoBLL edi = new EdicaoBLL();
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        // Funcoes Javascript para alterar o titulo
         LabelTitulo.Attributes.Add("onclick", "ShowEditBox();");
         ButtonUpdate.Attributes.Add("onclick", "SaveEditBox();");
         ButtonClose.Attributes.Add("onclick", "HideEditBox();");
-
+        
         LabelTitulo.Text = HiddenField1.Value;
+
         // verifica qual o id passado para saber
         // qual o texto que deve apresentar
         string id = Request.QueryString["id"];
-
-        edi = new EdicaoBLL();
 
         // Descarrega da Base de Dados o texto com o id passado na QueryString
         txt = edi.getTexto(Convert.ToInt32(id));
@@ -29,9 +29,8 @@ public partial class Edit : System.Web.UI.Page
         // Altera o titulo da pagina
         this.Title = "Web2Text : " + txt.Titulo;
 
-        
         // Se nao foi feito um PostBack da pagina
-        // (guardar alteracoes por exemplo...)
+        // (ou seja quando se entra na pagina pela primeira vez )
         if (!IsPostBack) 
         {
             // Altera titulo do texto em vizualizacao
@@ -47,10 +46,9 @@ public partial class Edit : System.Web.UI.Page
             linkWWW.NavigateUrl = txt.Link;
             labelDtAcess.Text = txt.DtAcesso.ToString();
         }
-        // Tooltips icons
-        //dlButton.ToolTip = "Download";    
     }
 
+    #region Download do conteudo do texto
     protected void downloadFile()
     {
         Response.Clear();
@@ -60,22 +58,27 @@ public partial class Edit : System.Web.UI.Page
         Response.Write(TextBox1.Text);
         Response.End();
     }
+    #endregion
 
+    #region Limpar o HTML do texto
     protected void limparHTML()
     {
         string s = txt.limpaTexto(TextBox1.Text);
         TextBox1.Text = s;
     }
+    #endregion
+
 
     protected void guardarAlteracoes()
     {
-        // Username a rever...
-        edi.saveTexto(txt.IdTexto,TextBox1.Text,LabelTitulo.Text);
+        string username = System.Web.HttpContext.Current.User.Identity.Name;
+        edi.saveTexto(txt.IdTexto,TextBox1.Text,LabelTitulo.Text,username);
     }
 
     protected void arquivarTexto()
     {
-        edi.archiveTexto(txt.IdTexto, TextBox1.Text, LabelTitulo.Text);
+        string username = System.Web.HttpContext.Current.User.Identity.Name;
+        edi.archiveTexto(txt.IdTexto, TextBox1.Text, LabelTitulo.Text,username);
         Response.Redirect("Arquivo.aspx");
     }
   
@@ -109,8 +112,18 @@ public partial class Edit : System.Web.UI.Page
     {
         arquivarTexto();
     }
-    protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+    protected void arqButton_Click(object sender, ImageClickEventArgs e)
     {
         arquivarTexto();
+    }
+
+    protected void LinkSair_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Edicao.aspx");
+    }
+
+    protected void sairButton_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("Edicao.aspx");
     }
 }

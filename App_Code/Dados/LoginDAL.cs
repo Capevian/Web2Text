@@ -65,12 +65,72 @@ public class LoginDAL
         else return false;
     }
 
-    public bool insert(string username, string passSimples)
+    public bool insert(string username, string email, string passSimples)
     {
-        string password = this.CalculaMD5(passSimples);
+        int i = 0;
+
+        StringBuilder q1 = new StringBuilder();
+
+        q1.Append(" SELECT ");
+        q1.Append("  Count(username) ");
+        q1.Append(" FROM ");
+        q1.Append("  Utilizadores ");
+        q1.Append(" WHERE ");
+        q1.Append("  username = @user ");
+
+        using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[db].ConnectionString))
+        {
+            conn.Open();
+
+            SqlCommand cmd1 = new SqlCommand(q1.ToString(), conn);
+
+            cmd1.Parameters.Add(new SqlParameter("@user", SqlDbType.NVarChar)).Value = username;
+
+            i = Convert.ToInt32(cmd1.ExecuteScalar());
+
+            if (conn.State != ConnectionState.Closed)
+            {
+                conn.Close();
+            }
+        }
+
+        if (i > 0)
+        {
+            return false;
+        }
+        else
+        {
+            string password = this.CalculaMD5(passSimples);
+
+            StringBuilder q2 = new StringBuilder();
+
+            q2.Append(" INSERT INTO ");
+            q2.Append("  Utilizadores (username, password, email, nlinksSeed, depth, mode) ");
+            q2.Append(" VALUES ");
+            q2.Append("  (@user, @pass, @email, 5, 2, 0) ");
+
+            using (SqlConnection conn =
+                new SqlConnection(ConfigurationManager.ConnectionStrings[db].ConnectionString))
+            {
+                SqlCommand cmd2 = new SqlCommand(q2.ToString(), conn);
+
+                cmd2.Parameters.Add(new SqlParameter("@user", SqlDbType.NVarChar)).Value = username;
+
+                cmd2.Parameters.Add(new SqlParameter("@pass", SqlDbType.NVarChar)).Value = password;
+
+                cmd2.Parameters.Add(new SqlParameter("@email", SqlDbType.NVarChar)).Value = email;
 
 
-        return false;
+                conn.Open();
+
+                i = cmd2.ExecuteNonQuery();
+
+                conn.Close();
+            }
+
+            if (i == 1) return true;
+            else return false;
+        }
     }
 
     public int[] getDefinicoes(string username)
@@ -128,7 +188,37 @@ public class LoginDAL
 
     public int setDefinicoes(string username, int nlinksSeed, int depth, int mode)
     {
-        return 0;
+        int i = 0;
+
+        StringBuilder q = new StringBuilder();
+
+        q.Append(" UPDATE ");
+        q.Append("  Utilizadores ");
+        q.Append(" SET ");
+        q.Append("  nlinksSeed = @seed, ");
+        q.Append("  depth = @dep, ");
+        q.Append("  mode = @mod ");
+        q.Append(" WHERE ");
+        q.Append("  username = @user ");
+
+        using (SqlConnection conn =
+            new SqlConnection(ConfigurationManager.ConnectionStrings[db].ConnectionString))
+        {
+            SqlCommand cmd = new SqlCommand(q.ToString(), conn);
+
+            cmd.Parameters.Add(new SqlParameter("@seed", SqlDbType.Int)).Value = nlinksSeed;
+            cmd.Parameters.Add(new SqlParameter("@dep",  SqlDbType.Int)).Value = depth;
+            cmd.Parameters.Add(new SqlParameter("@mod",  SqlDbType.Int)).Value = mode;
+            cmd.Parameters.Add(new SqlParameter("@user", SqlDbType.NVarChar)).Value = username;
+
+            conn.Open();
+
+            i = cmd.ExecuteNonQuery();
+
+            conn.Close();
+        }
+
+        return i;
     }
     
     private string CalculaMD5(string input)

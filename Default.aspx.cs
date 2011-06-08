@@ -14,10 +14,18 @@ public partial class _Default : System.Web.UI.Page
     int CurrentPage = 0;
     private List<Link> listaLinks;
     private string username;
+    private HistoricoBLL historico = new HistoricoBLL();
     
     protected void Page_Load(object sender, EventArgs e)
     {
         username = System.Web.HttpContext.Current.User.Identity.Name;
+        
+        string erro = Request.QueryString["erro"];
+        
+        if(erro != null && Convert.ToInt32(erro) == 1)
+        {
+            LabelResultados.Text = "Uma das páginas que requisitou não pode ser descarregada. <br /> Tente Novamente.";
+        }
 
         if (!IsPostBack)
         {
@@ -29,10 +37,7 @@ public partial class _Default : System.Web.UI.Page
 
     protected void ButtonPesquisar_Click(object sender, EventArgs e)
     {
-        bool incluirRejeitadas = CheckBoxRejeitadas.Checked;
-        bool todosOsTermos = CheckBoxTodosTermos.Checked;
-
-        BindListView();
+       BindListView();
     }
 
     #endregion
@@ -41,7 +46,7 @@ public partial class _Default : System.Web.UI.Page
 
     protected void ButtonLimparHistorico_Click(object sender, EventArgs e)
     {
-
+        historico.cleanHistorico();
     }
 
     #endregion
@@ -73,8 +78,17 @@ public partial class _Default : System.Web.UI.Page
             }
         }
 
-        edi.adicionaLinks(linksToEdit, username);
-        //Session["linksToEdit"] = linksToEdit;
+        try
+        {
+            edi.adicionaLinks(linksToEdit, username);
+        }
+        catch (Exception exc)
+        {
+            Response.Redirect("Default.aspx?erro=1");
+        }
+
+        historico.addHistorico(linksToEdit);
+
         Response.Redirect("Edicao.aspx");
     }
     #endregion
@@ -108,9 +122,11 @@ public partial class _Default : System.Web.UI.Page
     private void BindListView()
     { 
         PesquisaWeb search = new PesquisaWeb(username);
-        bool flagTodosTermos = CheckBoxTodosTermos.Checked;
+        //bool flagTodosTermos = CheckBoxTodosTermos.Checked;
+        bool flagTodosTermos = true;
         bool ignorarHist = CheckBoxRejeitadas.Checked;
 
+        
         string termos = TextBox1.Text;
 
         if (termos != "")

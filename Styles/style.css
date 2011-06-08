@@ -144,7 +144,7 @@ h2
     the user has specified as the default font in the browser.
   */
     font-size: 0.8em;
-    width: 660px;
+    width: 657px;
     border-left: 1px solid white;
     border-right: 1px solid white;
     float: left;
@@ -498,7 +498,7 @@ textarea.CaixaEdicao
     float: left;
     margin-left: auto;
     margin-right: auto;
-    width: 730px;
+    width: 728px;
     height: 25px;
     border: 1px solid #3366FF;
 	border-left: 4px solid #3366FF;
@@ -522,4 +522,9 @@ textarea.CaixaEdicao
     color: #FFFFFF;
     border: 1px solid #29447E;
     background-color: #3366FF;/*#5B74A8;*/
+}
+
+.ErrorMessage
+{
+    color: Red;
 }

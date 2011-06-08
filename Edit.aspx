@@ -127,12 +127,12 @@
             
             <%--ARQUIVAR TEXTO--%>
             <span class="space">
-            <asp:ImageButton ID="ImageButton1" 
+            <asp:ImageButton ID="arqButton" 
                             runat="server" 
                             Width="15px" 
                             Height="15px"
                             CssClass="imgIcon" 
-                            onclick="ImageButton1_Click"
+                            onclick="arqButton_Click"
                             ImageUrl="~/Styles/Images/arq.png" 
                             />
                 <asp:LinkButton ID="LinkArquivar" 
@@ -142,6 +142,26 @@
                                 onclick="LinkArquivar_Click"
                                 OnClientClick="return confirm('Tem a certeza que deseja arquivar o texto?');">
                                 Arquivar Texto
+                </asp:LinkButton>
+            </span>
+            <br />
+            <%--SAIR--%>
+            <span class="space">
+            <asp:ImageButton ID="sairButton" 
+                            runat="server" 
+                            Width="15px" 
+                            Height="15px"
+                            CssClass="imgIcon"
+                            onclick="sairButton_Click" 
+                            ImageUrl="~/Styles/Images/exit.png" 
+                            />
+                <asp:LinkButton ID="LinkSair" 
+                                runat="server" 
+                                CssClass="labelTitle labelDetail imgLabel" 
+                                Style="display:inline" 
+                                onclick="LinkSair_Click"
+                                OnClientClick="return confirm('Tem a certeza que deseja sair?');">
+                                Sair
                 </asp:LinkButton>
             </span>
         </div>

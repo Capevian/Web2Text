@@ -152,7 +152,11 @@ public partial class Arquivo : System.Web.UI.Page
 
     protected void clicklinkRemover(object sender, CommandEventArgs e)
     {
+        string orderby = Session["SortingBy"].ToString();
+
         arq.removeTexto(Convert.ToInt32(e.CommandArgument.ToString()));
+
+        BindListView(orderby);
     }
 
     #endregion

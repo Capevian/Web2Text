@@ -36,4 +36,15 @@ public class HistoricoBLL
     {
         return hist.deleteAll();
     }
+
+    public int addHistorico(List<Link> links)
+    {
+        int i = 0;
+
+        foreach(Link l in links)
+        {
+            i += hist.addHistorico(l.LinkContent);
+        }
+        return i;
+    }
 }

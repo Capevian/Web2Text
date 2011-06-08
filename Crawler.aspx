@@ -26,7 +26,12 @@
                     <asp:Label ID="Label1" runat="server" Text="Número de Links Semente" ></asp:Label> 
                 </asp:TableCell>
                 <asp:TableCell>
-                    <asp:TextBox ID="TextBoxNlinks" runat="server" Width="40px"></asp:TextBox>
+                    <asp:TextBox ID="TextBoxNlinks" runat="server" Width="40px" Style="margin-right:10px"></asp:TextBox>
+                    <asp:RangeValidator ID="RangeValidator1" runat="server" 
+                                        ErrorMessage="Introduza um número maior que 1" 
+                                        MaximumValue="100" MinimumValue="1" Type="Integer" 
+                                        ControlToValidate="TextBoxNlinks" CssClass="ErrorMessage">
+                    </asp:RangeValidator>
                 </asp:TableCell>
             </asp:TableRow>
             <asp:TableRow>
@@ -34,7 +39,12 @@
                     <asp:Label ID="Label2" runat="server" Text="Profundidade de Pesquisa do Crawler"></asp:Label>
                 </asp:TableCell>
                 <asp:TableCell>
-                    <asp:TextBox ID="TextBoxDepth" runat="server" Width="40px"></asp:TextBox>
+                    <asp:TextBox ID="TextBoxDepth" runat="server" Width="40px" Style="margin-right:10px"></asp:TextBox>
+                    <asp:RangeValidator ID="RangeValidator2" runat="server" 
+                                        ErrorMessage="Introduza um número maior que 1" 
+                                        MaximumValue="100" MinimumValue="1" Type="Integer" 
+                                        ControlToValidate="TextBoxDepth" CssClass="ErrorMessage">
+                    </asp:RangeValidator>
                 </asp:TableCell>
             </asp:TableRow>
             <asp:TableRow>

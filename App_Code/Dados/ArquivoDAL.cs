@@ -13,12 +13,7 @@ using System.Diagnostics;
 /// </summary>
 public class ArquivoDAL
 {
-    //private static string connString = "Data Source=ACS-LAPTOP;Initial Catalog=web2text;"
-    //                    + "Integrated Security=True;Pooling=False";
-    //private static string connString = "Data Source=w2t.dyndns.info;Initial Catalog=web2text;"
-    //                      + "Persist Security Info=True;User ID=sa;Password=TROIKA;";
     private static string db = "web2textRemote";
-    //private static string db = "web2textLocal";
 
 	public ArquivoDAL()
 	{

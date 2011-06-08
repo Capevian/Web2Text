@@ -83,6 +83,7 @@ public class ArquivoBLL
         if (termos == "") return lista;
         
         DataTable dt = arq.pesquisaPalavras(termos, opcao);
+        
         foreach (DataRow row in dt.Rows)
         {
             lista.Add(new PesquisaArq(termos,

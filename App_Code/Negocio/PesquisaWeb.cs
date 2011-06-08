@@ -46,13 +46,23 @@ public class PesquisaWeb
                 break;
         }
 
-        return temp;
-        /*
-        List<Link> resultado = new List<Link>();
-        List<Link> historico = histBLL.getHistorico();
+        if (ignorarHist)
+        {
+            return temp;
+        }
+        else
+        {
+            return filtraLinks(temp);
+        }
+    }
 
-        resultado = temp.Intersect(historico);
-        return resultado;*/
+    private List<Link> filtraLinks(List<Link> aFiltrar)
+    {
+        List<Link> historico = histBLL.getHistorico();
+        //IEnumerable<Link> resultado = (IEnumerable<Link>) historico;
+        List<Link> final = new List<Link>(aFiltrar.Except(historico));
+        //return aFiltrar.Except(historico).ToList().ConvertAll(new Converter<Link,Link>( Link => Link ));
+        return final;
     }
 
     #region funcao de pesquisa usando o crawler

@@ -14,7 +14,6 @@ using System.Diagnostics;
 public class HistoricoDAL
 {
     private static string db = "web2textRemote";
-    //private static string db = "web2textLocal";
 
 	public HistoricoDAL()
 	{
@@ -54,6 +53,34 @@ public class HistoricoDAL
             return dt;
         }
 
+    }
+
+    public int addHistorico(string link)
+    {
+        int i = 0;
+
+        StringBuilder q = new StringBuilder();
+
+        q.Append(" INSERT INTO ");
+        q.Append(" Historico ");
+        q.Append(" (Link) ");
+        q.Append(" VALUES ");
+        q.Append(" (@link) ");
+
+        using (SqlConnection conn =
+            new SqlConnection(ConfigurationManager.ConnectionStrings[db].ConnectionString))
+        {
+            SqlCommand cmd = new SqlCommand(q.ToString(), conn);
+
+            cmd.Parameters.Add(new SqlParameter("@link", SqlDbType.NVarChar)).Value = link;
+
+            conn.Open();
+
+            i = cmd.ExecuteNonQuery();
+
+            conn.Close();
+        }
+        return i; 
     }
 
     public int deleteAll()

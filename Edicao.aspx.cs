@@ -151,7 +151,11 @@ public partial class Edicao : System.Web.UI.Page
 
     protected void clicklinkRemover(object sender, CommandEventArgs e)
     {
+        string orderby = Session["SortingBy"].ToString();
+
         edi.removeTexto(Convert.ToInt32(e.CommandArgument.ToString()));
+        
+        BindListView(orderby);
     }
 
     #endregion

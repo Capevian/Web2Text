@@ -1,15 +1,22 @@
 ﻿<%@ Page Title="Web2Text" Language="C#" MasterPageFile="~/MasterPages/Pesquisa.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
 
+<%-- HEAD --%>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 
+<%-- CONTEUDO CENTRAL - ZONA SUPERIOR --%>
 <asp:Content ID="Content3" ContentPlaceHolderID="searhBoxContent" runat="server">
-        <div style="width:820px; margin-left: auto; margin-right: auto;">
+    
+    <%-- ZONA DE PESQUISA - TOP --%>
+    <div style="width:820px; margin-left: auto; margin-right: auto;">
+    
+        <%-- TEXT-BOX DE PESQUISA --%>
         <asp:TextBox ID="TextBox1" 
                      CssClass="boxPesquisa2"
                      runat="server">
         </asp:TextBox>
 
+        <%-- BOTAO PESQUISAR--%>
         <asp:Button ID="ButtonPesquisar" runat="server" Text="Pesquisar" 
             onclick="ButtonPesquisar_Click" CssClass="botao"
             Style="height: 29px;
@@ -17,38 +24,50 @@
                    float: left;
                    font-size: 14px;
                    margin-left:2px;"/>
-        </div>
+    </div>
         <br />
-        <div style="font-family: 'Lucida Grande',Tahoma,Verdana,Arial,sans-serif;
-                    font-weight: bold;
-                    font-size:10px;
-                    text-align: left;
-                    margin-left: 10px;
-                    margin-top: 15px;">
+    <%-- ZONA DE PESQUISA - DOWN --%>
+    <div style="font-family: 'Lucida Grande',Tahoma,Verdana,Arial,sans-serif;
+                font-weight: bold;
+                font-size:10px;
+                text-align: left;
+                margin-left: 10px;
+                margin-top: 15px;">
+
+            <%-- CHECKBOX "IGNORAR PAGINAS REJEITADAS" --%>
             <asp:CheckBox ID="CheckBoxRejeitadas" runat="server"
                           Text="Ignorar Páginas Rejeitadas"
                           />
-            <asp:CheckBox ID="CheckBoxTodosTermos" runat="server"
-                          Text="Todos os termos"/>
+            <%-- CHECKBOX "TODOS OS TERMOS" (NAO USADA) --%>
+            <%--<asp:CheckBox ID="CheckBoxTodosTermos" runat="server"
+                          Text="Todos os termos"/>--%>
+
+            <%-- BOTAO "LIMPAR HISTORICO" --%>
             <asp:Button ID="Button2" runat="server" Text="Limpar Histórico" 
                         onclick="ButtonLimparHistorico_Click" 
-                        Style="font-size: 10px;
-                               margin-left:2px;"/>
+                        Style="font-size: 10px; margin-left:2px;"
+                        OnClientClick="return confirm('Tem a certeza que deseja limpar o histórico?');"/>
+
+            <%-- BOTAO LINK "CRAWLER CONFIG." --%>
             <asp:HyperLink ID="LinkCrawlerConfig" runat="server"
                            Text="Crawler Config."
                            Style="float:right; display: block; margin: 5px 12px 0px 2px;" 
                            NavigateUrl="~/Crawler.aspx"></asp:HyperLink>
-        </div>
+    </div>
+
 </asp:Content>
 
+<%-- CONTEUDO CENTRAL - ZONA INFERIOR --%>
 <asp:Content ID="Content2" ContentPlaceHolderID="cpMainContent" Runat="Server">
     
+    <%-- LISTA DE RESULTADOS --%>
     <asp:ListView ID="ListView1" 
         runat="server" 
         ItemPlaceholderID="myItemPlaceHolder"
         OnPagePropertiesChanging="listView1_PagePropertiesChanging"
         >
       
+        <%-- TEMPLATE GERAL --%>
         <LayoutTemplate>
             <table id="tabPesquisa" width="100%">
                 <thead>           
@@ -76,14 +95,17 @@
             </table>
         </LayoutTemplate>
       
+        <%--  TEMPLATE DE CADA ITEM --%>
         <ItemTemplate>
             <tr>
                 <td onmouseover="this.style.backgroundColor='#B8B8B8'" 
                     onmouseout="this.style.backgroundColor='#E1E1E1'"
                     style="margin-bottom: 8px; border: none"
                     width="500px">
-
+                    
+                    <%-- TITULO DO SITE --%>
                     <div class="tbpTitle">
+                        
                         <asp:HyperLink ID="linkSite" runat="server" 
                                        Target="_blank" 
                                        NavigateUrl='<%# Eval("LinkContent") %>' 
@@ -92,6 +114,7 @@
                         <%--<a href="<%# Eval("LinkContent") %>" target="_blank"><%# Eval("Titulo") %></a>--%>
                     </div>
 
+                    <%-- DESCRICAO DO SITE --%>
                     <div class="tbpDesc">
                         <asp:Label ID="linkIntro" runat="server" 
                                      Text='<%# Eval("LinkDesc") %>'>
@@ -101,7 +124,10 @@
                                      Text='<%# Eval("LinkContent") %>'>
                         </asp:Label>
                     </div>
+
                 </td>
+
+                <%-- CHECKBOX SELECAO DO LINK --%>
                 <td style="border-bottom: none; text-align: center;">
                     <asp:CheckBox ID="chkSelect" runat="server"/>
                 </td>

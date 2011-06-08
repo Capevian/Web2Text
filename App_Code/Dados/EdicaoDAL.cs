@@ -13,8 +13,8 @@ using System.Diagnostics;
 /// </summary>
 public class EdicaoDAL
 {
-    //private static string db = "web2textLocal";
     private static string db = "web2textRemote";
+
 	public EdicaoDAL()
 	{
 	}
@@ -96,7 +96,7 @@ public class EdicaoDAL
         return i; 
     }
 
-    public int updateTexto(int idTexto, string texto, string titulo)
+    public int updateTexto(int idTexto, string texto, string titulo, string username)
     {
         int i = 0;
         StringBuilder q = new StringBuilder();
@@ -106,6 +106,7 @@ public class EdicaoDAL
         q.Append("SET ");
         q.Append("Titulo = @tit, ");
         q.Append("Texto = @tex, ");
+        q.Append("username = @user, ");
         q.Append("DataModificacao = CURRENT_TIMESTAMP ");
         q.Append("WHERE ");
         q.Append("idLink = @idTex; ");
@@ -120,6 +121,8 @@ public class EdicaoDAL
             cmd.Parameters.Add(new SqlParameter("@tex", SqlDbType.NVarChar)).Value = texto;
 
             cmd.Parameters.Add(new SqlParameter("@idTex", SqlDbType.Int)).Value = idTexto;
+
+            cmd.Parameters.Add(new SqlParameter("@user", SqlDbType.NVarChar)).Value = username;
 
             conn.Open();
 
@@ -207,7 +210,7 @@ public class EdicaoDAL
         return dataRow;
     }
 
-    public int archiveTexto(int idTexto, string texto, string titulo)
+    public int archiveTexto(int idTexto, string texto, string titulo, string user)
     {
         int i = 0;
 
@@ -219,7 +222,8 @@ public class EdicaoDAL
         q1.Append(" Edicao ");
         q1.Append(" SET ");
         q1.Append(" Titulo = @titulo, ");
-        q1.Append(" Texto = @texto ");
+        q1.Append(" Texto = @texto, ");
+        q1.Append(" username = @user ");
         q1.Append(" WHERE ");
         q1.Append(" idLink = @idTexto; ");
         
@@ -252,6 +256,8 @@ public class EdicaoDAL
             cmd1.Parameters.Add("@titulo", SqlDbType.NVarChar).Value = titulo;
 
             cmd1.Parameters.Add("@texto", SqlDbType.NVarChar).Value = texto;
+
+            cmd1.Parameters.Add("@user", SqlDbType.NVarChar).Value = user;
 
             cmd1.Parameters.Add("@idTexto", SqlDbType.Int).Value = idTexto;
 

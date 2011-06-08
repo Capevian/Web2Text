@@ -33,7 +33,9 @@
             </div>
             <div id="Footer">
                 <span style="padding-left: 20px; float: left;">&copy; Capevian Team - Universidade do Minho 2011</span>
-                <span style="padding-right: 20px; float: right;"><asp:LoginStatus ID="LoginStatus1" runat="server" /> </span>
+                <span style="padding-right: 20px; float: right;">
+                    Está ligado como <asp:LoginName ID="LoginName1" runat="server" />
+                    <asp:LoginStatus ID="LoginStatus1" runat="server" /> </span>
             </div>
         </div>
     </form>
