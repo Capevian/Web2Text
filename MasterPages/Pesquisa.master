@@ -14,13 +14,8 @@
         <div id="PageWrapper">
             <div id="Header"><a href="~/" runat="server"></a></div>
             <div id="MenuWrapper">
-                <div class="MainMenu">
-                    <ul>
-                        <li><a href="Default.aspx">Pesquisa</a></li>
-                        <li><a href="Edicao.aspx">Edição</a></li>
-                        <li><a href="Arquivo.aspx">Arquivo</a></li>
-                    </ul>
-                </div>
+                <asp:ContentPlaceHolder ID="menuPrincipal" runat="server">
+                </asp:ContentPlaceHolder>
                 <div style="clear: left;"></div>
             </div>
             <div id="searchBox">

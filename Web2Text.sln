@@ -1,0 +1,124 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Web2Text", "D:\Web2Text\", "{5239EA60-DD86-4A35-B7C7-43B46675B9AA}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = "{5E4DF149-F650-4152-8410-586FB9CCF644}|NCrawler.dll;{8BC9BDCE-64E8-40D8-8691-8BC1DB8AF21E}|NCrawler.Db4oServices.dll;{0F514E25-5C5E-4F3D-9F4B-73EE5C7B6986}|NCrawler.DbServices.dll;{D82B1354-F267-4C35-9FC0-6910A5C44304}|NCrawler.EsentServices.dll;{944F9961-7B7D-4384-9946-705237E7E195}|NCrawler.FileStorageServices.dll;{A8ADB9E8-359E-4CFB-97D7-59E1E705DE04}|NCrawler.HtmlProcessor.dll;{FC4BAAF7-5749-4149-8D3C-3DA21A129999}|NCrawler.IFilterProcessor.dll;{791A3998-A352-4DE8-88C7-6EE5C6FF1668}|NCrawler.IsolatedStorageServices.dll;{1CC6DC28-0B0B-445D-8AE3-07F9823A9036}|NCrawler.iTextSharpPdfProcessor.dll;{0E707ADD-8F93-4E65-BAE7-534D4C844060}|NCrawler.LanguageDetection.Google.dll;{8DBF9F2F-A8BD-45B1-8750-C7CB63611425}|NCrawler.MP3Processor.dll;{4C550C30-9CCD-4CAB-8E9C-C1A4D6619953}|NCrawler.SitemapProcessor.dll;{E565C692-2122-4B7D-B467-4B965BFD72B1}|NCrawler.Test.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/Web2Text"
+		Debug.AspNetCompiler.PhysicalPath = "D:\Web2Text\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Web2Text\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/Web2Text"
+		Release.AspNetCompiler.PhysicalPath = "D:\Web2Text\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\Web2Text\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "1113"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{A12F69BF-C6ED-4470-9AFA-E61B878F5182}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EPocalipse.IFilter", "EPocalipse.IFilter", "{9EB84C30-C4BC-49F9-BA17-DFEB5DC7F1AE}"
+	ProjectSection(SolutionItems) = preProject
+		..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\EPocalipse.IFilter\EPocalipse.IFilter.dll = ..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\EPocalipse.IFilter\EPocalipse.IFilter.dll
+		..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\EPocalipse.IFilter\EPocalipse.IFilter.pdb = ..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\EPocalipse.IFilter\EPocalipse.IFilter.pdb
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HtmlAgilityPack", "HtmlAgilityPack", "{5C8FF96D-41D1-4730-BBC1-19E04A05716A}"
+	ProjectSection(SolutionItems) = preProject
+		..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\HtmlAgilityPack\HtmlAgilityPack.dll = ..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\HtmlAgilityPack\HtmlAgilityPack.dll
+		..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\HtmlAgilityPack\HtmlAgilityPack.pdb = ..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\HtmlAgilityPack\HtmlAgilityPack.pdb
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ILMerge", "ILMerge", "{D77639D4-E137-4E57-9F42-DE9C10645C91}"
+	ProjectSection(SolutionItems) = preProject
+		..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\ILMerge\ILMerge.exe = ..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\ILMerge\ILMerge.exe
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "iTextSharp", "iTextSharp", "{868CFDF9-60C2-4DF1-A515-0DDC7E244F9C}"
+	ProjectSection(SolutionItems) = preProject
+		..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\iTextSharp\itextsharp.dll = ..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\iTextSharp\itextsharp.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NUnit", "NUnit", "{A0162785-5944-4A85-A993-FB006F237140}"
+	ProjectSection(SolutionItems) = preProject
+		..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\NUnit\nunit.framework.dll = ..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\NUnit\nunit.framework.dll
+		..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\NUnit\nunit.mocks.dll = ..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\NUnit\nunit.mocks.dll
+		..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\NUnit\pnunit.framework.dll = ..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\NUnit\pnunit.framework.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQLite", "SQLite", "{58885B58-5E1C-4A29-8177-EFE460F38224}"
+	ProjectSection(SolutionItems) = preProject
+		..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\SQLite\System.Data.SQLite.dll = ..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\SQLite\System.Data.SQLite.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HundredMilesSoftware", "HundredMilesSoftware", "{79DDEB8E-48D8-4D95-AA7A-F4FAAC9AB10A}"
+	ProjectSection(SolutionItems) = preProject
+		..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\HundredMilesSoftware\UltraID3Lib.dll = ..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\HundredMilesSoftware\UltraID3Lib.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MSBuild", "MSBuild", "{88BAF15C-4FB3-46B3-BDD3-066962294D13}"
+	ProjectSection(SolutionItems) = preProject
+		..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Build.bat = ..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Build.bat
+		..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\NCrawler.proj = ..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\NCrawler.proj
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Autofac", "Autofac", "{C593456F-CB40-4DB8-9D53-9CC48FDE1652}"
+	ProjectSection(SolutionItems) = preProject
+		..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\Autofac\Autofac.dll = ..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\Autofac\Autofac.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Esent", "Esent", "{C4F0BA72-F3F8-452E-B7E4-48684E9C7F96}"
+	ProjectSection(SolutionItems) = preProject
+		..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\ManagedEsent\Esent.Interop.dll = ..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\ManagedEsent\Esent.Interop.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Db4o", "Db4o", "{9B0CEC51-A565-413E-BDF6-E2D557E24FE2}"
+	ProjectSection(SolutionItems) = preProject
+		..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\Db4o\Db4objects.Db4o.dll = ..\LEI\6_ano\LI4\Fase 3\Crawlers\ncrawler-58912\Net 4.0\Repository\Db4o\Db4objects.Db4o.dll
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5239EA60-DD86-4A35-B7C7-43B46675B9AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5239EA60-DD86-4A35-B7C7-43B46675B9AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5239EA60-DD86-4A35-B7C7-43B46675B9AA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5239EA60-DD86-4A35-B7C7-43B46675B9AA}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5239EA60-DD86-4A35-B7C7-43B46675B9AA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5239EA60-DD86-4A35-B7C7-43B46675B9AA}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{5239EA60-DD86-4A35-B7C7-43B46675B9AA}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{5239EA60-DD86-4A35-B7C7-43B46675B9AA}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5239EA60-DD86-4A35-B7C7-43B46675B9AA}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5239EA60-DD86-4A35-B7C7-43B46675B9AA}.Release|x86.ActiveCfg = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9EB84C30-C4BC-49F9-BA17-DFEB5DC7F1AE} = {A12F69BF-C6ED-4470-9AFA-E61B878F5182}
+		{5C8FF96D-41D1-4730-BBC1-19E04A05716A} = {A12F69BF-C6ED-4470-9AFA-E61B878F5182}
+		{D77639D4-E137-4E57-9F42-DE9C10645C91} = {A12F69BF-C6ED-4470-9AFA-E61B878F5182}
+		{868CFDF9-60C2-4DF1-A515-0DDC7E244F9C} = {A12F69BF-C6ED-4470-9AFA-E61B878F5182}
+		{A0162785-5944-4A85-A993-FB006F237140} = {A12F69BF-C6ED-4470-9AFA-E61B878F5182}
+		{58885B58-5E1C-4A29-8177-EFE460F38224} = {A12F69BF-C6ED-4470-9AFA-E61B878F5182}
+		{79DDEB8E-48D8-4D95-AA7A-F4FAAC9AB10A} = {A12F69BF-C6ED-4470-9AFA-E61B878F5182}
+		{88BAF15C-4FB3-46B3-BDD3-066962294D13} = {A12F69BF-C6ED-4470-9AFA-E61B878F5182}
+		{C593456F-CB40-4DB8-9D53-9CC48FDE1652} = {A12F69BF-C6ED-4470-9AFA-E61B878F5182}
+		{C4F0BA72-F3F8-452E-B7E4-48684E9C7F96} = {A12F69BF-C6ED-4470-9AFA-E61B878F5182}
+		{9B0CEC51-A565-413E-BDF6-E2D557E24FE2} = {A12F69BF-C6ED-4470-9AFA-E61B878F5182}
+	EndGlobalSection
+EndGlobal

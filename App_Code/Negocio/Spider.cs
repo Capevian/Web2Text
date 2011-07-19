@@ -25,10 +25,11 @@ public class Spider
 			};
 
     private  List<Link> paginas = new List<Link>();
+    private int profundidade;
 
-	public Spider()
+	public Spider(int profundidade)
 	{
-		
+        this.profundidade = profundidade;
 	}
 
     public void pesquisa(string termo, List<Uri> seeds, bool flagTodosTermos)
@@ -54,8 +55,8 @@ public class Spider
                     AdhereToRobotRules = true,
                     
 					// Custom step to visualize crawl
-					MaximumThreadCount = 1,
-					MaximumCrawlDepth = 5,
+					MaximumThreadCount = 2,
+					MaximumCrawlDepth = profundidade,
                     MaximumCrawlCount = 20,
 					ExcludeFilter = ExtensionsToSkip,
                     

@@ -101,19 +101,21 @@ h2
 
 #MenuWrapper a
 {
-    /*
-    Links in the Menu are white. This gets overriden by styles in chapter 7.
-  */
     color: #0000FF;
     font-family: Tahoma;
     text-align: center;
 }
 
+#MenuWrapper a#pesqNav, #MenuWrapper a#ediNav, #MenuWrapper a#arqNav
+{
+    text-decoration: underline;   
+    color: #000000;
+}
+
+
 .MainMenu
 {
-    /*
-    The Menu gets a white border on all four sides.
-  */
+
     width: 390px;
     height: 19px;
     background-color: #FFFFFF;

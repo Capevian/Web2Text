@@ -4,6 +4,16 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 
+<asp:Content ID="Content4" ContentPlaceHolderID="menuPrincipal" runat="server">
+    <div class="MainMenu">
+        <ul>
+            <li><a href="Default.aspx" id="pesqNav">Pesquisa</a></li>
+            <li><a href="Edicao.aspx">Edição</a></li>
+            <li><a href="Arquivo.aspx">Arquivo</a></li>
+        </ul>
+    </div>
+</asp:Content>
+
 <%-- CONTEUDO CENTRAL - ZONA SUPERIOR --%>
 <asp:Content ID="Content3" ContentPlaceHolderID="searhBoxContent" runat="server">
     
@@ -36,7 +46,7 @@
 
             <%-- CHECKBOX "IGNORAR PAGINAS REJEITADAS" --%>
             <asp:CheckBox ID="CheckBoxRejeitadas" runat="server"
-                          Text="Ignorar Páginas Rejeitadas"
+                          Text="Ignorar Histórico"
                           />
             <%-- CHECKBOX "TODOS OS TERMOS" (NAO USADA) --%>
             <%--<asp:CheckBox ID="CheckBoxTodosTermos" runat="server"
@@ -48,11 +58,11 @@
                         Style="font-size: 10px; margin-left:2px;"
                         OnClientClick="return confirm('Tem a certeza que deseja limpar o histórico?');"/>
 
-            <%-- BOTAO LINK "CRAWLER CONFIG." --%>
+            <%-- BOTAO LINK "CRAWLER CONFIG." 
             <asp:HyperLink ID="LinkCrawlerConfig" runat="server"
                            Text="Crawler Config."
                            Style="float:right; display: block; margin: 5px 12px 0px 2px;" 
-                           NavigateUrl="~/Crawler.aspx"></asp:HyperLink>
+                           NavigateUrl="~/Crawler.aspx"></asp:HyperLink>--%>
     </div>
 
 </asp:Content>
@@ -73,7 +83,9 @@
                 <thead>           
                     <tr>
                         <th>Resultados</th> 
-                        <th width="80px"></th>
+                        <th width="80px" style="text-align: center;">
+                            <asp:CheckBox ID="CheckBox1" runat="server" AutoPostBack="true" OnCheckedChanged="CheckBoxHeader_CheckedChanged"/>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>

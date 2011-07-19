@@ -3,6 +3,16 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 
+<asp:Content ID="Content4" ContentPlaceHolderID="menuPrincipal" runat="server">
+    <div class="MainMenu">
+        <ul>
+            <li><a href="Default.aspx">Pesquisa</a></li>
+            <li><a href="Edicao.aspx">Edição</a></li>
+            <li><a href="Arquivo.aspx" id="arqNav">Arquivo</a></li>
+        </ul>
+    </div>
+</asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="cpSideBar" runat="server">
     
     <div class="sideCont">

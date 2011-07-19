@@ -151,6 +151,16 @@ public partial class _Default : System.Web.UI.Page
     }
 
     #endregion
+
+    public void CheckBoxHeader_CheckedChanged(object sender, EventArgs e)
+    {
+        CheckBox chkHeader = sender as CheckBox;
+        for (int i = 0; i < ListView1.Items.Count; i++)
+        {
+            CheckBox chk = ListView1.Items[i].FindControl("chkSelect") as CheckBox;
+            chk.Checked = chkHeader.Checked;
+        }
+    }
     
     #region Funcoes para apagar
     /*

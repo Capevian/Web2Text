@@ -21,13 +21,13 @@ public class PesquisaWeb
 	{
         log = new LoginDAL();
         histBLL = new HistoricoBLL();
-        spider = new Spider();
 
         int[] defs = log.getDefinicoes(username);
 
         this.nLinksSeed = Convert.ToUInt32(defs[0]);
         this.profundidade = defs[1];
         this.modoPesquisa = defs[2];
+        spider = new Spider(profundidade);
 	}
 
     public List<Link> efectuaPesquisa(string termos, bool flagTodosTermos, bool ignorarHist)

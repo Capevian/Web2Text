@@ -13,6 +13,16 @@
 
 </asp:Content>
 
+<asp:Content ID="Content4" ContentPlaceHolderID="menuPrincipal" runat="server">
+    <div class="MainMenu">
+        <ul>
+            <li><a href="Default.aspx">Pesquisa</a></li>
+            <li><a href="Edicao.aspx" id="ediNav">Edição</a></li>
+            <li><a href="Arquivo.aspx">Arquivo</a></li>
+        </ul>
+    </div>
+</asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="cpMainContent" Runat="Server">
     
     <%-- Conteudo principal: Lista de Textos --%>    

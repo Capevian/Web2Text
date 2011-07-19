@@ -76,7 +76,7 @@ public abstract class Texto
         s = Regex.Replace(s, HTML_TAG_NOSCRIPT_2, "");
         s = Regex.Replace(s, HTML_TAG, "");
 
-        s = Regex.Replace(s, @"\s+", " ");
+        //s = Regex.Replace(s, @"\s+", " ");
 
         return s;
         
